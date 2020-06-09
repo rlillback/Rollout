@@ -1,0 +1,103 @@
+Rollout:
+  Expected Control Flow:
+    Read Concept Pushbutton:
+      - 1 - Read spreadsheet
+      - 2 - Validate spreadsheet columns
+      - 3 - Validate spreadsheet rows
+      - 4 - Get list of ShipTo's (by ABALKY append -ABAC08 from SoldTo) that aren't in the database yet
+      - 5 - If there are any new ShipTos, generate a ship to spreadsheet to upload into JDE and exit
+      - 6 - If all ShipTos are in the system, then verify all the items are in the 3SUW branch plant item file
+      - 7 - If there are items not in the system, write a CSV with the bad part numbers & exit.
+      - 8 - If all items are in the system, populate the 850 files & notify the user to run the JDE import process.
+    Read ShipTo Pushbutton:
+      - 1 - Read the spreadsheet
+      - 2 - Validate spreadsheet columns
+      - 3 - Validate spreadsheet rows
+      - 4 - Populate F0101, F0111, F0115, F0116, F03012
+              - a. Can we do this via a Z-File process or do we have to populate the tables directly?
+              - b. If directly, how do we atomically grab the address book's customer next number Members
+  ===================================================          
+  ConceptCSV:
+    Required Columns:
+      - Customer Number -> Eventually, this needs to be an ABAN8 and must exist in all rows
+      - PO Number -> Needs to exist in all rows
+      - Store Number -> This unique store number
+      - Ship To Name -> Needed if the store number is new
+      - Address 1 -> 
+      - Address 2 ->
+      - City ->
+      - State -> Needs to be JDE state
+      - Zip ->
+      - Order Part Number -> This needs to be a legal Kinetico part number
+      - Order Qty ->
+      - Requested Ship Date -> Needs to be MM.DD.YYYY
+      - Ordered By ->
+
+    ===================================================
+    ConceptCSV Class:
+      Members:
+      - Has a DataTable that holds all the columns in the CSV (if needed or not)
+      - FileName -> A path&filename for the CSV
+      - Delimiter -> The file's delimeter
+      - List<Header Class> -> A populated header class list for this specific spreadsheet.
+      - Header Class:
+          - Column Name -> The CSVs header columns that are required for uploading
+          - Column Regex -> Regular Expression to make sure the data is Valid.
+          - Flag -> Set to say that the CSV has this column. 
+      Methods:
+        - ReadCSV -> Read CSV into generic DataTable, include any additional columns into 
+        - ValidateHeader -> Set the flags for each row in the List<Header> object.  If column
+                            exists in the CSV then set the flag to true.
+        - ValidateRows -> For each column in each row, validate the cell's contents by using 
+                          The Regex field in the List<Header> object.
+        - WriteCSV -> Write the DataTable to a file.
+
+  ===================================================
+  Concept:
+    - Notes -> This is a closer mapping to the JDE fields of BillTo, ShipTo, LineNumber, PN, etc.
+    Members:
+      - ValidConcept -> Flag saying the concept is valid 
+      - BillTo -> double JDE F0101.ABAN8
+      - List<ConceptLine> -> The concept rows
+      - JulianOrderDate -> CYYDDD JDE Format
+      - ValidBillTo -> The bill to exists in JDE
+    Methods:
+      - Validate -> For each row, validate the data against JDE.
+                    - Shouldn't I bulk check this for efficency?
+
+  ===================================================
+  ConceptLine:
+    Members:    
+      - SoldTo -> double JDE F0101.ABAN8
+      - LineNumber -> decimal JDE F4211.SDLNID format (e.g, 1 = 1000)
+      - JDEPartNumber -> String equal to F4102.IBLITM for the Branch/Plant 
+      - Quantity -> double JDE F4211.SDQTY normal float format
+      - JulianRequestedDate -> CYYDDD
+      - ValidShipTo -> The ship to exists in JDE
+      - ValidPartNumber -> The part number exists in JDE
+    Methods:
+      - ValidateLine -> Verify the BillTo, ShipTo and Part number exist
+
+
+  ===================================================
+  JDE:
+    - Set things up for the JDE File Structure:
+        - F0101 AB Master
+        - F0002 Next Number -- Need an atomic method or usp for retrieval
+        - F0111 Who's Who
+        - F0115 Addresses
+        - F0116 Phones
+        - F03012 Customer Master **NOTE = ShipTo needs N'P' in the batch processing mode AIEDPM field **
+        - F47011 - EDI Purchase Order Header - Inbound
+        - F47012 - EDI Purchase Order Detail - Inbound
+        - F4714 & F4715 Multiple lines?
+    - Is a static class for interfacing with the Entity Framework
+    Methods:
+      - GetConceptID - grab ABAC08 for a passed ABAN8 or ABALKY
+      - FindMissingShipTos - return a list of ShipTo addresses by ABALKY that aren't in the system
+                           - We need the StoreNumber-ConceptID for the ABALKY field.
+      - DoesAddressExist - check if an ABAN8 exists in F0101
+      - GetMissingItems - return a list of part numbers that don't exist in the branch plant.
+      - DoesItemExist - check if a single item number exists in the branch plant.
+
+
