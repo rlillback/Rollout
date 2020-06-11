@@ -225,10 +225,19 @@ namespace Rollout.BLL
                         conceptID = jde.F0101.AsNoTracking()
                                    .Where(n => n.ABAN8 == Address)
                                    .Select(n => n.ABAC08).First().ToString().Trim();
+                        log.Debug($"Found {conceptID} as concept ID for F0101.ABAN8 = {Address.ToString()}");
+                    }
+                    else if ( jde.F0101.AsNoTracking().Any(n => n.ABALKY == Address.ToString()))
+                    {
+                        conceptID = jde.F0101.AsNoTracking()
+                                    .Where(n => n.ABALKY == Address.ToString())
+                                    .Select(n => n.ABAC08).First().ToString().Trim();
+                        log.Debug($"Found {conceptID} as concept ID for F0101.ABLKY = {Address.ToString()}");
                     }
                     else
                     {
                         log.Error($"Cannot find F0101.ABAN8 = {Address.ToString()}");
+                        log.Error($"Cannot find F0101.ABALKY = {Address.ToString()}");
                         throw new System.ArgumentException($"Error {Address.ToString()} isn't in JDE.");
                     }
                 }
@@ -237,8 +246,7 @@ namespace Rollout.BLL
             {
                 log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
                 throw eJDE;                
-            }
-            log.Debug($"Found {conceptID} as concept ID for F0101.ABAN8 = {Address}");
+            }          
             return conceptID;
         } // GetConceptID float is passed
 
@@ -262,10 +270,12 @@ namespace Rollout.BLL
                         conceptID = jde.F0101.AsNoTracking()
                                     .Where(n => n.ABALKY == Nickname)
                                     .Select(n => n.ABAC08).First().ToString().Trim();
+                        log.Debug($"Found {conceptID} as concept ID for F0101.ABLKY = {Nickname}");
                     }
                     else
                     {
                         log.Error($"Cannot find F0101.ABALKY = {Nickname}");
+                        log.Error($"Cannot find F0101.ABAN8 = {Nickname}");
                         throw new System.ArgumentException($"Error {Nickname} isn't in JDE.");
                     }
                 }
@@ -275,7 +285,6 @@ namespace Rollout.BLL
                 log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
                 throw eJDE;
             }
-            log.Debug($"Found {conceptID} as concept ID for F0101.ABLKY = {Nickname}");
             return conceptID;
         }
 
