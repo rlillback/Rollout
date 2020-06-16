@@ -31,5 +31,14 @@ namespace Rollout.UnitTests
             ShipTo PopulatedShipTo = XfrmShipTo.CSVToShipTo(PopulatedCSV);
             JDE.PopulateF0101Z2(PopulatedShipTo);
         }
+
+        [TestMethod]
+        public void PopulateF03012Z1()
+        {
+            ShipToCSV PopulatedCSV = new ShipToCSV(@"D:\gitHub\Rollout\TestFiles\TestShipTo.csv", ",");
+            PopulatedCSV.ReadShipTo();
+            PopulatedCSV.ValidateHeader();
+            PopulatedCSV.ValidateRows();
+        }
     }
 }

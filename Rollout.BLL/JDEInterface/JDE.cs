@@ -18,6 +18,11 @@ namespace Rollout.BLL
         #endregion
 
         #region PrivateMethods
+        /// <summary>
+        /// Populate the non-entry specific fields in the F0101Z2 record
+        /// </summary>
+        /// <param name="entry"></param>
+        /// <param name="batch"></param>
         private static void PopulateUnchangingF0101Z2(ref F0101Z2 entry, string batch)
         {
             
@@ -34,7 +39,7 @@ namespace Rollout.BLL
             entry.SZPNID = "Rollout";    // Process ID
             entry.SZAN8 = null;          // Use the next number to define the value
             entry.SZSIC = "";            // We don't use the SIC codes
-            entry.SZLNGP = "EN";         // English
+            entry.SZLNGP = "";           // English
             entry.SZCM = "";             // Credit message isn't needed for ship to addresses
             entry.SZTAXC = "C";          // If someone enters a tax-id, print it out in EIN format
             entry.SZAT2 = "N";           // No AR/AP netting
@@ -138,6 +143,15 @@ namespace Rollout.BLL
             return;
         }
 
+        /// <summary>
+        /// Populate the customer specific fields in the F0101Z2 record
+        /// </summary>
+        /// <param name="entry"></param>
+        /// <param name="line"></param>
+        /// <param name="ParentAddress"></param>
+        /// <param name="StoreName"></param>
+        /// <param name="ConceptID"></param>
+        /// <param name="transaction"></param>
         private static void PopulateLineF0101Z2(ref F0101Z2 entry, ShipToLine line, double ParentAddress, string StoreName, string ConceptID, decimal transaction)
         {
             entry.SZEDTN = transaction.ToString();
@@ -463,6 +477,10 @@ namespace Rollout.BLL
             return exists;
         }
 
+        /// <summary>
+        /// Populate the JDE F0101Z2 file from the ShipTo construct
+        /// </summary>
+        /// <param name="DT"></param>
         public static void PopulateF0101Z2(ShipTo DT)
         {
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));

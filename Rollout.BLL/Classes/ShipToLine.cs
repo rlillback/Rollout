@@ -149,5 +149,7 @@ namespace Rollout.BLL
         }
 
         public string StoreNumber;
+
+        public double JDEAddress;
     }
 }

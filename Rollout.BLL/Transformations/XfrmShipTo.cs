@@ -49,6 +49,7 @@ namespace Rollout.BLL
             line.TaxAreaCode = (null == r.Field<String>("TAX AREA CODE")) ? "" : r.Field<String>("TAX AREA CODE").ToUpper();
             line.Concept = (null == r.Field<String>("CONCEPT CODE")) ? "" : r.Field<String>("CONCEPT CODE").ToUpper();
             line.StoreNumber = (null == r.Field<String>("STORE NUMBER")) ? "" : r.Field<String>("STORE NUMBER").ToUpper();
+            line.JDEAddress = (null == r.Field<String>("JDE ADDRESS")) ? 0 : Double.Parse(r.Field<String>("JDE ADDRESS"));
             return line;
         }
         #endregion

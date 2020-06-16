@@ -86,6 +86,7 @@ namespace Rollout.BLL
             Regex anyreg = new Regex(RegexHelper.MatchAnything);
             Regex intreg = new Regex(RegexHelper.MatchInteger);
             Regex datereg = new Regex(RegexHelper.MatchUSADate);
+            this.HeaderRow.Add(PopulateHeader("JDE ADDRESS", intreg));
             this.HeaderRow.Add(PopulateHeader("SHIP TO NAME", anyreg));
             this.HeaderRow.Add(PopulateHeader("STORE NUMBER", anyreg));
             this.HeaderRow.Add(PopulateHeader("CONCEPT CODE", anyreg));
@@ -132,6 +133,10 @@ namespace Rollout.BLL
                 else if (0 == String.Compare("CONCEPT CODE", h.ColumnName.ToUpper()))
                 {
                     r["CONCEPT CODE"] = conceptID;
+                }
+                else if (0 == String.Compare("JDE ADDRESS", h.ColumnName.ToUpper()))
+                {
+                    r["JDE ADDRESS"] = 0;
                 }
                 else
                 {
@@ -189,6 +194,39 @@ namespace Rollout.BLL
         }
 
         /// <summary>
+        /// Using a regex, validate all the rows in the spreadsheet.
+        /// Change the regex for the tax area to disallow blank entries, if bool is false
+        /// </summary>
+        /// <param name="AllowEmptyTaxRow"></param>
+        /// <returns></returns>
+        public bool ValidateRows(bool AllowEmptyTaxRow)
+        {
+            bool rowsValid = true;
+            if (false == AllowEmptyTaxRow)
+            {
+                Header h = this.HeaderRow.Find(n => "TAX AREA CODE" == n.ColumnName);
+                if (null != h)
+                {
+                    Regex reg = new Regex(RegexHelper.MatchNonBlank);
+                    h.ColumnRegex = reg;
+                }
+            }
+            foreach (DataRow r in DT.Rows)
+            {
+                foreach (Header h in HeaderRow)
+                {
+                    r["RowValid"] = h.ColumnRegex.IsMatch(r[h.ColumnName].ToString());
+                    if (false == (bool)r["RowValid"])
+                    {
+                        log.Error($"{h.ColumnName} has {r[h.ColumnName].ToString()} invalid in row {DT.Rows.IndexOf(r)} -- row data: {string.Join(",", r.ItemArray)}");
+                        rowsValid = false;
+                    }
+                }
+            }
+            return rowsValid;
+        }
+
+        /// <summary>
         /// Read the spreadsheet into the data table
         /// </summary>
         public void ReadShipTo()
@@ -212,6 +250,9 @@ namespace Rollout.BLL
             }
         }
 
+        /// <summary>
+        /// Write the ship to CSV to the filesystem
+        /// </summary>
         public void WriteShipTo()
         {
             try
