@@ -38,7 +38,13 @@ namespace Rollout.BLL
             return success;
         }
 
-        private static ShipToLine PopulateShipToLine(DataRow r)
+        /// <summary>
+        /// Populate a single ship-to line from the CSV
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="LookupJDEAddress"></param>
+        /// <returns></returns>
+        private static ShipToLine PopulateShipToLine(DataRow r, bool LookupJDEaddress)
         {
             ShipToLine line = new ShipToLine();
             line.Address1 = (null == r.Field<String>("ADDRESS 1")) ? "" : r.Field<String>("ADDRESS 1").ToUpper();
@@ -47,14 +53,30 @@ namespace Rollout.BLL
             line.State = (null == r.Field<String>("STATE")) ? "" : r.Field<String>("STATE").ToUpper();
             line.Zip = (null == r.Field<String>("ZIP")) ? "" : r.Field<String>("ZIP").ToUpper();
             line.TaxAreaCode = (null == r.Field<String>("TAX AREA CODE")) ? "" : r.Field<String>("TAX AREA CODE").ToUpper();
+            line.TaxExplanationCode = (null == r.Field<String>("TAX EXPLANATION CODE")) ? "" : r.Field<String>("TAX EXPLANATION CODE").ToUpper();
             line.Concept = (null == r.Field<String>("CONCEPT CODE")) ? "" : r.Field<String>("CONCEPT CODE").ToUpper();
             line.StoreNumber = (null == r.Field<String>("STORE NUMBER")) ? "" : r.Field<String>("STORE NUMBER").ToUpper();
-            line.JDEAddress = (null == r.Field<String>("JDE ADDRESS")) ? 0 : Double.Parse(r.Field<String>("JDE ADDRESS"));
+            if (true == LookupJDEaddress)
+            {
+                string alky = line.StoreNumber + "-" + line.Concept;
+                double? jdeaddress = JDE.GetAddressFromALKY(alky);
+                line.JDEAddress = (null == jdeaddress) ? 0 : (double)jdeaddress; 
+            }
+            else
+            {
+                line.JDEAddress = 0;
+            }
             return line;
         }
         #endregion
 
-        public static ShipTo CSVToShipTo (ShipToCSV csv)
+        /// <summary>
+        /// Populate the ship-to data structure
+        /// </summary>
+        /// <param name="csv"></param>
+        /// <param name="PopulateJDEAddress"></param>
+        /// <returns></returns>
+        public static ShipTo CSVToShipTo (ShipToCSV csv, bool LookupJDEaddress)
         {
             ShipTo shipTo = new ShipTo();
             shipTo.NewShipTos = new List<ShipToLine>();
@@ -64,7 +86,7 @@ namespace Rollout.BLL
             }
             foreach (DataRow r in csv.DT.Rows)
             {
-                ShipToLine line = PopulateShipToLine(r);
+                ShipToLine line = PopulateShipToLine(r, LookupJDEaddress);
                 shipTo.NewShipTos.Add(line);
             }
             return shipTo;

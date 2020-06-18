@@ -238,82 +238,6 @@
           <Property Name="SZACTIN" Type="nchar" MaxLength="1" />
           <Property Name="SZREVRNG" Type="nchar" MaxLength="5" />
         </EntityType>
-        <EntityType Name="F0111Z1">
-          <Key>
-            <PropertyRef Name="BWEDUS" />
-            <PropertyRef Name="BWEDBT" />
-            <PropertyRef Name="BWEDTN" />
-            <PropertyRef Name="BWEDLN" />
-          </Key>
-          <Property Name="BWEDUS" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="BWEDBT" Type="nchar" MaxLength="15" Nullable="false" />
-          <Property Name="BWEDTN" Type="nchar" MaxLength="22" Nullable="false" />
-          <Property Name="BWEDLN" Type="float" Nullable="false" />
-          <Property Name="BWEDCT" Type="nchar" MaxLength="2" />
-          <Property Name="BWTYTN" Type="nchar" MaxLength="8" />
-          <Property Name="BWEDFT" Type="nchar" MaxLength="10" />
-          <Property Name="BWEDDT" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="BWDRIN" Type="nchar" MaxLength="1" />
-          <Property Name="BWEDDL" Type="float" />
-          <Property Name="BWEDSP" Type="nchar" MaxLength="1" />
-          <Property Name="BWPNID" Type="nchar" MaxLength="15" />
-          <Property Name="BWTNAC" Type="nchar" MaxLength="2" />
-          <Property Name="BWAN8" Type="float" />
-          <Property Name="BWIDLN" Type="float" />
-          <Property Name="BWDSS5" Type="float" />
-          <Property Name="BWMLNM" Type="nchar" MaxLength="40" />
-          <Property Name="BWATTL" Type="nchar" MaxLength="40" />
-          <Property Name="BWREM1" Type="nchar" MaxLength="40" />
-          <Property Name="BWSLNM" Type="nchar" MaxLength="40" />
-          <Property Name="BWALPH" Type="nchar" MaxLength="40" />
-          <Property Name="BWDC" Type="nchar" MaxLength="40" />
-          <Property Name="BWGNNM" Type="nchar" MaxLength="25" />
-          <Property Name="BWMDNM" Type="nchar" MaxLength="25" />
-          <Property Name="BWSRNM" Type="nchar" MaxLength="25" />
-          <Property Name="BWTYC" Type="nchar" MaxLength="1" />
-          <Property Name="BWW001" Type="nchar" MaxLength="3" />
-          <Property Name="BWW002" Type="nchar" MaxLength="3" />
-          <Property Name="BWW003" Type="nchar" MaxLength="3" />
-          <Property Name="BWW004" Type="nchar" MaxLength="3" />
-          <Property Name="BWW005" Type="nchar" MaxLength="3" />
-          <Property Name="BWW006" Type="nchar" MaxLength="3" />
-          <Property Name="BWW007" Type="nchar" MaxLength="3" />
-          <Property Name="BWW008" Type="nchar" MaxLength="3" />
-          <Property Name="BWW009" Type="nchar" MaxLength="3" />
-          <Property Name="BWW010" Type="nchar" MaxLength="3" />
-          <Property Name="BWMLN1" Type="nchar" MaxLength="40" />
-          <Property Name="BWALP1" Type="nchar" MaxLength="40" />
-          <Property Name="BWTORG" Type="nchar" MaxLength="10" />
-          <Property Name="BWUSER" Type="nchar" MaxLength="10" />
-          <Property Name="BWPID" Type="nchar" MaxLength="10" />
-          <Property Name="BWUPMJ" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="BWJOBN" Type="nchar" MaxLength="10" />
-          <Property Name="BWTDAY" Type="float" />
-          <Property Name="BWUPMT" Type="float" />
-          <Property Name="BWWN001" Type="nchar" MaxLength="3" />
-          <Property Name="BWWN002" Type="nchar" MaxLength="3" />
-          <Property Name="BWWN003" Type="nchar" MaxLength="3" />
-          <Property Name="BWWN004" Type="nchar" MaxLength="3" />
-          <Property Name="BWWN005" Type="nchar" MaxLength="3" />
-          <Property Name="BWWN006" Type="nchar" MaxLength="3" />
-          <Property Name="BWWN007" Type="nchar" MaxLength="3" />
-          <Property Name="BWWN008" Type="nchar" MaxLength="3" />
-          <Property Name="BWWN009" Type="nchar" MaxLength="3" />
-          <Property Name="BWWN010" Type="nchar" MaxLength="3" />
-          <Property Name="BWNICK" Type="nchar" MaxLength="40" />
-          <Property Name="BWGEND" Type="nchar" MaxLength="1" />
-          <Property Name="BWNTYP" Type="nchar" MaxLength="3" />
-          <Property Name="BWDDATE" Type="float" />
-          <Property Name="BWDMON" Type="float" />
-          <Property Name="BWDYR" Type="float" />
-          <Property Name="BWFUCO" Type="nchar" MaxLength="10" />
-          <Property Name="BWPCM" Type="nchar" MaxLength="10" />
-          <Property Name="BWPCF" Type="nchar" MaxLength="3" />
-          <Property Name="BWACTIN" Type="nchar" MaxLength="1" />
-          <Property Name="BWCFRGUID" Type="nchar" MaxLength="36" />
-          <Property Name="BWREFNAME" Type="nchar" MaxLength="40" />
-          <Property Name="BWCHPROC" Type="nchar" MaxLength="1" />
-        </EntityType>
         <EntityType Name="F03012">
           <Key>
             <PropertyRef Name="AIAN8" />
@@ -1502,7 +1426,6 @@
         <EntityContainer Name="JDEModelStoreContainer">
           <EntitySet Name="F0101" EntityType="Self.F0101" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F0101Z2" EntityType="Self.F0101Z2" Schema="TESTDTA" store:Type="Tables" />
-          <EntitySet Name="F0111Z1" EntityType="Self.F0111Z1" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F03012" EntityType="Self.F03012" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F03012Z1" EntityType="Self.F03012Z1" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F4102" EntityType="Self.F4102" Schema="TESTDTA" store:Type="Tables" />
@@ -2579,7 +2502,6 @@
           <EntitySet Name="F4714" EntityType="Self.F4714" />
           <EntitySet Name="F4715" EntityType="Self.F4715" />
           <EntitySet Name="F0101Z2" EntityType="JDEModel.F0101Z2" />
-          <EntitySet Name="F0111Z1" EntityType="JDEModel.F0111Z1" />
           <EntitySet Name="F03012Z1" EntityType="JDEModel.F03012Z1" />
         </EntityContainer>
         <EntityType Name="F0101Z2">
@@ -2714,82 +2636,6 @@
           <Property Name="SZAEMPGP" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
           <Property Name="SZACTIN" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="SZREVRNG" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-        </EntityType>
-        <EntityType Name="F0111Z1">
-          <Key>
-            <PropertyRef Name="BWEDUS" />
-            <PropertyRef Name="BWEDBT" />
-            <PropertyRef Name="BWEDTN" />
-            <PropertyRef Name="BWEDLN" />
-          </Key>
-          <Property Name="BWEDUS" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="BWEDBT" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="true" />
-          <Property Name="BWEDTN" Type="String" Nullable="false" MaxLength="22" FixedLength="true" Unicode="true" />
-          <Property Name="BWEDLN" Type="Double" Nullable="false" />
-          <Property Name="BWEDCT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="BWTYTN" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
-          <Property Name="BWEDFT" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="BWEDDT" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="BWDRIN" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="BWEDDL" Type="Double" />
-          <Property Name="BWEDSP" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="BWPNID" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <Property Name="BWTNAC" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="BWAN8" Type="Double" />
-          <Property Name="BWIDLN" Type="Double" />
-          <Property Name="BWDSS5" Type="Double" />
-          <Property Name="BWMLNM" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
-          <Property Name="BWATTL" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
-          <Property Name="BWREM1" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
-          <Property Name="BWSLNM" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
-          <Property Name="BWALPH" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
-          <Property Name="BWDC" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
-          <Property Name="BWGNNM" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
-          <Property Name="BWMDNM" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
-          <Property Name="BWSRNM" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
-          <Property Name="BWTYC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="BWW001" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWW002" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWW003" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWW004" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWW005" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWW006" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWW007" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWW008" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWW009" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWW010" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWMLN1" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
-          <Property Name="BWALP1" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
-          <Property Name="BWTORG" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="BWUSER" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="BWPID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="BWUPMJ" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="BWJOBN" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="BWTDAY" Type="Double" />
-          <Property Name="BWUPMT" Type="Double" />
-          <Property Name="BWWN001" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWWN002" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWWN003" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWWN004" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWWN005" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWWN006" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWWN007" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWWN008" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWWN009" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWWN010" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWNICK" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
-          <Property Name="BWGEND" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="BWNTYP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWDDATE" Type="Double" />
-          <Property Name="BWDMON" Type="Double" />
-          <Property Name="BWDYR" Type="Double" />
-          <Property Name="BWFUCO" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="BWPCM" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="BWPCF" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="BWACTIN" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="BWCFRGUID" Type="String" MaxLength="36" FixedLength="true" Unicode="true" />
-          <Property Name="BWREFNAME" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
-          <Property Name="BWCHPROC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="F03012Z1">
           <Key>
@@ -4200,80 +4046,6 @@
                 <ScalarProperty Name="SZEDTN" ColumnName="SZEDTN" />
                 <ScalarProperty Name="SZEDBT" ColumnName="SZEDBT" />
                 <ScalarProperty Name="SZEDUS" ColumnName="SZEDUS" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="F0111Z1">
-            <EntityTypeMapping TypeName="JDEModel.F0111Z1">
-              <MappingFragment StoreEntitySet="F0111Z1">
-                <ScalarProperty Name="BWCHPROC" ColumnName="BWCHPROC" />
-                <ScalarProperty Name="BWREFNAME" ColumnName="BWREFNAME" />
-                <ScalarProperty Name="BWCFRGUID" ColumnName="BWCFRGUID" />
-                <ScalarProperty Name="BWACTIN" ColumnName="BWACTIN" />
-                <ScalarProperty Name="BWPCF" ColumnName="BWPCF" />
-                <ScalarProperty Name="BWPCM" ColumnName="BWPCM" />
-                <ScalarProperty Name="BWFUCO" ColumnName="BWFUCO" />
-                <ScalarProperty Name="BWDYR" ColumnName="BWDYR" />
-                <ScalarProperty Name="BWDMON" ColumnName="BWDMON" />
-                <ScalarProperty Name="BWDDATE" ColumnName="BWDDATE" />
-                <ScalarProperty Name="BWNTYP" ColumnName="BWNTYP" />
-                <ScalarProperty Name="BWGEND" ColumnName="BWGEND" />
-                <ScalarProperty Name="BWNICK" ColumnName="BWNICK" />
-                <ScalarProperty Name="BWWN010" ColumnName="BWWN010" />
-                <ScalarProperty Name="BWWN009" ColumnName="BWWN009" />
-                <ScalarProperty Name="BWWN008" ColumnName="BWWN008" />
-                <ScalarProperty Name="BWWN007" ColumnName="BWWN007" />
-                <ScalarProperty Name="BWWN006" ColumnName="BWWN006" />
-                <ScalarProperty Name="BWWN005" ColumnName="BWWN005" />
-                <ScalarProperty Name="BWWN004" ColumnName="BWWN004" />
-                <ScalarProperty Name="BWWN003" ColumnName="BWWN003" />
-                <ScalarProperty Name="BWWN002" ColumnName="BWWN002" />
-                <ScalarProperty Name="BWWN001" ColumnName="BWWN001" />
-                <ScalarProperty Name="BWUPMT" ColumnName="BWUPMT" />
-                <ScalarProperty Name="BWTDAY" ColumnName="BWTDAY" />
-                <ScalarProperty Name="BWJOBN" ColumnName="BWJOBN" />
-                <ScalarProperty Name="BWUPMJ" ColumnName="BWUPMJ" />
-                <ScalarProperty Name="BWPID" ColumnName="BWPID" />
-                <ScalarProperty Name="BWUSER" ColumnName="BWUSER" />
-                <ScalarProperty Name="BWTORG" ColumnName="BWTORG" />
-                <ScalarProperty Name="BWALP1" ColumnName="BWALP1" />
-                <ScalarProperty Name="BWMLN1" ColumnName="BWMLN1" />
-                <ScalarProperty Name="BWW010" ColumnName="BWW010" />
-                <ScalarProperty Name="BWW009" ColumnName="BWW009" />
-                <ScalarProperty Name="BWW008" ColumnName="BWW008" />
-                <ScalarProperty Name="BWW007" ColumnName="BWW007" />
-                <ScalarProperty Name="BWW006" ColumnName="BWW006" />
-                <ScalarProperty Name="BWW005" ColumnName="BWW005" />
-                <ScalarProperty Name="BWW004" ColumnName="BWW004" />
-                <ScalarProperty Name="BWW003" ColumnName="BWW003" />
-                <ScalarProperty Name="BWW002" ColumnName="BWW002" />
-                <ScalarProperty Name="BWW001" ColumnName="BWW001" />
-                <ScalarProperty Name="BWTYC" ColumnName="BWTYC" />
-                <ScalarProperty Name="BWSRNM" ColumnName="BWSRNM" />
-                <ScalarProperty Name="BWMDNM" ColumnName="BWMDNM" />
-                <ScalarProperty Name="BWGNNM" ColumnName="BWGNNM" />
-                <ScalarProperty Name="BWDC" ColumnName="BWDC" />
-                <ScalarProperty Name="BWALPH" ColumnName="BWALPH" />
-                <ScalarProperty Name="BWSLNM" ColumnName="BWSLNM" />
-                <ScalarProperty Name="BWREM1" ColumnName="BWREM1" />
-                <ScalarProperty Name="BWATTL" ColumnName="BWATTL" />
-                <ScalarProperty Name="BWMLNM" ColumnName="BWMLNM" />
-                <ScalarProperty Name="BWDSS5" ColumnName="BWDSS5" />
-                <ScalarProperty Name="BWIDLN" ColumnName="BWIDLN" />
-                <ScalarProperty Name="BWAN8" ColumnName="BWAN8" />
-                <ScalarProperty Name="BWTNAC" ColumnName="BWTNAC" />
-                <ScalarProperty Name="BWPNID" ColumnName="BWPNID" />
-                <ScalarProperty Name="BWEDSP" ColumnName="BWEDSP" />
-                <ScalarProperty Name="BWEDDL" ColumnName="BWEDDL" />
-                <ScalarProperty Name="BWDRIN" ColumnName="BWDRIN" />
-                <ScalarProperty Name="BWEDDT" ColumnName="BWEDDT" />
-                <ScalarProperty Name="BWEDFT" ColumnName="BWEDFT" />
-                <ScalarProperty Name="BWTYTN" ColumnName="BWTYTN" />
-                <ScalarProperty Name="BWEDCT" ColumnName="BWEDCT" />
-                <ScalarProperty Name="BWEDLN" ColumnName="BWEDLN" />
-                <ScalarProperty Name="BWEDTN" ColumnName="BWEDTN" />
-                <ScalarProperty Name="BWEDBT" ColumnName="BWEDBT" />
-                <ScalarProperty Name="BWEDUS" ColumnName="BWEDUS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

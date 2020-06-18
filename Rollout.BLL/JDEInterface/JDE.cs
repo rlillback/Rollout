@@ -217,8 +217,123 @@ namespace Rollout.BLL
             entry.SZAC08 = line.Concept; // This is where we are placing the concept
             return;
         }
+
+        /// <summary>
+        /// Populate a single F03012Z1 entry with data that doesn't change per line
+        /// </summary>
+        /// <param name="entry"></param>
+        /// <param name="batch"></param>
+        private static void PopulateUnchangingF03012Z1(ref F03012Z1 entry, string batch)
+        {
+            entry.VOEDUS = "808718";        //TODO: Change this from Ray Lillback
+            entry.VOEDBT = batch;           // Unique batch number
+            entry.VOEDLN = 1;               // We are going to enter each record uniquely in a single item.
+            entry.VOEDSP = "";              // Leave blank - is set to Y for a successfully processed record.
+            entry.VOTNAC = "A";             // We are adding these to JDE, so action code = A
+            entry.VOCO = "03000";           // Hard code the company??
+            entry.VOCRCA = "USD";           // Hard code the currency code??
+            entry.VOTYTN = "";              // Use the Customer Master MBF processing option (P0100042)
+            entry.VODRIN = "0";             // Inbound direction
+            entry.VOEDDL = 1;               // Informational only, so set this to a default value
+            entry.VOPNID = "";              // Trading Partner ID
+            entry.VOARC = "";               // GL Offset.  
+            entry.VOMCUR = "";              // Business Unit - A/R Default
+            entry.VOOBAR = "";              // Object - A/R Default.  
+            entry.VOAIDR = "";              // Subsidiary - A/R Default. What do we populate here ????
+            entry.VOKCOR = "";              // Document Company - A/R Model.  
+            entry.VODCAR = null;            // Document Number - A/R Model.  
+            entry.VODTAR = "";              // Document Type - A/R Model.  
+            entry.VOCRCD = "USD";           // Currency Code
+            entry.VOACL = null;             // Amount - Credit Limit.  
+            entry.VOHDAR = "";              // Hold Invoices.  
+            entry.VOTRAR = "";              // Payment Terms. 
+            entry.VOSTTO = "P";             // Send Statement To.  
+            entry.VORYIN = "";              // Payment Instrument.  Must exist in 00/PY & since this is a ship to, "" should work
+            entry.VOSTMT = "N";             // Print Statement.  
+            entry.VOATCS = "N";             // Auto Receipt.
+            entry.VOSITO = "P";             // Send invoice to Parent.
+            entry.VOCYCN = "";              // Statement cycle.  Kinetico uses the default value here.
+            entry.VOTSTA = "";              // Temporary Credit Message.  Must exist in UDC 01/CM
+            entry.VODLC = null;             // Date of Last Credit Review.
+            entry.VODNLT = "";              // Delinquency Notice
+            entry.VOPLCR = "";              // Person completing last credit review
+            entry.VORVDJ = null;            // Date - Recall for Review
+            entry.VOCMGR = "";              // Credit Manager
+            entry.VOCLMG = "";              // Collection Manager
+            entry.VOCOLL = "";              // Collection Report
+            entry.VOAFC = "";               // Apply Finance Charges
+            entry.VODT1J = null;            // Last Statement Date
+            entry.VODFIJ = null;            // First Invoice Date
+            entry.VODLIJ = null;            // Last Invoice Date
+            entry.VODLP = null;             // Date Last Paid
+            entry.VODB = "";                // Dun & Bradstreet Rating
+            entry.VODNBJ = null;            // Dun & Bradstreet Date
+            entry.VOTRW = "";               // TRW Rating
+            entry.VOTWDJ = null;            // TRW Date
+            entry.VOAD = 0;                 // Reserved for future use
+            entry.VOAFCP = 0;               // Amount - Prior Year Finance Charge
+            entry.VOAFCY = 0;               // Amount - YTD Finance Charges
+            entry.VOASTY = 0;               // Amount Invoiced this Year
+            entry.VOSPYE = 0;               // Amount Invoiced
+            entry.VOALP = 0;                // Amount Last Applied
+            entry.VOPOPN = "";              // Person Opening Account
+            entry.VODAOJ = CommonFunctions.DateStringToJulian(System.DateTime.Today.ToShortDateString()); // Date - Account Opened
+            entry.VOPLY = null;             // Policy Number (Internal)
+            entry.VOMAN8 = null;            // Deduction Manager
+            entry.VOARL = "";               // Auto Receipts Execution List
+            entry.VOAC01 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC02 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC03 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC04 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC05 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC06 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC07 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC08 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC09 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC10 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC11 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC12 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC13 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC14 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC15 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC16 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC17 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC18 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC19 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC20 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC21 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC22 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC23 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC24 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC25 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC26 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC27 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC28 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC29 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOAC30 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
+            entry.VOCUSTS = "0";            // Customer Status 0 = Active 1 = Inactive (For CRM)
+            return;
+        }
+
+        /// <summary>
+        /// Populate a single F03012Z1 entry with line-specific data
+        /// </summary>
+        /// <param name="entry"></param>
+        /// <param name="ParentAddress"></param>
+        /// <param name="line"></param>
+        /// <param name="transaction"></param>
+        private static void PopulateLineF03012Z1(ref F03012Z1 entry, double ParentAddress, ShipToLine line, decimal transaction)
+        {
+            entry.VOAN8 = line.JDEAddress;              // AIAN8
+            entry.VOTXA1 = line.TaxAreaCode;            // Tax Area Code must exist in F4008
+            entry.VOEDTN = transaction.ToString();      // Transaction number
+            entry.VOARPY = ParentAddress;               // Alternate Payor
+            entry.VOEXR1 = line.TaxExplanationCode;     // Tax Explanation Code.  Must exist in UDC 00/EX
+            return;
+        }
         #endregion
 
+        #region public methods
         /// <summary>
         /// Get the ABAC08 field for a concept by ABAN8
         /// </summary>
@@ -478,6 +593,33 @@ namespace Rollout.BLL
         }
 
         /// <summary>
+        /// Get the JDE Address number by field ABALKY
+        /// </summary>
+        /// <param name="alky"></param>
+        /// <returns></returns>
+        public static double? GetAddressFromALKY(string alky)
+        {
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));
+            log.Debug($"Getting JDE Address where ABALKY = {alky}");
+
+            double? address;
+            try
+            {
+                using (JDEEntities jde = new JDEEntities())
+                {
+                    address = jde.F0101.AsNoTracking().Where(n => n.ABALKY.Trim() == alky.Trim()).Select(n => n.ABAN8).FirstOrDefault();
+                    log.Debug($"ABALKY = {alky} returned {address.ToString()} from F0101");
+                }
+            }
+            catch (Exception eJDE)
+            {
+                log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
+                throw eJDE;
+            }
+            return address;
+        }
+
+        /// <summary>
         /// Populate the JDE F0101Z2 file from the ShipTo construct
         /// </summary>
         /// <param name="DT"></param>
@@ -489,7 +631,7 @@ namespace Rollout.BLL
             Random random = new Random();
             string batch = random.Next().ToString(); // 32-bit integer
             List<F0101Z2> entries = new List<F0101Z2>();
-            F0101Z2 entry = null;
+            F0101Z2 entry;
             decimal transaction = 1;
             foreach (ShipToLine line in DT.NewShipTos)
             {
@@ -514,5 +656,44 @@ namespace Rollout.BLL
             }
             return;
         }
+
+        /// <summary>
+        /// Populate the JDE F03012Z1 file from the ShipToconstruct
+        /// </summary>
+        /// <param name="DT"></param>
+        public static void PopulateF03012Z1(ShipTo DT)
+        {
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));
+            log.Debug($"Populating F03012Z1");
+
+            Random random = new Random();
+            string batch = random.Next().ToString(); // 32-bit integer
+            List<F03012Z1> entries = new List<F03012Z1>();
+            F03012Z1 entry;
+            decimal transaction = 1;
+            foreach (ShipToLine line in DT.NewShipTos)
+            {
+                entry = new F03012Z1();
+                PopulateUnchangingF03012Z1(ref entry, batch);
+                PopulateLineF03012Z1(ref entry, DT.ParentAddress, line, transaction);
+                entries.Add(entry);
+                transaction++;
+            }
+            try
+            {
+                using (JDEEntities jde = new JDEEntities())
+                {
+                    jde.F03012Z1.AddRange(entries);
+                    jde.SaveChanges();
+                }
+            }
+            catch (Exception eJDE)
+            {
+                log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
+                throw eJDE;
+            }
+            return;
+        }
+#endregion
     } // Class
 } // namespace

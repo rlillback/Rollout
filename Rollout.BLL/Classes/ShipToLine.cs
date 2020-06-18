@@ -151,5 +151,22 @@ namespace Rollout.BLL
         public string StoreNumber;
 
         public double JDEAddress;
+
+        private string _TaxExplanationCode;
+        public string TaxExplanationCode
+        {
+            get { return _TaxExplanationCode; }
+            set
+            {
+                if ( 2 < value.Length )
+                {
+                    _TaxExplanationCode = value.Substring(0, 2);
+                }
+                else
+                {
+                    _TaxExplanationCode = value;
+                }
+            }
+        }
     }
 }

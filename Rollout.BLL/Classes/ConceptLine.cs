@@ -21,7 +21,7 @@ namespace Rollout.BLL
             }
             set
             {
-                if (26 < value.Length)
+                if (25 < value.Length)
                 {
                     _jdePartNumber = value.Substring(0, 25);
                 }
@@ -33,6 +33,22 @@ namespace Rollout.BLL
         }
         public double Quantity { get; set; }
         public decimal JulianRequestedDate { get; set; }
+        private string _BranchPlant;
+        public string BranchPlant
+        {
+            get { return _BranchPlant; }
+            set
+            {
+                if (12 < value.Length)
+                {
+                    _BranchPlant = value.Substring((value.Length - 12), 12); // Rightmost 12
+                }
+                else
+                {
+                    _BranchPlant = value;
+                }
+            }
+        }
         public bool ValidShipTo { get; set; }
         public bool ValidPartNumber { get; set; }
 

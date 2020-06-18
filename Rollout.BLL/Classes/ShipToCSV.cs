@@ -86,7 +86,6 @@ namespace Rollout.BLL
             Regex anyreg = new Regex(RegexHelper.MatchAnything);
             Regex intreg = new Regex(RegexHelper.MatchInteger);
             Regex datereg = new Regex(RegexHelper.MatchUSADate);
-            this.HeaderRow.Add(PopulateHeader("JDE ADDRESS", intreg));
             this.HeaderRow.Add(PopulateHeader("SHIP TO NAME", anyreg));
             this.HeaderRow.Add(PopulateHeader("STORE NUMBER", anyreg));
             this.HeaderRow.Add(PopulateHeader("CONCEPT CODE", anyreg));
@@ -96,6 +95,7 @@ namespace Rollout.BLL
             this.HeaderRow.Add(PopulateHeader("STATE", anyreg));
             this.HeaderRow.Add(PopulateHeader("ZIP", anyreg));
             this.HeaderRow.Add(PopulateHeader("TAX AREA CODE", anyreg));
+            this.HeaderRow.Add(PopulateHeader("TAX EXPLANATION CODE", anyreg));
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Rollout.BLL
             {
                 if (0 == String.Compare("TAX AREA CODE", h.ColumnName.ToUpper()))
                 {
-                    r["TAX AREA CODE"] = String.Empty;
+                    r["TAX AREA CODE"] = String.Empty; // Filled out later for F03012 load
                 }
                 else if (0 == String.Compare("CONCEPT CODE", h.ColumnName.ToUpper()))
                 {
@@ -136,7 +136,11 @@ namespace Rollout.BLL
                 }
                 else if (0 == String.Compare("JDE ADDRESS", h.ColumnName.ToUpper()))
                 {
-                    r["JDE ADDRESS"] = 0;
+                    r["JDE ADDRESS"] = 0; // The Z-File upload populates the JDE address in JDE
+                }
+                else if (0 == String.Compare("TAX EXPLANATION CODE", h.ColumnName.ToUpper()))
+                {
+                    r["TAX EXPLANATION CODE"] = String.Empty; // Filled out later for F03012 load
                 }
                 else
                 {
@@ -218,7 +222,7 @@ namespace Rollout.BLL
                     r["RowValid"] = h.ColumnRegex.IsMatch(r[h.ColumnName].ToString());
                     if (false == (bool)r["RowValid"])
                     {
-                        log.Error($"{h.ColumnName} has {r[h.ColumnName].ToString()} invalid in row {DT.Rows.IndexOf(r)} -- row data: {string.Join(",", r.ItemArray)}");
+                        log.Error($"{h.ColumnName} data = {r[h.ColumnName].ToString()} is invalid in row {DT.Rows.IndexOf(r)} -- row data: {string.Join(",", r.ItemArray)}");
                         rowsValid = false;
                     }
                 }
