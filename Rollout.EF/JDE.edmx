@@ -5,6 +5,42 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="JDEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="F0002">
+          <Key>
+            <PropertyRef Name="NNSY" />
+          </Key>
+          <Property Name="NNSY" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="NNUD01" Type="nchar" MaxLength="15" />
+          <Property Name="NNUD02" Type="nchar" MaxLength="15" />
+          <Property Name="NNUD03" Type="nchar" MaxLength="15" />
+          <Property Name="NNUD04" Type="nchar" MaxLength="15" />
+          <Property Name="NNUD05" Type="nchar" MaxLength="15" />
+          <Property Name="NNUD06" Type="nchar" MaxLength="15" />
+          <Property Name="NNUD07" Type="nchar" MaxLength="15" />
+          <Property Name="NNUD08" Type="nchar" MaxLength="15" />
+          <Property Name="NNUD09" Type="nchar" MaxLength="15" />
+          <Property Name="NNUD10" Type="nchar" MaxLength="15" />
+          <Property Name="NNN001" Type="float" />
+          <Property Name="NNN002" Type="float" />
+          <Property Name="NNN003" Type="float" />
+          <Property Name="NNN004" Type="float" />
+          <Property Name="NNN005" Type="float" />
+          <Property Name="NNN006" Type="float" />
+          <Property Name="NNN007" Type="float" />
+          <Property Name="NNN008" Type="float" />
+          <Property Name="NNN009" Type="float" />
+          <Property Name="NNN010" Type="float" />
+          <Property Name="NNCK01" Type="nchar" MaxLength="1" />
+          <Property Name="NNCK02" Type="nchar" MaxLength="1" />
+          <Property Name="NNCK03" Type="nchar" MaxLength="1" />
+          <Property Name="NNCK04" Type="nchar" MaxLength="1" />
+          <Property Name="NNCK05" Type="nchar" MaxLength="1" />
+          <Property Name="NNCK06" Type="nchar" MaxLength="1" />
+          <Property Name="NNCK07" Type="nchar" MaxLength="1" />
+          <Property Name="NNCK08" Type="nchar" MaxLength="1" />
+          <Property Name="NNCK09" Type="nchar" MaxLength="1" />
+          <Property Name="NNCK10" Type="nchar" MaxLength="1" />
+        </EntityType>
         <EntityType Name="F0101">
           <Key>
             <PropertyRef Name="ABAN8" />
@@ -1359,71 +1395,8 @@
           <Property Name="SZGDVAN" Type="float" />
           <Property Name="SZPMPN" Type="nchar" MaxLength="30" />
         </EntityType>
-        <EntityType Name="F4714">
-          <Key>
-            <PropertyRef Name="ZTEKCO" />
-            <PropertyRef Name="ZTEDOC" />
-            <PropertyRef Name="ZTEDCT" />
-            <PropertyRef Name="ZTEDLN" />
-            <PropertyRef Name="ZTFILE" />
-            <PropertyRef Name="ZTLINS" />
-          </Key>
-          <Property Name="ZTEDTY" Type="nchar" MaxLength="1" />
-          <Property Name="ZTEDSQ" Type="float" />
-          <Property Name="ZTEKCO" Type="nchar" MaxLength="5" Nullable="false" />
-          <Property Name="ZTEDOC" Type="float" Nullable="false" />
-          <Property Name="ZTEDCT" Type="nchar" MaxLength="2" Nullable="false" />
-          <Property Name="ZTEDLN" Type="float" Nullable="false" />
-          <Property Name="ZTEDSP" Type="nchar" MaxLength="1" />
-          <Property Name="ZTEDBT" Type="nchar" MaxLength="15" />
-          <Property Name="ZTFILE" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="ZTKCOO" Type="nchar" MaxLength="5" />
-          <Property Name="ZTDOCO" Type="float" />
-          <Property Name="ZTDCTO" Type="nchar" MaxLength="2" />
-          <Property Name="ZTLNID" Type="float" />
-          <Property Name="ZTPNTC" Type="nchar" MaxLength="1" />
-          <Property Name="ZTLINS" Type="float" Nullable="false" />
-          <Property Name="ZTTXLN" Type="nchar" MaxLength="60" />
-          <Property Name="ZTTORG" Type="nchar" MaxLength="10" />
-          <Property Name="ZTUSER" Type="nchar" MaxLength="10" />
-          <Property Name="ZTPID" Type="nchar" MaxLength="10" />
-          <Property Name="ZTJOBN" Type="nchar" MaxLength="10" />
-          <Property Name="ZTUPMJ" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="ZTTDAY" Type="float" />
-        </EntityType>
-        <EntityType Name="F4715">
-          <Key>
-            <PropertyRef Name="ZDEKCO" />
-            <PropertyRef Name="ZDEDOC" />
-            <PropertyRef Name="ZDEDCT" />
-            <PropertyRef Name="ZDEDLN" />
-            <PropertyRef Name="ZDFILE" />
-            <PropertyRef Name="ZDLINS" />
-          </Key>
-          <Property Name="ZDEDTY" Type="nchar" MaxLength="1" />
-          <Property Name="ZDEDSQ" Type="float" />
-          <Property Name="ZDEKCO" Type="nchar" MaxLength="5" Nullable="false" />
-          <Property Name="ZDEDOC" Type="float" Nullable="false" />
-          <Property Name="ZDEDCT" Type="nchar" MaxLength="2" Nullable="false" />
-          <Property Name="ZDEDLN" Type="float" Nullable="false" />
-          <Property Name="ZDEDSP" Type="nchar" MaxLength="1" />
-          <Property Name="ZDEDBT" Type="nchar" MaxLength="15" />
-          <Property Name="ZDFILE" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="ZDKCOO" Type="nchar" MaxLength="5" />
-          <Property Name="ZDDOCO" Type="float" />
-          <Property Name="ZDDCTO" Type="nchar" MaxLength="2" />
-          <Property Name="ZDLNID" Type="float" />
-          <Property Name="ZDPNTC" Type="nchar" MaxLength="1" />
-          <Property Name="ZDLINS" Type="float" Nullable="false" />
-          <Property Name="ZDTXLN" Type="nchar" MaxLength="60" />
-          <Property Name="ZDTORG" Type="nchar" MaxLength="10" />
-          <Property Name="ZDUSER" Type="nchar" MaxLength="10" />
-          <Property Name="ZDPID" Type="nchar" MaxLength="10" />
-          <Property Name="ZDJOBN" Type="nchar" MaxLength="10" />
-          <Property Name="ZDUPMJ" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="ZDTDAY" Type="float" />
-        </EntityType>
         <EntityContainer Name="JDEModelStoreContainer">
+          <EntitySet Name="F0002" EntityType="Self.F0002" Schema="TESTCTL" store:Type="Tables" />
           <EntitySet Name="F0101" EntityType="Self.F0101" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F0101Z2" EntityType="Self.F0101Z2" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F03012" EntityType="Self.F03012" Schema="TESTDTA" store:Type="Tables" />
@@ -1431,8 +1404,6 @@
           <EntitySet Name="F4102" EntityType="Self.F4102" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F47011" EntityType="Self.F47011" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F47012" EntityType="Self.F47012" Schema="TESTDTA" store:Type="Tables" />
-          <EntitySet Name="F4714" EntityType="Self.F4714" Schema="TESTDTA" store:Type="Tables" />
-          <EntitySet Name="F4715" EntityType="Self.F4715" Schema="TESTDTA" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -2429,80 +2400,15 @@
           <Property Name="SZGDVAN" Type="Double" />
           <Property Name="SZPMPN" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
         </EntityType>
-        <EntityType Name="F4714">
-          <Key>
-            <PropertyRef Name="ZTEKCO" />
-            <PropertyRef Name="ZTEDOC" />
-            <PropertyRef Name="ZTEDCT" />
-            <PropertyRef Name="ZTEDLN" />
-            <PropertyRef Name="ZTFILE" />
-            <PropertyRef Name="ZTLINS" />
-          </Key>
-          <Property Name="ZTEDTY" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="ZTEDSQ" Type="Double" />
-          <Property Name="ZTEKCO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="ZTEDOC" Type="Double" Nullable="false" />
-          <Property Name="ZTEDCT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="ZTEDLN" Type="Double" Nullable="false" />
-          <Property Name="ZTEDSP" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="ZTEDBT" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <Property Name="ZTFILE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="ZTKCOO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="ZTDOCO" Type="Double" />
-          <Property Name="ZTDCTO" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="ZTLNID" Type="Double" />
-          <Property Name="ZTPNTC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="ZTLINS" Type="Double" Nullable="false" />
-          <Property Name="ZTTXLN" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
-          <Property Name="ZTTORG" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="ZTUSER" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="ZTPID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="ZTJOBN" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="ZTUPMJ" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="ZTTDAY" Type="Double" />
-        </EntityType>
-        <EntityType Name="F4715">
-          <Key>
-            <PropertyRef Name="ZDEKCO" />
-            <PropertyRef Name="ZDEDOC" />
-            <PropertyRef Name="ZDEDCT" />
-            <PropertyRef Name="ZDEDLN" />
-            <PropertyRef Name="ZDFILE" />
-            <PropertyRef Name="ZDLINS" />
-          </Key>
-          <Property Name="ZDEDTY" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="ZDEDSQ" Type="Double" />
-          <Property Name="ZDEKCO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="ZDEDOC" Type="Double" Nullable="false" />
-          <Property Name="ZDEDCT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="ZDEDLN" Type="Double" Nullable="false" />
-          <Property Name="ZDEDSP" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="ZDEDBT" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <Property Name="ZDFILE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="ZDKCOO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="ZDDOCO" Type="Double" />
-          <Property Name="ZDDCTO" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="ZDLNID" Type="Double" />
-          <Property Name="ZDPNTC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="ZDLINS" Type="Double" Nullable="false" />
-          <Property Name="ZDTXLN" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
-          <Property Name="ZDTORG" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="ZDUSER" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="ZDPID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="ZDJOBN" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="ZDUPMJ" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="ZDTDAY" Type="Double" />
-        </EntityType>
         <EntityContainer Name="JDEEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="F0101" EntityType="Self.F0101" />
           <EntitySet Name="F03012" EntityType="Self.F03012" />
           <EntitySet Name="F4102" EntityType="Self.F4102" />
           <EntitySet Name="F47011" EntityType="Self.F47011" />
           <EntitySet Name="F47012" EntityType="Self.F47012" />
-          <EntitySet Name="F4714" EntityType="Self.F4714" />
-          <EntitySet Name="F4715" EntityType="Self.F4715" />
           <EntitySet Name="F0101Z2" EntityType="JDEModel.F0101Z2" />
           <EntitySet Name="F03012Z1" EntityType="JDEModel.F03012Z1" />
+          <EntitySet Name="F0002" EntityType="JDEModel.F0002" />
         </EntityContainer>
         <EntityType Name="F0101Z2">
           <Key>
@@ -2866,6 +2772,42 @@
           <Property Name="VOCIG" Type="Double" />
           <Property Name="VODTEE" Type="DateTime" Precision="3" />
           <Property Name="VOGOPASF" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="F0002">
+          <Key>
+            <PropertyRef Name="NNSY" />
+          </Key>
+          <Property Name="NNSY" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="NNUD01" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="NNUD02" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="NNUD03" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="NNUD04" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="NNUD05" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="NNUD06" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="NNUD07" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="NNUD08" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="NNUD09" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="NNUD10" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="NNN001" Type="Double" />
+          <Property Name="NNN002" Type="Double" />
+          <Property Name="NNN003" Type="Double" />
+          <Property Name="NNN004" Type="Double" />
+          <Property Name="NNN005" Type="Double" />
+          <Property Name="NNN006" Type="Double" />
+          <Property Name="NNN007" Type="Double" />
+          <Property Name="NNN008" Type="Double" />
+          <Property Name="NNN009" Type="Double" />
+          <Property Name="NNN010" Type="Double" />
+          <Property Name="NNCK01" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="NNCK02" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="NNCK03" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="NNCK04" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="NNCK05" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="NNCK06" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="NNCK07" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="NNCK08" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="NNCK09" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="NNCK10" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3862,62 +3804,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="F4714">
-            <EntityTypeMapping TypeName="JDEModel.F4714">
-              <MappingFragment StoreEntitySet="F4714">
-                <ScalarProperty Name="ZTEDTY" ColumnName="ZTEDTY" />
-                <ScalarProperty Name="ZTEDSQ" ColumnName="ZTEDSQ" />
-                <ScalarProperty Name="ZTEKCO" ColumnName="ZTEKCO" />
-                <ScalarProperty Name="ZTEDOC" ColumnName="ZTEDOC" />
-                <ScalarProperty Name="ZTEDCT" ColumnName="ZTEDCT" />
-                <ScalarProperty Name="ZTEDLN" ColumnName="ZTEDLN" />
-                <ScalarProperty Name="ZTEDSP" ColumnName="ZTEDSP" />
-                <ScalarProperty Name="ZTEDBT" ColumnName="ZTEDBT" />
-                <ScalarProperty Name="ZTFILE" ColumnName="ZTFILE" />
-                <ScalarProperty Name="ZTKCOO" ColumnName="ZTKCOO" />
-                <ScalarProperty Name="ZTDOCO" ColumnName="ZTDOCO" />
-                <ScalarProperty Name="ZTDCTO" ColumnName="ZTDCTO" />
-                <ScalarProperty Name="ZTLNID" ColumnName="ZTLNID" />
-                <ScalarProperty Name="ZTPNTC" ColumnName="ZTPNTC" />
-                <ScalarProperty Name="ZTLINS" ColumnName="ZTLINS" />
-                <ScalarProperty Name="ZTTXLN" ColumnName="ZTTXLN" />
-                <ScalarProperty Name="ZTTORG" ColumnName="ZTTORG" />
-                <ScalarProperty Name="ZTUSER" ColumnName="ZTUSER" />
-                <ScalarProperty Name="ZTPID" ColumnName="ZTPID" />
-                <ScalarProperty Name="ZTJOBN" ColumnName="ZTJOBN" />
-                <ScalarProperty Name="ZTUPMJ" ColumnName="ZTUPMJ" />
-                <ScalarProperty Name="ZTTDAY" ColumnName="ZTTDAY" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="F4715">
-            <EntityTypeMapping TypeName="JDEModel.F4715">
-              <MappingFragment StoreEntitySet="F4715">
-                <ScalarProperty Name="ZDEDTY" ColumnName="ZDEDTY" />
-                <ScalarProperty Name="ZDEDSQ" ColumnName="ZDEDSQ" />
-                <ScalarProperty Name="ZDEKCO" ColumnName="ZDEKCO" />
-                <ScalarProperty Name="ZDEDOC" ColumnName="ZDEDOC" />
-                <ScalarProperty Name="ZDEDCT" ColumnName="ZDEDCT" />
-                <ScalarProperty Name="ZDEDLN" ColumnName="ZDEDLN" />
-                <ScalarProperty Name="ZDEDSP" ColumnName="ZDEDSP" />
-                <ScalarProperty Name="ZDEDBT" ColumnName="ZDEDBT" />
-                <ScalarProperty Name="ZDFILE" ColumnName="ZDFILE" />
-                <ScalarProperty Name="ZDKCOO" ColumnName="ZDKCOO" />
-                <ScalarProperty Name="ZDDOCO" ColumnName="ZDDOCO" />
-                <ScalarProperty Name="ZDDCTO" ColumnName="ZDDCTO" />
-                <ScalarProperty Name="ZDLNID" ColumnName="ZDLNID" />
-                <ScalarProperty Name="ZDPNTC" ColumnName="ZDPNTC" />
-                <ScalarProperty Name="ZDLINS" ColumnName="ZDLINS" />
-                <ScalarProperty Name="ZDTXLN" ColumnName="ZDTXLN" />
-                <ScalarProperty Name="ZDTORG" ColumnName="ZDTORG" />
-                <ScalarProperty Name="ZDUSER" ColumnName="ZDUSER" />
-                <ScalarProperty Name="ZDPID" ColumnName="ZDPID" />
-                <ScalarProperty Name="ZDJOBN" ColumnName="ZDJOBN" />
-                <ScalarProperty Name="ZDUPMJ" ColumnName="ZDUPMJ" />
-                <ScalarProperty Name="ZDTDAY" ColumnName="ZDTDAY" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="F0101Z2">
             <EntityTypeMapping TypeName="JDEModel.F0101Z2">
               <MappingFragment StoreEntitySet="F0101Z2">
@@ -4274,6 +4160,43 @@
                 <ScalarProperty Name="VOEDTN" ColumnName="VOEDTN" />
                 <ScalarProperty Name="VOEDBT" ColumnName="VOEDBT" />
                 <ScalarProperty Name="VOEDUS" ColumnName="VOEDUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="F0002">
+            <EntityTypeMapping TypeName="JDEModel.F0002">
+              <MappingFragment StoreEntitySet="F0002">
+                <ScalarProperty Name="NNCK10" ColumnName="NNCK10" />
+                <ScalarProperty Name="NNCK09" ColumnName="NNCK09" />
+                <ScalarProperty Name="NNCK08" ColumnName="NNCK08" />
+                <ScalarProperty Name="NNCK07" ColumnName="NNCK07" />
+                <ScalarProperty Name="NNCK06" ColumnName="NNCK06" />
+                <ScalarProperty Name="NNCK05" ColumnName="NNCK05" />
+                <ScalarProperty Name="NNCK04" ColumnName="NNCK04" />
+                <ScalarProperty Name="NNCK03" ColumnName="NNCK03" />
+                <ScalarProperty Name="NNCK02" ColumnName="NNCK02" />
+                <ScalarProperty Name="NNCK01" ColumnName="NNCK01" />
+                <ScalarProperty Name="NNN010" ColumnName="NNN010" />
+                <ScalarProperty Name="NNN009" ColumnName="NNN009" />
+                <ScalarProperty Name="NNN008" ColumnName="NNN008" />
+                <ScalarProperty Name="NNN007" ColumnName="NNN007" />
+                <ScalarProperty Name="NNN006" ColumnName="NNN006" />
+                <ScalarProperty Name="NNN005" ColumnName="NNN005" />
+                <ScalarProperty Name="NNN004" ColumnName="NNN004" />
+                <ScalarProperty Name="NNN003" ColumnName="NNN003" />
+                <ScalarProperty Name="NNN002" ColumnName="NNN002" />
+                <ScalarProperty Name="NNN001" ColumnName="NNN001" />
+                <ScalarProperty Name="NNUD10" ColumnName="NNUD10" />
+                <ScalarProperty Name="NNUD09" ColumnName="NNUD09" />
+                <ScalarProperty Name="NNUD08" ColumnName="NNUD08" />
+                <ScalarProperty Name="NNUD07" ColumnName="NNUD07" />
+                <ScalarProperty Name="NNUD06" ColumnName="NNUD06" />
+                <ScalarProperty Name="NNUD05" ColumnName="NNUD05" />
+                <ScalarProperty Name="NNUD04" ColumnName="NNUD04" />
+                <ScalarProperty Name="NNUD03" ColumnName="NNUD03" />
+                <ScalarProperty Name="NNUD02" ColumnName="NNUD02" />
+                <ScalarProperty Name="NNUD01" ColumnName="NNUD01" />
+                <ScalarProperty Name="NNSY" ColumnName="NNSY" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

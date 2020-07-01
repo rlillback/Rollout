@@ -56,6 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="F0002.cs">
+      <DependentUpon>JDE.tt</DependentUpon>
+    </Compile>
     <Compile Include="F0101.cs">
       <DependentUpon>JDE.tt</DependentUpon>
     </Compile>
@@ -75,12 +78,6 @@
       <DependentUpon>JDE.tt</DependentUpon>
     </Compile>
     <Compile Include="F47012.cs">
-      <DependentUpon>JDE.tt</DependentUpon>
-    </Compile>
-    <Compile Include="F4714.cs">
-      <DependentUpon>JDE.tt</DependentUpon>
-    </Compile>
-    <Compile Include="F4715.cs">
       <DependentUpon>JDE.tt</DependentUpon>
     </Compile>
     <Compile Include="JDE.Context.cs">

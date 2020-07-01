@@ -86,6 +86,15 @@ namespace Rollout.UnitTests
             Assert.IsTrue(0 == returned.Count);
         }
 
+        [TestMethod]
+        public void TestNextNumber()
+        {
+            double NextBatch = JDE.GetNextBatchNumber();
+            double NextDocument = JDE.GetDocumentNumbers(10);
+            NextBatch = JDE.GetNextBatchNumber();
+            NextDocument = JDE.GetDocumentNumbers(1);
+        }
+
 
     }
 }

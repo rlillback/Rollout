@@ -49,16 +49,16 @@ namespace Rollout.UnitTests
             bool SkipF0101 = true;
             bool SkipF03012 = false;
             // 1.) Read the concept
-            ConceptCSV TestConcept = new ConceptCSV(@"D:\gitHub\Rollout\TestFiles\SageRolloutExample1.csv", ",");
-            TestConcept.ReadConcept();
+            ConceptCSV TestConceptCSV = new ConceptCSV(@"D:\gitHub\Rollout\TestFiles\SageRolloutExample1.csv", ",");
+            TestConceptCSV.ReadConcept();
             // 2.) Test for missing entries
-            List<string> TestMissing = TestConcept.CheckForMissingShipToAddresses();
+            List<string> TestMissing = TestConceptCSV.CheckForMissingShipToAddresses();
             // 3.) If entries are missing, do the following:
             if (0 < TestMissing.Count && !SkipF0101)
             {
                 // 4.) Populate the missing CSV using the list of missing items
                 ShipToCSV MissingShipToCSV = new ShipToCSV(@"D:\gitHub\Rollout\TestFiles\SageRolloutMissing.csv", ",");
-                MissingShipToCSV.PopulateSpreadsheet(TestMissing, TestConcept);
+                MissingShipToCSV.PopulateSpreadsheet(TestMissing, TestConceptCSV);
                 // 5.) Populate the transformed data structure
                 ShipTo MissingShipTo = XfrmShipTo.CSVToShipTo(MissingShipToCSV, false); // Don't look up JDE Addresses
                 // 6.) Upload the transformed data structure to the F0101 Z-File
@@ -93,7 +93,7 @@ namespace Rollout.UnitTests
             else
             {
                 //TODO: Load the EDI tables
-
+                Concept TestConcept = XfrmConcept.CSVtoConcept(TestConceptCSV);
             }
         }
     }

@@ -9,8 +9,24 @@ namespace Rollout.BLL
     public class ConceptLine
     {
         #region PublicMembers
-        public double ShipToAddress { get; set; }
-        public decimal LineNumber { get; set; }
+        private string _BranchPlant;
+        public string BranchPlant
+        {
+            get { return _BranchPlant; }
+            set
+            {
+                if (12 < value.Length)
+                {
+                    _BranchPlant = value.Substring((value.Length - 12), 12); // Rightmost 12
+                }
+                else
+                {
+                    _BranchPlant = value;
+                }
+            }
+        }
+
+        public double DocumentNumber { get; set; }
 
         private string _jdePartNumber;
         public string JDEPartNumber
@@ -31,28 +47,11 @@ namespace Rollout.BLL
                 }
             }
         }
-        public double Quantity { get; set; }
-        public decimal JulianRequestedDate { get; set; }
-        private string _BranchPlant;
-        public string BranchPlant
-        {
-            get { return _BranchPlant; }
-            set
-            {
-                if (12 < value.Length)
-                {
-                    _BranchPlant = value.Substring((value.Length - 12), 12); // Rightmost 12
-                }
-                else
-                {
-                    _BranchPlant = value;
-                }
-            }
-        }
-        public bool ValidShipTo { get; set; }
-        public bool ValidPartNumber { get; set; }
 
-        private bool _lineValid;
+        public decimal JulianRequestedDate { get; set; }
+
+        public decimal LineNumber { get; set; }
+
         public bool LineValid
         {
             get
@@ -60,6 +59,13 @@ namespace Rollout.BLL
                 return (ValidShipTo && ValidPartNumber);
             }
         }
+
+        public double Quantity { get; set; }
+
+        public double ShipToAddress { get; set; }
+
+        public bool ValidShipTo { get; set; }
+        public bool ValidPartNumber { get; set; }
         #endregion
 
         public void ValidateLine()

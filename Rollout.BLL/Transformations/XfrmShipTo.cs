@@ -12,7 +12,9 @@ namespace Rollout.BLL
     {
         #region PrivateMembers
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        #endregion
 
+        #region PrivateMethods
         /// <summary>
         /// Populate the top common ship to information
         /// </summary>
@@ -22,6 +24,8 @@ namespace Rollout.BLL
         private static bool PopulateShipToHeader(ref ShipTo shipTo, ShipToCSV csv)
         {
             bool success = true;
+            Random random = new Random();
+            shipTo.batch = random.Next().ToString(); // 32-bit integer
             DataRow r = csv.DT.Rows[0];
             shipTo.StoreName = r["SHIP TO NAME"].ToString();
             shipTo.ConceptID = r["CONCEPT CODE"].ToString();

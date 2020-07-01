@@ -9,24 +9,10 @@ namespace Rollout.BLL
     public class Concept
     {
         #region PublicMembers
+        public string batch { get; set; }
+
         public double BillToAddress { get; set; }
-        public decimal JulianOrderDate { get; set; }
-        private string _PONumber;
-        public string PONumber
-        {
-            get { return _PONumber; }
-            set
-            {
-                if (25 < value.Length)
-                {
-                    _PONumber = value.Substring(0, 25);
-                }
-                else
-                {
-                    _PONumber = value;
-                }
-            }
-        }
+
         private string _ConceptID;
         public string ConceptID
         {
@@ -43,7 +29,28 @@ namespace Rollout.BLL
                 }
             }
         }
+
+        public decimal JulianOrderDate { get; set; }
+
+        private string _PONumber;
+        public string PONumber
+        {
+            get { return _PONumber; }
+            set
+            {
+                if (25 < value.Length)
+                {
+                    _PONumber = value.Substring(0, 25);
+                }
+                else
+                {
+                    _PONumber = value;
+                }
+            }
+        }
+
         public List<ConceptLine> OrderDetails { get; set; }
+
         public bool OrderValid { get; set; }
         #endregion
     }

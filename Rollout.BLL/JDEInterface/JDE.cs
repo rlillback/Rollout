@@ -331,9 +331,110 @@ namespace Rollout.BLL
             entry.VOEXR1 = line.TaxExplanationCode;     // Tax Explanation Code.  Must exist in UDC 00/EX
             return;
         }
+
+        /// <summary>
+        /// Populate a single F47011 entry with required header data, leave all the rest as default
+        /// </summary>
+        /// <param name="line"></param>
+        /// <param name="concept"></param>
+        /// <returns></returns>
+        private static F47011 PopulateSingleF47011(ConceptLine line, Concept concept)
+        {
+            F47011 EdiHeader = new F47011();
+            EdiHeader.SYEDOC = line.DocumentNumber;         // Order Number
+            EdiHeader.SYEDCT = "RO";                        // Rollout Order
+            EdiHeader.SYEKCO = "03000";                     // Don't really need this, but set it to Newbury
+            EdiHeader.SYEDST = "850";                       // 850 = New Sales Order
+            EdiHeader.SYEDER = "R";                         // Receive/Inbound Transaction
+            EdiHeader.SYTPUR = "00";                        // Transaction Set Purpose = Add
+            EdiHeader.SYSHAN = line.ShipToAddress;          // Can only populate AN8 or SHAN, not both
+            EdiHeader.SYMCU = line.BranchPlant;             // Branch/Plant for revenue
+            EdiHeader.SYDRQJ = line.JulianRequestedDate;    // Requested Date
+            EdiHeader.SYPDDJ = line.JulianRequestedDate;    // Promised Date
+            EdiHeader.SYVR01 = concept.PONumber;            // Purchase order number on the sales order
+            return EdiHeader;
+        }
+
+        private static F47012 PopulateOrderDetailF47012(ConceptLine line, string PONumber)
+        {
+            F47012 OrderLine = new F47012();
+            OrderLine.SZEDOC = line.DocumentNumber;         // Must be the same as the order header.  Part of the 1->M relationship.
+            OrderLine.SZEDCT = "RO";                        // Must be the same as the order header.  Part of the 1->M relationship.
+            OrderLine.SZEKCO = "03000";                     // Must be the same as the order header.  Part of the 1->M relationship.
+            OrderLine.SZEDLN = (double)line.LineNumber * 1000; // Line Number in JDE format of 1.000 = 1000
+            OrderLine.SZSHAN = line.ShipToAddress;          // Must be same as header
+            OrderLine.SZUORG = line.Quantity;               // How many to order
+            OrderLine.SZLITM = line.JDEPartNumber;          // The item to order
+            OrderLine.SZEDST = "850";                       // 850 = New Sales Order
+            OrderLine.SZEDER = "R";                         // Receive (Inbound) Transaction
+            OrderLine.SZMCU = line.BranchPlant;             // Branch plant to commit into
+            OrderLine.SZDRQJ = line.JulianRequestedDate;    // Requested Date
+            OrderLine.SZPDDJ = line.JulianRequestedDate;    // Promised Date
+            OrderLine.SZVR01 = PONumber;                    // Purchase Order Reference
+            return OrderLine;
+        }
         #endregion
 
         #region public methods
+        /// <summary>
+        /// Grab the SUW RO Batch next number from JDE
+        /// Where NNSY = 47 & we use the custom next number of NNN007
+        /// </summary>
+        /// <returns>The Next number</returns>
+        public static double GetNextBatchNumber()
+        {
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));
+            log.Debug($"Getting next batch number");
+
+            double nn;
+            try
+            {
+                using (JDEEntities jde = new JDEEntities())
+                {
+                    F0002 record = jde.F0002.Where(n => "47" == n.NNSY).First();
+                    nn = (double)record.NNN007;
+                    record.NNN007++;
+                    jde.SaveChanges();
+                }
+                log.Debug($"Successfully retreived batch number = {nn.ToString()}");
+            }
+            catch (Exception eJDE)
+            {
+                log.Error($"Error in batch next number retrieval from F0002.");
+                throw (eJDE);
+            }
+            return nn;
+        }
+
+        /// <summary>
+        /// Reserve an amount of records 
+        /// </summary>
+        /// <param name="AmountToGet"></param>
+        /// <returns>The first next number to use</returns>
+        public static double GetDocumentNumbers(double AmountToGet)
+        {
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));
+            log.Debug($"Reserving {AmountToGet.ToString()} document numbers");
+
+            double nn;
+            try
+            {
+                using (JDEEntities jde = new JDEEntities())
+                {
+                    F0002 record = jde.F0002.Where(n => "47" == n.NNSY).First();
+                    nn = (double)record.NNN006;
+                    record.NNN006 = nn + AmountToGet;
+                    jde.SaveChanges();
+                }
+            }
+            catch (Exception eJDE)
+            {
+                log.Error($"Error in reserving document numbers from F0002.");
+                throw (eJDE);
+            }
+            return nn;
+        }
+
         /// <summary>
         /// Get the ABAC08 field for a concept by ABAN8
         /// </summary>
@@ -628,15 +729,13 @@ namespace Rollout.BLL
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));
             log.Debug($"Populating F0101Z2");
 
-            Random random = new Random();
-            string batch = random.Next().ToString(); // 32-bit integer
             List<F0101Z2> entries = new List<F0101Z2>();
             F0101Z2 entry;
             decimal transaction = 1;
             foreach (ShipToLine line in DT.NewShipTos)
             {
                 entry = new F0101Z2();
-                PopulateUnchangingF0101Z2(ref entry, batch);
+                PopulateUnchangingF0101Z2(ref entry, DT.batch);
                 PopulateLineF0101Z2(ref entry, line, DT.ParentAddress, DT.StoreName, DT.ConceptID, transaction);
                 entries.Add(entry);
                 transaction++;
@@ -666,15 +765,13 @@ namespace Rollout.BLL
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));
             log.Debug($"Populating F03012Z1");
 
-            Random random = new Random();
-            string batch = random.Next().ToString(); // 32-bit integer
             List<F03012Z1> entries = new List<F03012Z1>();
             F03012Z1 entry;
             decimal transaction = 1;
             foreach (ShipToLine line in DT.NewShipTos)
             {
                 entry = new F03012Z1();
-                PopulateUnchangingF03012Z1(ref entry, batch);
+                PopulateUnchangingF03012Z1(ref entry, DT.batch);
                 PopulateLineF03012Z1(ref entry, DT.ParentAddress, line, transaction);
                 entries.Add(entry);
                 transaction++;
@@ -694,6 +791,68 @@ namespace Rollout.BLL
             }
             return;
         }
+
+        /// <summary>
+        /// Populate the JDE F47011 EDI file from the concept
+        /// </summary>
+        /// <param name="concept"></param>
+        public static void PopulateF47011(Concept concept)
+        {
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));
+            log.Debug($"Populating F47011");
+
+            List<F47011> EdiHeaderList = new List<F47011>();
+            F47011 EdiHeader;
+            IEnumerable<ConceptLine> FirstConceptLines = concept.OrderDetails.Where(n => 1 == n.LineNumber); // grab one record per concept order, grab the 1
+            foreach (ConceptLine line in FirstConceptLines)
+            {
+                EdiHeader = PopulateSingleF47011(line, concept);
+                EdiHeaderList.Add(EdiHeader);
+            }
+            try
+            {
+                using (JDEEntities jde = new JDEEntities())
+                {
+                    jde.F47011.AddRange(EdiHeaderList);
+                    jde.SaveChanges();
+                }
+            }
+            catch (Exception eJDE)
+            {
+                log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
+                throw eJDE;
+            }
+            return;
+        }
+
+        public static void PopulateF47012(Concept concept)
+        {
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));
+            log.Debug($"Populating F47012");
+
+            List<F47012> EdiDetailsList = new List<F47012>();
+            F47012 EdiDetail;
+            foreach (ConceptLine line in concept.OrderDetails)
+            {
+                EdiDetail = PopulateOrderDetailF47012(line, concept.PONumber);
+                EdiDetailsList.Add(EdiDetail);
+            }
+            try
+            {
+                using (JDEEntities jde = new JDEEntities())
+                {
+                    jde.F47012.AddRange(EdiDetailsList);
+                    jde.SaveChanges();
+                }
+            }
+            catch (Exception eJDE)
+            {
+                log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
+                throw eJDE;
+            }
+            return;
+        }
+
 #endregion
     } // Class
 } // namespace
