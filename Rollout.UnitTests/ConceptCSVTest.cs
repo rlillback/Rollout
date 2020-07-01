@@ -10,7 +10,7 @@ namespace Rollout.UnitTests
         [TestMethod]
         public ConceptCSV TestGoodRead()
         {
-            ConceptCSV TestConcept = new ConceptCSV(@"D:\gitHub\Rollout\TestFiles\SageRolloutExample1.csv");
+            ConceptCSV TestConcept = new ConceptCSV(@"E:\gitHub\Rollout\TestFiles\SageRolloutExample1.csv");
             TestConcept.ReadConcept();
             Assert.IsNotNull(TestConcept);
             return TestConcept;

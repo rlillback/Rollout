@@ -312,6 +312,7 @@ namespace Rollout.BLL
             entry.VOAC29 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
             entry.VOAC30 = "";              // This doesn't update ABAC01 - 30, Sleeper Updates Them
             entry.VOCUSTS = "0";            // Customer Status 0 = Active 1 = Inactive (For CRM)
+            entry.VOEDPM = "P";             // Allow batch processing for this customer
             return;
         }
 
@@ -352,6 +353,7 @@ namespace Rollout.BLL
             EdiHeader.SYDRQJ = line.JulianRequestedDate;    // Requested Date
             EdiHeader.SYPDDJ = line.JulianRequestedDate;    // Promised Date
             EdiHeader.SYVR01 = concept.PONumber;            // Purchase order number on the sales order
+            EdiHeader.SYEDSP = "N";                         // Say this line isn't processed - used in data selection
             return EdiHeader;
         }
 
@@ -371,6 +373,8 @@ namespace Rollout.BLL
             OrderLine.SZDRQJ = line.JulianRequestedDate;    // Requested Date
             OrderLine.SZPDDJ = line.JulianRequestedDate;    // Promised Date
             OrderLine.SZVR01 = PONumber;                    // Purchase Order Reference
+            OrderLine.SZVR02 = PONumber;                    // Place the PO here too for batch ship confirm
+            OrderLine.SZEDSP = "N";                         // Say this line isn't processed - used in data selection
             return OrderLine;
         }
         #endregion

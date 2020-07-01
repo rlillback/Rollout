@@ -13,10 +13,10 @@ namespace Rollout.UnitTests
         [TestMethod]
         public void ReadConceptAndWriteCSV()
         {
-            ConceptCSV TestConcept = new ConceptCSV(@"D:\gitHub\Rollout\TestFiles\SageRolloutExample1.csv");
+            ConceptCSV TestConcept = new ConceptCSV(@"E:\gitHub\Rollout\TestFiles\SageRolloutExample1.csv");
             TestConcept.ReadConcept();
             List<string> TestMissing = TestConcept.CheckForMissingShipToAddresses();
-            ShipToCSV TestShip = new ShipToCSV(@"D:\gitHub\Rollout\TestFiles\SageRolloutMissing.csv", ",");
+            ShipToCSV TestShip = new ShipToCSV(@"E:\gitHub\Rollout\TestFiles\SageRolloutMissing.csv", ",");
             TestShip.PopulateSpreadsheet(TestMissing, TestConcept);
             TestShip.WriteCSV();
         }
@@ -24,7 +24,7 @@ namespace Rollout.UnitTests
         [TestMethod]
         public void ReadShipToCSVandPopulateF0101Z2()
         {
-            ShipToCSV PopulatedCSV = new ShipToCSV(@"D:\gitHub\Rollout\TestFiles\SageRolloutMissing.csv", ",");
+            ShipToCSV PopulatedCSV = new ShipToCSV(@"E:\gitHub\Rollout\TestFiles\SageRolloutMissing.csv", ",");
             PopulatedCSV.ReadShipTo();
             PopulatedCSV.ValidateHeader();
             PopulatedCSV.ValidateRows(true);
@@ -35,7 +35,7 @@ namespace Rollout.UnitTests
         [TestMethod]
         public void PopulateF03012Z1()
         {
-            ShipToCSV PopulatedCSV = new ShipToCSV(@"D:\gitHub\Rollout\TestFiles\SageRolloutMissing.csv", ",");
+            ShipToCSV PopulatedCSV = new ShipToCSV(@"E:\gitHub\Rollout\TestFiles\SageRolloutMissing.csv", ",");
             PopulatedCSV.ReadShipTo();
             PopulatedCSV.ValidateHeader();
             PopulatedCSV.ValidateRows(false); // Force non-empty tax area code
@@ -47,9 +47,9 @@ namespace Rollout.UnitTests
         public void TestSteps()
         {
             bool SkipF0101 = true;
-            bool SkipF03012 = false;
+            bool SkipF03012 = true;
             // 1.) Read the concept
-            ConceptCSV TestConceptCSV = new ConceptCSV(@"D:\gitHub\Rollout\TestFiles\SageRolloutExample1.csv", ",");
+            ConceptCSV TestConceptCSV = new ConceptCSV(@"E:\gitHub\Rollout\TestFiles\SageRolloutExample1.csv", ",");
             TestConceptCSV.ReadConcept();
             // 2.) Test for missing entries
             List<string> TestMissing = TestConceptCSV.CheckForMissingShipToAddresses();
@@ -57,7 +57,7 @@ namespace Rollout.UnitTests
             if (0 < TestMissing.Count && !SkipF0101)
             {
                 // 4.) Populate the missing CSV using the list of missing items
-                ShipToCSV MissingShipToCSV = new ShipToCSV(@"D:\gitHub\Rollout\TestFiles\SageRolloutMissing.csv", ",");
+                ShipToCSV MissingShipToCSV = new ShipToCSV(@"E:\gitHub\Rollout\TestFiles\SageRolloutMissing.csv", ",");
                 MissingShipToCSV.PopulateSpreadsheet(TestMissing, TestConceptCSV);
                 // 5.) Populate the transformed data structure
                 ShipTo MissingShipTo = XfrmShipTo.CSVToShipTo(MissingShipToCSV, false); // Don't look up JDE Addresses
@@ -72,7 +72,7 @@ namespace Rollout.UnitTests
             {
                 // TODO: 9.) Check for F03012 records
                 // 10.) If F03012 records are missing:
-                ShipToCSV MissingShipToCSV = new ShipToCSV(@"D:\gitHub\Rollout\TestFiles\SageRolloutMissing.csv", ",");
+                ShipToCSV MissingShipToCSV = new ShipToCSV(@"E:\gitHub\Rollout\TestFiles\SageRolloutMissing.csv", ",");
                 MissingShipToCSV.ReadShipTo();
                 if (MissingShipToCSV.ValidateHeader() && // Required row is all there
                     MissingShipToCSV.ValidateRows(false)) // We can't have an empty tax area code
@@ -94,6 +94,8 @@ namespace Rollout.UnitTests
             {
                 //TODO: Load the EDI tables
                 Concept TestConcept = XfrmConcept.CSVtoConcept(TestConceptCSV);
+                JDE.PopulateF47011(TestConcept);
+                JDE.PopulateF47012(TestConcept);
             }
         }
     }

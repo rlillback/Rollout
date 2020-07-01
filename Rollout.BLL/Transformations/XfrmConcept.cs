@@ -34,6 +34,7 @@ namespace Rollout.BLL
                 con.JulianOrderDate = CommonFunctions.DateStringToJulian(System.DateTime.Today.ToString());
                 con.OrderValid = true;
                 con.OrderDetails = new List<ConceptLine>();
+                con.PONumber = r["PO NUMBER"].ToString();
             }
             catch (Exception eBLL)
             {
@@ -60,6 +61,7 @@ namespace Rollout.BLL
                 line.LineNumber = LineNumber;
                 line.JDEPartNumber = PartNumber;
                 line.Quantity = Quantity;
+                line.JulianRequestedDate = RequestedJulian;
             }
             catch (Exception eBLL)
             {
@@ -83,7 +85,7 @@ namespace Rollout.BLL
                                             r["STORE NUMBER"].ToString(), 
                                             1, // Line #1 is the part; per Selecto, a rollout only has a single part per customer
                                             r["PART NUMBER"].ToString(),  // The part number
-                                            Double.Parse(r["QUANTITY"].ToString()), 
+                                            Double.Parse(r["ORDER QTY"].ToString()), 
                                             CommonFunctions.DateStringToJulian(r["REQ'D SHIP DATE"].ToString()), 
                                             con);
                 con.OrderDetails.Add(entry);
