@@ -32,14 +32,16 @@ namespace Rollout.BLL
                 con.BillToAddress = Double.Parse(r["CUSTOMER NUMBER"].ToString());
                 con.ConceptID = JDE.GetConceptID(con.BillToAddress);
                 con.JulianOrderDate = CommonFunctions.DateStringToJulian(System.DateTime.Today.ToString());
-                con.OrderValid = true;
                 con.OrderDetails = new List<ConceptLine>();
                 con.PONumber = r["PO NUMBER"].ToString();
+                con.OrderedBy = r["ORDERED BY"].ToString();
+                con.ShippingVendor = Double.Parse(r["SHIPPING VENDOR"].ToString());
+                con.ShippingMode = r["SHIPPING METHOD"].ToString();
             }
             catch (Exception eBLL)
             {
                 log.Error($"Error populating concept header" + eBLL.Message);
-                throw (eBLL);
+                throw;
             }
             
             return;
@@ -66,7 +68,7 @@ namespace Rollout.BLL
             catch (Exception eBLL)
             {
                 log.Error($"Error writing concept line " + eBLL.Message);
-                throw eBLL;
+                throw;
             }
             return line;
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.SqlServer.Server;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,26 @@ namespace Rollout.BLL
 {
     public class ShipToLine
     {
+        /// <summary>
+        /// NOTE: I needed to do this to have JDEAddress appear as a property & show up in the data table
+        /// </summary>
+        public double _JDEAddress;
+        public double JDEAddress
+        {
+            get { return _JDEAddress; }
+            set { _JDEAddress = value; }
+        }
+
+        /// <summary>
+        /// NOTE: I needed to do this to have StoreNumber appear as a property & show up in the data table
+        /// </summary>
+        private string _StoreNumber;
+        public string StoreNumber
+        {
+            get { return _StoreNumber; }
+            set { _StoreNumber = value; }
+        }
+
         private string _Concept;
         public string Concept
         {
@@ -147,10 +168,6 @@ namespace Rollout.BLL
                 }
             }
         }
-
-        public string StoreNumber;
-
-        public double JDEAddress;
 
         private string _TaxExplanationCode;
         public string TaxExplanationCode

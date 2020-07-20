@@ -92,7 +92,6 @@ namespace Rollout.UnitTests
             }
             else
             {
-                //TODO: Load the EDI tables
                 Concept TestConcept = XfrmConcept.CSVtoConcept(TestConceptCSV);
                 JDE.PopulateF47011(TestConcept);
                 JDE.PopulateF47012(TestConcept);

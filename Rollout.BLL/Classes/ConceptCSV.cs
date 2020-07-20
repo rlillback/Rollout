@@ -17,6 +17,7 @@ namespace Rollout.BLL
     {
         #region PrivateMembers
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly string BranchPlant = "        3SUW";
         #endregion
 
         public List<Header> HeaderRow { get; set; }
@@ -50,11 +51,12 @@ namespace Rollout.BLL
         /// <param name="name">the column name</param>
         /// <param name="reg">the regular expression for column checking</param>
         /// <returns>a populated Header object</returns>
-        private Header PopulateHeader(string name, Regex reg)
+        private Header PopulateHeader(string name, Regex reg, Regex firstRowReg)
         {
             Header column = new Header();
             column.ColumnName = name;
             column.ColumnRegex = reg;
+            column.FirstColumnRegex = firstRowReg;
             column.CSVHasColumn = false;
             return column;
         } // PopulateHeader
@@ -67,23 +69,27 @@ namespace Rollout.BLL
             Regex anyreg = new Regex(RegexHelper.MatchAnything);
             Regex intreg = new Regex(RegexHelper.MatchInteger);
             Regex datereg = new Regex(RegexHelper.MatchUSADate);
-            this.HeaderRow.Add(PopulateHeader("CUSTOMER NUMBER", anyreg));
-            this.HeaderRow.Add(PopulateHeader("PO NUMBER", anyreg));
-            this.HeaderRow.Add(PopulateHeader("STORE NUMBER", anyreg));
-            this.HeaderRow.Add(PopulateHeader("SHIP TO NAME", anyreg));
-            this.HeaderRow.Add(PopulateHeader("ADDRESS 1", anyreg));
-            this.HeaderRow.Add(PopulateHeader("ADDRESS 2", anyreg));
-            this.HeaderRow.Add(PopulateHeader("CITY", anyreg));
-            this.HeaderRow.Add(PopulateHeader("STATE", anyreg));
-            this.HeaderRow.Add(PopulateHeader("ZIP", anyreg));
-            this.HeaderRow.Add(PopulateHeader("ORDER QTY", intreg));
-            this.HeaderRow.Add(PopulateHeader("PART NUMBER", anyreg));
-            this.HeaderRow.Add(PopulateHeader("REQ'D SHIP DATE", datereg));
-            this.HeaderRow.Add(PopulateHeader("ORDERED BY", anyreg));
+            Regex intOrBlankReg = new Regex(RegexHelper.MatchIntegerOrBlank);
+            Regex nonBlankReg = new Regex(RegexHelper.MatchNonBlank);
+            this.HeaderRow.Add(PopulateHeader("CUSTOMER NUMBER", anyreg, intreg));
+            this.HeaderRow.Add(PopulateHeader("PO NUMBER", anyreg, nonBlankReg));
+            this.HeaderRow.Add(PopulateHeader("STORE NUMBER", nonBlankReg, nonBlankReg));
+            this.HeaderRow.Add(PopulateHeader("SHIP TO NAME", nonBlankReg, nonBlankReg));
+            this.HeaderRow.Add(PopulateHeader("ADDRESS 1", nonBlankReg, nonBlankReg));
+            this.HeaderRow.Add(PopulateHeader("ADDRESS 2", anyreg, anyreg));
+            this.HeaderRow.Add(PopulateHeader("CITY", nonBlankReg, nonBlankReg));
+            this.HeaderRow.Add(PopulateHeader("STATE", nonBlankReg, nonBlankReg));
+            this.HeaderRow.Add(PopulateHeader("ZIP", nonBlankReg, nonBlankReg));
+            this.HeaderRow.Add(PopulateHeader("ORDER QTY", intreg, intreg));
+            this.HeaderRow.Add(PopulateHeader("PART NUMBER", nonBlankReg, nonBlankReg));
+            this.HeaderRow.Add(PopulateHeader("REQ'D SHIP DATE", datereg, datereg));
+            this.HeaderRow.Add(PopulateHeader("ORDERED BY", anyreg, anyreg));
+            this.HeaderRow.Add(PopulateHeader("SHIPPING VENDOR", intOrBlankReg, intreg));
+            this.HeaderRow.Add(PopulateHeader("SHIPPING METHOD", anyreg, nonBlankReg));
         }
-        #endregion
+#endregion
 
-        #region Constructors
+#region Constructors
         /// <summary>
         /// Generic constructor provides default filename and delimiter
         /// </summary>
@@ -108,9 +114,9 @@ namespace Rollout.BLL
             this.FileName = filename;
             this.DeLimiter = delimiter;
         } // Constructor
-        #endregion
+#endregion
 
-        #region PublicMethods
+#region PublicMethods
         /// <summary>
         /// Loop through all the header columns and see if any are missing
         /// </summary>
@@ -155,6 +161,21 @@ namespace Rollout.BLL
                     }
                 }
             }
+            // Now make sure the first row has the requisite data in it; this row is an exception to the others
+            // And requires more data fields -- However, don't worry about validating this data until the rest of the file is valid
+            if (true == rowsValid)
+            {
+                DataRow firstRow = DT.Rows[0];
+                foreach (Header h in HeaderRow)
+                {
+                    firstRow["RowValid"] = h.FirstColumnRegex.IsMatch(firstRow[h.ColumnName].ToString());
+                    if (false == (bool)firstRow["RowValid"])
+                    {
+                        log.Error($"The first data row requires {h.ColumnName} to be non-blank and valid. The column contained {firstRow[h.ColumnName].ToString()} -- row data: {string.Join(",", firstRow.ItemArray)}");
+                        rowsValid = false;
+                    }
+                }
+            }
             return rowsValid;
         } // ValidateRows
 
@@ -179,7 +200,7 @@ namespace Rollout.BLL
             catch (Exception eBLL)
             {
                 log.Error("Error reading concept" + eBLL.Message);
-                throw eBLL;
+                throw;
             }
         }
 
@@ -196,7 +217,7 @@ namespace Rollout.BLL
             catch (Exception eBLL)
             {
                 log.Error("Error writing concept CSV" + eBLL.Message);
-                throw eBLL;
+                throw;
             }
         } // WriteConcept
 
@@ -215,7 +236,43 @@ namespace Rollout.BLL
             return missing;
         }
 
+        /// <summary>
+        /// See if any of the item numbers in the CSV don't exist in JDE
+        /// </summary>
+        /// <returns>List of part numbers that don't exist in JDE</returns>
+        public List<string> CheckForMissingItemNumbers()
+        {
+            List<string> AllItemNumbers = new List<string>();
+            foreach (DataRow r in DT.Rows)
+            {
+                AllItemNumbers.Add(r.Field<string>("PART NUMBER").Trim());
+            }
+            List<string> missing = JDE.GetMissingItems(AllItemNumbers.Distinct().ToList(), BranchPlant);
+            return missing;
+        }
+
+        /// <summary>
+        /// Verify that the shipping vendor is a vendor (V or V3) in JDE.
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckShippingVendor()
+        {
+            double Vendor = Double.Parse(DT.Rows[0].Field<string>("SHIPPING VENDOR").Trim());
+            if (true == JDE.DoesAddressExist(Vendor, "V"))
+            {
+                return true;
+            }
+            else if (true == JDE.DoesAddressExist(Vendor, "V3"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public int RowCount => DT.Rows.Count;
-        #endregion
+#endregion
     }
 }

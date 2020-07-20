@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,48 +18,52 @@ namespace Rollout.Common
         private static readonly ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// Get the first file you find matching *.csv or *.txt
+        /// Select a *.csv or *.txt file to load
         /// </summary>
         /// <param name="pathName">the path to the folder to search</param>
-        /// <returns>the path & filename of the first *.csv or *.txt in the folder</returns>
-        public static string GetFileName(string pathName)
+        /// <returns>the path & filename of a selected file or String.Empty if canceled</returns>
+        public static string GetFileName(string pathName, string Filter)
         {
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(FileIO)).Location) + @"\" + "log4net.config"));
-            Regex regEX = new Regex(@"(\w|\-)+(\w|\s|\-)*\.(((c|C)(s|S)(v|V))|((t|T)(x|X)(t|T)))$");
-            string[] allFiles = Directory.GetFiles(pathName);
-            if (0 == allFiles.Length)
-            {
-                log.Info("No files found in directory " + pathName);
-            }
-            else
-            {
-                log.Info("Found " + allFiles.Length +
-                                 " files in directory. " +
-                                 "Attempting to match csv or txt.");
-            }
-            string[] csvFiles = allFiles.Where(n => regEX.IsMatch(n)).ToArray();
             string foundFile = String.Empty;
-            if (0 == csvFiles.Length)
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                log.Error("CSV or TXT file not found in directory " +
-                                 pathName);
-            }
-            else if (1 < csvFiles.Length)
-            {
-                /* We have more than one match, so print out the warning */
-                log.Warn("Found more than one file in the directory.");
-                log.Info("Selecting file named: " + allFiles[0]);
-                foundFile = allFiles[0];
-            }
-            else
-            {
-                foundFile = allFiles[0];
-                log.Info("Found a single file in the directory...");
-                log.Info("Selecting file named: " + allFiles[0] + "\r\n");
-                foundFile = allFiles[0];
+                openFileDialog.InitialDirectory = pathName;
+                openFileDialog.Filter = Filter;
+                openFileDialog.RestoreDirectory = true;
+
+                if (DialogResult.OK == openFileDialog.ShowDialog())
+                {
+                    foundFile = openFileDialog.FileName;
+                }
             }
             return foundFile;
         } // getFileName
+
+        /// <summary>
+        /// Select/create a path and file to save a file into
+        /// </summary>
+        /// <param name="pathName"></param>
+        /// <param name="Filter"></param>
+        /// <returns></returns>
+        public static string SaveFileName(string pathName, string Filter)
+        {
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(FileIO)).Location) + @"\" + "log4net.config"));
+            string fileName = String.Empty;
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.InitialDirectory = pathName;
+                saveFileDialog.Filter = Filter;
+                saveFileDialog.Title = "Save File As...";
+                saveFileDialog.DefaultExt = ".txt";
+                saveFileDialog.RestoreDirectory = true;
+                if (DialogResult.OK == saveFileDialog.ShowDialog())
+                {
+                    fileName = saveFileDialog.FileName;
+                }
+            }
+            return fileName;
+        }
 
         /// <summary>
         /// Write a datatable object to a CSV delimited by the passed string
@@ -100,7 +105,7 @@ namespace Rollout.Common
             catch (Exception ex)
             {
                 log.Error("Error reading concept" + ex.Message);
-                throw (ex);
+                throw;
             }
             return;
         } // writeCSV
@@ -169,7 +174,7 @@ namespace Rollout.Common
             catch (Exception ex)
             {
                 log.Error("Error reading concept" + ex.Message);
-                throw (ex);
+                throw;
             }
             return dataTable;
         } // readCSV

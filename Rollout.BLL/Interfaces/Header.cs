@@ -11,6 +11,7 @@ namespace Rollout.BLL
     {
         public string ColumnName { get; set; }
         public Regex ColumnRegex { get; set; }
+        public Regex FirstColumnRegex { get; set; }
         public bool CSVHasColumn { get; set; }
     };
 }

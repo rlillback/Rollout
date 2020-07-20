@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
 using Rollout.EF;
 using Rollout.Common;
 
@@ -353,6 +350,10 @@ namespace Rollout.BLL
             EdiHeader.SYDRQJ = line.JulianRequestedDate;    // Requested Date
             EdiHeader.SYPDDJ = line.JulianRequestedDate;    // Promised Date
             EdiHeader.SYVR01 = concept.PONumber;            // Purchase order number on the sales order
+            EdiHeader.SYVR02 = concept.PONumber;            // Populate the PO number here too
+            EdiHeader.SYORBY = concept.OrderedBy;           // Who placed the order with Selecto
+            EdiHeader.SYCARS = concept.ShippingVendor;      // JDE Address of the shipping vendor
+            EdiHeader.SYMOT = concept.ShippingMode;         // JDE Method Of Transport (Mode of Transport)
             EdiHeader.SYEDSP = "N";                         // Say this line isn't processed - used in data selection
             return EdiHeader;
         }
@@ -404,8 +405,8 @@ namespace Rollout.BLL
             }
             catch (Exception eJDE)
             {
-                log.Error($"Error in batch next number retrieval from F0002.");
-                throw (eJDE);
+                log.Error($"Error in batch next number retrieval from F0002. {eJDE}");
+                throw;
             }
             return nn;
         }
@@ -433,8 +434,8 @@ namespace Rollout.BLL
             }
             catch (Exception eJDE)
             {
-                log.Error($"Error in reserving document numbers from F0002.");
-                throw (eJDE);
+                log.Error($"Error in reserving document numbers from F0002. {eJDE}");
+                throw;
             }
             return nn;
         }
@@ -479,7 +480,7 @@ namespace Rollout.BLL
             catch (Exception eJDE)
             {
                 log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
-                throw eJDE;                
+                throw;                
             }          
             return conceptID;
         } // GetConceptID float is passed
@@ -510,14 +511,14 @@ namespace Rollout.BLL
                     {
                         log.Error($"Cannot find F0101.ABALKY = {Nickname}");
                         log.Error($"Cannot find F0101.ABAN8 = {Nickname}");
-                        throw new System.ArgumentException($"Error {Nickname} isn't in JDE.");
+                        return String.Empty;
                     }
                 }
             }
             catch (Exception eJDE)
             {
                 log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
-                throw eJDE;
+                throw;
             }
             return conceptID;
         }
@@ -546,14 +547,14 @@ namespace Rollout.BLL
                     else
                     {
                         log.Error($"Cannot find F0101.ABAN8 for F0101.ABAT1 = C3 and F0101.ABAC08 = {ConceptId}");
-                        throw new System.ArgumentException($"Error {ConceptId} doesn't have a C3 record in JDE.");
+                        return null;
                     }
                 }
             }
             catch (Exception eJDE)
             {
                 log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
-                throw eJDE;
+                throw;
             }
             log.Debug($"Found {parent} as parent address for concept ID = {ConceptId}");
             return parent;
@@ -587,7 +588,7 @@ namespace Rollout.BLL
             catch (Exception eJDE)
             {
                 log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
-                throw eJDE;
+                throw;
             }
             return missing;
         } // FindMissingShipTos
@@ -597,7 +598,7 @@ namespace Rollout.BLL
         /// </summary>
         /// <param name="addressNumber"></param>
         /// <returns></returns>
-        public static bool DoesAddressExist(double addressNumber)
+        public static bool DoesAddressExist(double addressNumber, string searchType)
         {
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));
             log.Debug($"Checking for existence of address book number = {addressNumber}");
@@ -607,7 +608,7 @@ namespace Rollout.BLL
             {
                 using (JDEEntities jde = new JDEEntities())
                 {
-                    if (jde.F0101.AsNoTracking().Any(n => n.ABAN8 == addressNumber))
+                    if (jde.F0101.AsNoTracking().Any(n => (n.ABAN8 == addressNumber) && (n.ABAT1 == searchType)))
                     {
                         exists = true;
                         log.Debug($"Found {addressNumber}");
@@ -622,7 +623,7 @@ namespace Rollout.BLL
             catch (Exception eJDE)
             {
                 log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
-                throw eJDE;
+                throw;
             }
             return exists;
         }
@@ -657,7 +658,7 @@ namespace Rollout.BLL
             catch (Exception eJDE)
             {
                 log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
-                throw eJDE;
+                throw;
             }
             return missing;
         }
@@ -692,7 +693,7 @@ namespace Rollout.BLL
             catch (Exception eJDE)
             {
                 log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
-                throw eJDE;
+                throw;
             }
             return exists;
         }
@@ -719,7 +720,7 @@ namespace Rollout.BLL
             catch (Exception eJDE)
             {
                 log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
-                throw eJDE;
+                throw;
             }
             return address;
         }
@@ -755,7 +756,7 @@ namespace Rollout.BLL
             catch (Exception eJDE)
             {
                 log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
-                throw eJDE;
+                throw;
             }
             return;
         }
@@ -791,7 +792,7 @@ namespace Rollout.BLL
             catch (Exception eJDE)
             {
                 log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
-                throw eJDE;
+                throw;
             }
             return;
         }
@@ -824,7 +825,7 @@ namespace Rollout.BLL
             catch (Exception eJDE)
             {
                 log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
-                throw eJDE;
+                throw;
             }
             return;
         }
@@ -852,11 +853,10 @@ namespace Rollout.BLL
             catch (Exception eJDE)
             {
                 log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
-                throw eJDE;
+                throw;
             }
             return;
         }
-
 #endregion
     } // Class
 } // namespace
