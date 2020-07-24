@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Rollout.Common;
@@ -75,28 +76,47 @@ namespace Rollout.BLL
         #endregion
 
         #region PublicMethods
+        /// <summary>
+        /// Convert a csv object into a concept object
+        /// </summary>
+        /// <param name="csv"></param>
+        /// <returns></returns>
         public static Concept CSVtoConcept( ConceptCSV csv )
         {
             Concept con = new Concept();
             ConceptLine entry;
+            int linenumber;
+            DataRow r1;
+            List<DataRow> rows = new List<DataRow>();
             double document = JDE.GetDocumentNumbers(csv.DT.Rows.Count); // reserve a set of document numbers
             PopulateConceptHeader(ref con, csv);
-            foreach (DataRow r in csv.DT.Rows)
+            // Get a list of unique store numbers
+            List<string> stores = csv.DT.AsEnumerable().Select(n => n.Field<string>("STORE NUMBER")).Distinct().ToList();
+            // Loop through that customer and add all of that customer's lines to the datatable
+            foreach (string store in stores)
             {
-                entry = PopulateConceptLine(document,
-                                            r["STORE NUMBER"].ToString(), 
-                                            1, // Line #1 is the part; per Selecto, a rollout only has a single part per customer
-                                            r["PART NUMBER"].ToString(),  // The part number
-                                            Double.Parse(r["ORDER QTY"].ToString()), 
-                                            CommonFunctions.DateStringToJulian(r["REQ'D SHIP DATE"].ToString()), 
-                                            con);
-                con.OrderDetails.Add(entry);
-                entry = PopulateConceptLine(document,
+                rows = csv.DT.AsEnumerable().Where(n => store == n.Field<string>("STORE NUMBER")).ToList();
+                linenumber = 1;  // Start at linenumber 1
+                foreach (DataRow r in rows)
+                {
+                    entry = PopulateConceptLine(document,
                                             r["STORE NUMBER"].ToString(),
-                                            2, // Line #2 is the freight line
+                                            linenumber, // Line #
+                                            r["PART NUMBER"].ToString(),  // The part number
+                                            Double.Parse(r["ORDER QTY"].ToString()),
+                                            CommonFunctions.DateStringToJulian(r["REQ'D SHIP DATE"].ToString()),
+                                            con);
+                    con.OrderDetails.Add(entry);
+                    linenumber++;
+                }
+                // Now add the freight line for this customer
+                r1 = rows[0]; // get the first row
+                entry = PopulateConceptLine(document,
+                                            r1["STORE NUMBER"].ToString(),
+                                            linenumber, // Line #2 is the freight line
                                             "9227", // The freight part number
                                             1, // Qty of 1
-                                            CommonFunctions.DateStringToJulian(r["REQ'D SHIP DATE"].ToString()),
+                                            CommonFunctions.DateStringToJulian(r1["REQ'D SHIP DATE"].ToString()),
                                             con);
                 con.OrderDetails.Add(entry);
                 document++;

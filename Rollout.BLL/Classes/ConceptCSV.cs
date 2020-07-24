@@ -232,7 +232,7 @@ namespace Rollout.BLL
                                     + "-"
                                     + ConceptID.Trim());
             }
-            List<string> missing = JDE.FindMissingShipTos(AllShipToNames);
+            List<string> missing = JDE.FindMissingShipTos(AllShipToNames.Distinct().ToList());
             return missing;
         }
 
