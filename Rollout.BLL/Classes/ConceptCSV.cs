@@ -71,6 +71,8 @@ namespace Rollout.BLL
             Regex datereg = new Regex(RegexHelper.MatchUSADate);
             Regex intOrBlankReg = new Regex(RegexHelper.MatchIntegerOrBlank);
             Regex nonBlankReg = new Regex(RegexHelper.MatchNonBlank);
+            Regex ZipCodeUSA = new Regex(RegexHelper.MatchZipCodeUSA);
+            Regex ZipCodes = new Regex(RegexHelper.MatchZipCodes);
             this.HeaderRow.Add(PopulateHeader("CUSTOMER NUMBER", anyreg, intreg));
             this.HeaderRow.Add(PopulateHeader("PO NUMBER", anyreg, nonBlankReg));
             this.HeaderRow.Add(PopulateHeader("STORE NUMBER", nonBlankReg, nonBlankReg));
@@ -79,7 +81,7 @@ namespace Rollout.BLL
             this.HeaderRow.Add(PopulateHeader("ADDRESS 2", anyreg, anyreg));
             this.HeaderRow.Add(PopulateHeader("CITY", nonBlankReg, nonBlankReg));
             this.HeaderRow.Add(PopulateHeader("STATE", nonBlankReg, nonBlankReg));
-            this.HeaderRow.Add(PopulateHeader("ZIP", nonBlankReg, nonBlankReg));
+            this.HeaderRow.Add(PopulateHeader("ZIP", ZipCodes, ZipCodes));
             this.HeaderRow.Add(PopulateHeader("ORDER QTY", intreg, intreg));
             this.HeaderRow.Add(PopulateHeader("PART NUMBER", nonBlankReg, nonBlankReg));
             this.HeaderRow.Add(PopulateHeader("REQ'D SHIP DATE", datereg, datereg));

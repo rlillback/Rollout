@@ -62,13 +62,28 @@ namespace Rollout.BLL
             line.StoreNumber = (null == r.Field<String>("STORE NUMBER")) ? "" : r.Field<String>("STORE NUMBER").ToUpper();
             if (true == LookupJDEaddress)
             {
-                string alky = line.StoreNumber + "-" + line.Concept;
-                double? jdeaddress = JDE.GetAddressFromALKY(alky);
-                line.JDEAddress = (null == jdeaddress) ? 0 : (double)jdeaddress; 
+                try
+                {
+                    string alky = line.StoreNumber + "-" + line.Concept;
+                    double? jdeaddress = JDE.GetAddressFromALKY(alky);
+                    line.JDEAddress = (null == jdeaddress) ? 0 : (double)jdeaddress;
+                }
+                catch
+                { 
+                    throw;
+                }
             }
             else
             {
                 line.JDEAddress = 0;
+            }
+            try
+            {
+                line.County = JDE.GetCounty(r.Field<String>("ZIP").ToUpper());
+            }
+            catch
+            {
+                throw;
             }
             return line;
         }

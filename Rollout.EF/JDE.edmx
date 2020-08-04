@@ -274,6 +274,26 @@
           <Property Name="SZACTIN" Type="nchar" MaxLength="1" />
           <Property Name="SZREVRNG" Type="nchar" MaxLength="5" />
         </EntityType>
+        <EntityType Name="F0117">
+          <Key>
+            <PropertyRef Name="A8ADDZ" />
+            <PropertyRef Name="A8CTY1" />
+            <PropertyRef Name="A8COUN" />
+          </Key>
+          <Property Name="A8ADDZ" Type="nchar" MaxLength="12" Nullable="false" />
+          <Property Name="A8ADDS" Type="nchar" MaxLength="3" />
+          <Property Name="A8CTY1" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="A8COUN" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="A8CTR" Type="nchar" MaxLength="3" />
+          <Property Name="A8CRTE" Type="nchar" MaxLength="4" />
+          <Property Name="A8BKML" Type="nchar" MaxLength="2" />
+          <Property Name="A8ADZ1" Type="nchar" MaxLength="12" />
+          <Property Name="A8USER" Type="nchar" MaxLength="10" />
+          <Property Name="A8PID" Type="nchar" MaxLength="10" />
+          <Property Name="A8UPMJ" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="A8UPMT" Type="float" />
+          <Property Name="A8MKEY" Type="nchar" MaxLength="15" />
+        </EntityType>
         <EntityType Name="F03012">
           <Key>
             <PropertyRef Name="AIAN8" />
@@ -1399,6 +1419,7 @@
           <EntitySet Name="F0002" EntityType="Self.F0002" Schema="TESTCTL" store:Type="Tables" />
           <EntitySet Name="F0101" EntityType="Self.F0101" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F0101Z2" EntityType="Self.F0101Z2" Schema="TESTDTA" store:Type="Tables" />
+          <EntitySet Name="F0117" EntityType="Self.F0117" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F03012" EntityType="Self.F03012" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F03012Z1" EntityType="Self.F03012Z1" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F4102" EntityType="Self.F4102" Schema="TESTDTA" store:Type="Tables" />
@@ -2409,6 +2430,7 @@
           <EntitySet Name="F0101Z2" EntityType="JDEModel.F0101Z2" />
           <EntitySet Name="F03012Z1" EntityType="JDEModel.F03012Z1" />
           <EntitySet Name="F0002" EntityType="JDEModel.F0002" />
+          <EntitySet Name="F0117" EntityType="JDEModel.F0117" />
         </EntityContainer>
         <EntityType Name="F0101Z2">
           <Key>
@@ -2808,6 +2830,26 @@
           <Property Name="NNCK08" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="NNCK09" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="NNCK10" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="F0117">
+          <Key>
+            <PropertyRef Name="A8ADDZ" />
+            <PropertyRef Name="A8CTY1" />
+            <PropertyRef Name="A8COUN" />
+          </Key>
+          <Property Name="A8ADDZ" Type="String" Nullable="false" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="A8ADDS" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="A8CTY1" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="A8COUN" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="A8CTR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="A8CRTE" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="A8BKML" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="A8ADZ1" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="A8USER" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="A8PID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="A8UPMJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="A8UPMT" Type="Double" />
+          <Property Name="A8MKEY" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4197,6 +4239,25 @@
                 <ScalarProperty Name="NNUD02" ColumnName="NNUD02" />
                 <ScalarProperty Name="NNUD01" ColumnName="NNUD01" />
                 <ScalarProperty Name="NNSY" ColumnName="NNSY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="F0117">
+            <EntityTypeMapping TypeName="JDEModel.F0117">
+              <MappingFragment StoreEntitySet="F0117">
+                <ScalarProperty Name="A8MKEY" ColumnName="A8MKEY" />
+                <ScalarProperty Name="A8UPMT" ColumnName="A8UPMT" />
+                <ScalarProperty Name="A8UPMJ" ColumnName="A8UPMJ" />
+                <ScalarProperty Name="A8PID" ColumnName="A8PID" />
+                <ScalarProperty Name="A8USER" ColumnName="A8USER" />
+                <ScalarProperty Name="A8ADZ1" ColumnName="A8ADZ1" />
+                <ScalarProperty Name="A8BKML" ColumnName="A8BKML" />
+                <ScalarProperty Name="A8CRTE" ColumnName="A8CRTE" />
+                <ScalarProperty Name="A8CTR" ColumnName="A8CTR" />
+                <ScalarProperty Name="A8COUN" ColumnName="A8COUN" />
+                <ScalarProperty Name="A8CTY1" ColumnName="A8CTY1" />
+                <ScalarProperty Name="A8ADDS" ColumnName="A8ADDS" />
+                <ScalarProperty Name="A8ADDZ" ColumnName="A8ADDZ" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

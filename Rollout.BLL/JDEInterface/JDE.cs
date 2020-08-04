@@ -101,7 +101,6 @@ namespace Rollout.BLL
             entry.SZADD3 = "";           // Not used for ship to
             entry.SZADD4 = "";           // Not used for ship to
             entry.SZCTR = "US";          // Can we default the country to US?
-            entry.SZCOUN = "";           // We don't use the county or parish
             entry.SZAR1 = "";            // We aren't importing the phone numbers
             entry.SZPH1 = "";            // We aren't importing the phone numbers
             entry.SZPHT1 = "";           // We aren't importing the phone numbers
@@ -205,6 +204,7 @@ namespace Rollout.BLL
             entry.SZADDZ = line.Zip;
             entry.SZADDS = line.State;
             entry.SZCTY1 = line.City;
+            entry.SZCOUN = line.County;
             
             entry.SZAN82 = ParentAddress;
             entry.SZAN83 = ParentAddress;
@@ -381,6 +381,33 @@ namespace Rollout.BLL
         #endregion
 
         #region public methods
+        /// <summary>
+        /// Get the county from a zipcode via lookup in F0117
+        /// </summary>
+        /// <param name="zipcode"></param>
+        /// <returns>Returns county or empty if no county found</returns>
+        public static string GetCounty(string zipcode)
+        {
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));
+            log.Debug($"Getting county from F0117 for zip code = {zipcode}");
+
+            string county;
+            try
+            {
+                using (JDEEntities jde = new JDEEntities())
+                {
+                    county = jde.F0117.AsNoTracking().Where(n => n.A8ADDZ.Trim() == zipcode.ToUpper().Trim()).Select(n => n.A8COUN).FirstOrDefault();
+                    log.Debug($"A8ADDZ = {zipcode} returned {county} from F0117");
+                }
+            }
+            catch (Exception eJDE)
+            {
+                log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
+                throw;
+            }
+            return county;
+        }
+
         /// <summary>
         /// Grab the SUW RO Batch next number from JDE
         /// Where NNSY = 47 & we use the custom next number of NNN007
@@ -830,6 +857,10 @@ namespace Rollout.BLL
             return;
         }
 
+        /// <summary>
+        /// Populate the JDE F47012 EDI file from the concept
+        /// </summary>
+        /// <param name="concept"></param>
         public static void PopulateF47012(Concept concept)
         {
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));

@@ -149,6 +149,26 @@ namespace Rollout.BLL
             }
         }
 
+        private string _County;
+        public string County
+        {
+            get
+            {
+                return _County;
+            }
+            set
+            {
+                if (25 < value.Length)
+                {
+                    _County = value.Substring(0, 25);
+                }
+                else
+                {
+                    _County = value;
+                }
+            }
+        }
+
         private string _TaxAreaCode;
         public string TaxAreaCode
         {

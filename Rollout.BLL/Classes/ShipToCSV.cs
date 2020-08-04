@@ -86,14 +86,18 @@ namespace Rollout.BLL
             Regex anyreg = new Regex(RegexHelper.MatchAnything);
             Regex intreg = new Regex(RegexHelper.MatchInteger);
             Regex datereg = new Regex(RegexHelper.MatchUSADate);
-            this.HeaderRow.Add(PopulateHeader("SHIP TO NAME", anyreg));
-            this.HeaderRow.Add(PopulateHeader("STORE NUMBER", anyreg));
-            this.HeaderRow.Add(PopulateHeader("CONCEPT CODE", anyreg));
-            this.HeaderRow.Add(PopulateHeader("ADDRESS 1", anyreg));
+            Regex intOrBlankReg = new Regex(RegexHelper.MatchIntegerOrBlank);
+            Regex nonBlankReg = new Regex(RegexHelper.MatchNonBlank);
+            Regex ZipCodeUSA = new Regex(RegexHelper.MatchZipCodeUSA);
+            Regex ZipCodes = new Regex(RegexHelper.MatchZipCodes);
+            this.HeaderRow.Add(PopulateHeader("SHIP TO NAME", nonBlankReg));
+            this.HeaderRow.Add(PopulateHeader("STORE NUMBER", intreg));
+            this.HeaderRow.Add(PopulateHeader("CONCEPT CODE", nonBlankReg));
+            this.HeaderRow.Add(PopulateHeader("ADDRESS 1", nonBlankReg));
             this.HeaderRow.Add(PopulateHeader("ADDRESS 2", anyreg));
-            this.HeaderRow.Add(PopulateHeader("CITY", anyreg));
-            this.HeaderRow.Add(PopulateHeader("STATE", anyreg));
-            this.HeaderRow.Add(PopulateHeader("ZIP", anyreg));
+            this.HeaderRow.Add(PopulateHeader("CITY", nonBlankReg));
+            this.HeaderRow.Add(PopulateHeader("STATE", nonBlankReg));
+            this.HeaderRow.Add(PopulateHeader("ZIP", ZipCodes));
             this.HeaderRow.Add(PopulateHeader("TAX AREA CODE", anyreg));
             this.HeaderRow.Add(PopulateHeader("TAX EXPLANATION CODE", anyreg));
         }
