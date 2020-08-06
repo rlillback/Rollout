@@ -51,6 +51,33 @@ namespace Rollout.UI.Winform
 
         #region private functions
         /// <summary>
+        /// Verify a valid concept code exists in JDE for this customer.
+        /// </summary>
+        /// <param name="conceptCSV"></param>
+        /// <returns></returns>
+        private bool ConceptCodeExists(ConceptCSV conceptCSV)
+        {
+            bool result;
+            string concept = JDE.GetConceptID(Double.Parse(conceptCSV.DT.Rows[0].Field<string>("CUSTOMER NUMBER"))).Trim();
+            if (String.Empty == concept)
+            {
+                log.Error($"Customer Number {conceptCSV.DT.Rows[0].Field<string>("CUSTOMER NUMBER")} does not have a concept code populated in F0101.ABAC08");
+                using (new CenterDialog(this))
+                {
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    MessageBox.Show($"Customer Number {conceptCSV.DT.Rows[0].Field<string>("CUSTOMER NUMBER")} does not have a concept code populated in the Address Book.\r\nPlease fix this in the spreadsheet or JDE before continuing.", "Data Error", buttons);
+                }
+                result = false;
+            }
+            else
+            {
+                log.Debug($"Customer Number {conceptCSV.DT.Rows[0].Field<string>("CUSTOMER NUMBER")} has a concept.");
+                result = true;
+            }
+            return result;
+        }
+
+        /// <summary>
         /// Make sure all tax codes exist in F4008 and we are in an active date range for that code.
         /// </summary>
         /// <param name="ship"></param>
@@ -281,6 +308,10 @@ namespace Rollout.UI.Winform
                         log.Debug("Validating the shipping vendor is V or V3.");
                         frm.AddText("Validating the shipping vendor is a vendor in JDE.");
                         if (!CheckShippingVendor(conceptCSV)) { return; }
+                        // 4c.) Validate the concept ID exists for the Customer C3 Record
+                        log.Debug("Validating the Customer Number has a concept in ABAC08.");
+                        frm.AddText("Validating the Customer Number has a concept code.");
+                        if (!ConceptCodeExists(conceptCSV)) { return; }
                         // 5.) Verify the ship to addresses exist
                         log.Debug("Verify all Ship To addresses exist");
                         frm.AddText("Checking for missing ship to addresses in JDE.");
