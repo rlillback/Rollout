@@ -74,6 +74,9 @@
     <Compile Include="F03012Z1.cs">
       <DependentUpon>JDE.tt</DependentUpon>
     </Compile>
+    <Compile Include="F4008.cs">
+      <DependentUpon>JDE.tt</DependentUpon>
+    </Compile>
     <Compile Include="F4102.cs">
       <DependentUpon>JDE.tt</DependentUpon>
     </Compile>

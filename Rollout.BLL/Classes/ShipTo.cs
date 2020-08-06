@@ -17,5 +17,10 @@ namespace Rollout.BLL
         public string StoreName { get; set; }
 
         public List<ShipToLine>  NewShipTos { get; set; }
+
+        public bool ValidateTaxCodes()
+        {
+            return JDE.ValidateTaxCodes(this.NewShipTos.Select(n => n.TaxAreaCode.Trim()).Distinct().ToList());
+        }
     }
 }
