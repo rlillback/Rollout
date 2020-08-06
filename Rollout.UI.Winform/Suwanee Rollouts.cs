@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Threading;
 using System.Security.Cryptography;
 using System.Data;
+using System.Linq;
 
 namespace Rollout.UI.Winform
 {
@@ -49,6 +50,60 @@ namespace Rollout.UI.Winform
         #endregion
 
         #region private functions
+        /// <summary>
+        /// Make sure all tax codes exist in F4008 and we are in an active date range for that code.
+        /// </summary>
+        /// <param name="ship"></param>
+        /// <returns></returns>
+        private bool ValidateTaxCodes(ShipTo ship)
+        {
+            bool result = ship.ValidateTaxCodes();
+            if (!result)
+            {
+                // TODO: Fix this to display the missing information
+                log.Error("Failed to validate tax codes.");
+                using (new CenterDialog(this))
+                {
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    MessageBox.Show($"Error in csv.  There are missing or non-active tax codes in the CSV.  See Log file and documentation for more information.", "Data Error", buttons);
+                }
+            }
+            else
+            {
+                log.Debug("All tax codes exist and are active.");
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// See if there are any JDE Addresses that are 0, which is invalid
+        /// </summary>
+        /// <param name="ship"></param>
+        /// <returns></returns>
+        private bool AnyZeroAddresses(ShipTo ship)
+        {
+            bool result;
+            if (0 < ship.NewShipTos.Where(n => 0 == n.JDEAddress).Count())
+            {
+                List<ShipToLine> MissingShipTos = ship.NewShipTos.Where(n => 0 == n.JDEAddress).ToList(); 
+                foreach (ShipToLine line in MissingShipTos)
+                {
+                    log.Error($"This row failed to retrieve a JDE Address = {String.Join(",", line)}");
+                }
+                using (new CenterDialog(this))
+                {
+                    MessageBox.Show($"Error in csv. Failed to retrieve JDE Addresses in one or more rows.  See log file and documentation for more information.", "Error in CSV Data", MessageBoxButtons.OK);
+                }
+                result = true;
+            }
+            else
+            {
+                log.Debug($"All lines retrieved a JDE Address Book number.");
+                result = false;
+            }
+            return result;
+        }
+
         /// <summary>
         /// Validate concept header minimal columns are there
         /// </summary>
@@ -505,7 +560,7 @@ namespace Rollout.UI.Winform
                         // 5.) Either populate the data table for viewing or load the data into JDE
                         using (new CenterDialog(this))
                         {
-                            DialogResult result = MessageBox.Show($"All {MissingShipToCSV.DT.Rows.Count} rows of data are valid.\r\nLoad the Data into JDE?\r\nSelect No to preview the detail data before load.",
+                            DialogResult result = MessageBox.Show($"All {MissingShipToCSV.DT.Rows.Count} rows of data appear to be valid -- Further checks required.\r\nTry to Load the Data into JDE?\r\nSelect No to preview the detail data before load.",
                                                                   "Load Data?",
                                                                   MessageBoxButtons.YesNoCancel,
                                                                   MessageBoxIcon.Information);
@@ -515,6 +570,15 @@ namespace Rollout.UI.Winform
                                 log.Debug($"Tranform the ShipToCSV into a ShipTo object");
                                 frm.AddText($"Converting CSV file to a JDE loadable object.");
                                 ShipTo ship = XfrmShipTo.CSVToShipTo(MissingShipToCSV, true); // Get the JDE address, since we need it
+                                // 5a.1) Verify there aren't any unfound addresses
+                                log.Debug($"Checking that all JDE addresses are > 0");
+                                frm.AddText($"Validating JDE Addresses were found for all rows.");
+                                if (AnyZeroAddresses(ship)) { return; }
+                                // 5a.2) Verify all tax codes are valid
+                                log.Debug($"Verifying all tax codes are valid entries in F4008");
+                                frm.AddText($"Validating Tax codes are active in JDE.");
+                                if (!ValidateTaxCodes(ship)) { return; }
+                                // 5a.3) Populate the Z file
                                 log.Debug($"Populating F03012Z1 with data");
                                 frm.AddText("Loading JDE F03012Z1 with data.");
                                 JDE.PopulateF03012Z1(ship);
@@ -531,10 +595,19 @@ namespace Rollout.UI.Winform
                             }
                             else if (DialogResult.No == result)
                             {
-                                // 5c.) Populate the datatable with concept information
-                                log.Debug($"Tranform the ShipToCSV into a ShipTo object for data table.");
+                                // 5c.) Save the data into a ShipTo & save that to JDE
+                                log.Debug($"Tranform the ShipToCSV into a ShipTo object");
                                 frm.AddText($"Converting CSV file to a JDE loadable object.");
-                                ShipTo ship = XfrmShipTo.CSVToShipTo(MissingShipToCSV, false); // Don't look up the JDE address, because you don't have any yet
+                                ShipTo ship = XfrmShipTo.CSVToShipTo(MissingShipToCSV, true); // Get the JDE address, since we need it
+                                // 5c.1) Verify there aren't any unfound addresses
+                                log.Debug($"Checking that all JDE addresses are > 0");
+                                frm.AddText($"Validating JDE Addresses were found for all rows.");
+                                if (AnyZeroAddresses(ship)) { return; }
+                                // 5c.2) Verify all tax codes are valid
+                                log.Debug($"Verifying all tax codes are valid entries in F4008");
+                                frm.AddText($"Validating Tax codes are active in JDE.");
+                                if (!ValidateTaxCodes(ship)) { return; }
+                                // 5c.3) Populate the datatable with concept information
                                 frm.AddText("Successfully created JDE loadable object.");
                                 this.dgv_DataDisplay.DataSource = ship.NewShipTos;
                             }

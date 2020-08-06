@@ -381,6 +381,62 @@ namespace Rollout.BLL
         #endregion
 
         #region public methods
+        public static bool ValidateTaxCodes(List<string> codes)
+        {
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));
+            List<string> exceptions = new List<string>(); // list of exceptions that don't need to exist in F4008
+            exceptions.Add(String.Empty); // The null tax code is acceptable but doesn't exist in F4008
+            List<string> uniqueCodes = codes.Distinct().Except(exceptions).ToList();
+            log.Debug($"Validating Tax Codes: {String.Join(",", uniqueCodes)}");
+            bool result = false;
+            try
+            {
+                // Make sure all the codes exist in F4008
+                List<string> missing = new List<string>();
+                List<string> found;
+                using (JDEEntities jde = new JDEEntities())
+                {
+                    found = jde.F4008.AsNoTracking()
+                            .Where(n => uniqueCodes.Contains(n.TATXA1.Trim()))
+                            .Select(n => n.TATXA1.Trim())
+                            .ToList();
+                    log.Debug($"Found these tax codes in F4008 = {String.Join(",", found)}");
+                    missing = uniqueCodes.Except(found).ToList();
+                    log.Error($"These tax codes are missing from F4008 = {String.Join(",", missing)}");
+                    if (0 < missing.Count)
+                    {
+                        result = false;
+                    }
+                    else
+                    {
+                        // Now get a list off all the active tax codes in F4008
+                        decimal today = CommonFunctions.DateStringToJulian(System.DateTime.Today.ToShortDateString());
+                        found = jde.F4008.AsNoTracking()
+                                .Where(n => (uniqueCodes.Contains(n.TATXA1.Trim()) && ((today <= n.TAEFDJ) && (today >= n.TAEFTJ))))
+                                .Select(n => n.TATXA1.Trim())
+                                .ToList();
+                        log.Debug($"These tax codes are active in F4008 = {String.Join(",", found)}");
+                        missing = uniqueCodes.Except(found).ToList();
+                        log.Error($"These tax codes are not active in F4008 = {String.Join(",", missing)}");
+                        if (0 < missing.Count)
+                        {
+                            result = false;
+                        }
+                        else
+                        {
+                            log.Debug($"All tax codes are active & the file is ok to process further.");
+                            result = true; 
+                        }
+                    }
+                }
+            }
+            catch (Exception eJDE)
+            {
+                log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
+                throw;
+            }
+            return result;
+        }
         /// <summary>
         /// Get the county from a zipcode via lookup in F0117
         /// </summary>
@@ -610,7 +666,7 @@ namespace Rollout.BLL
                 }
                 log.Debug($"Found these addresses = {String.Join(",",found)}");
                 missing = Names.Except(found).ToList();
-                log.Debug($"These names are missing = {String.Join(",", missing)}");
+                log.Error($"These names are missing = {String.Join(",", missing)}");
             }
             catch (Exception eJDE)
             {
@@ -643,7 +699,7 @@ namespace Rollout.BLL
                     else
                     {
                         exists = false;
-                        log.Debug($"Did not find {addressNumber}");
+                        log.Error($"Did not find {addressNumber}");
                     }
                 }
             }
@@ -677,10 +733,10 @@ namespace Rollout.BLL
                                         items.Contains(n.IBLITM))
                             .Select(n => n.IBLITM.Trim())
                             .ToList();
-                    log.Debug($"Found the following items in the {branchplant} branch: {String.Join(",",found)}");
                 }
+                log.Debug($"Found the following items in the {branchplant} branch: {String.Join(",", found)}");
                 missing = items.Except(found).ToList();
-                log.Debug($"The following items were not found: {String.Join(",", missing)}");
+                log.Error($"The following items were not found: {String.Join(",", missing)}");
             }
             catch (Exception eJDE)
             {

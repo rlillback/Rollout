@@ -740,6 +740,48 @@
           <Property Name="VODTEE" Type="datetime" />
           <Property Name="VOGOPASF" Type="nchar" MaxLength="1" />
         </EntityType>
+        <EntityType Name="F4008">
+          <Key>
+            <PropertyRef Name="TATXA1" />
+            <PropertyRef Name="TAEFDJ" />
+            <PropertyRef Name="TAITM" />
+          </Key>
+          <Property Name="TATXA1" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="TATAXA" Type="nchar" MaxLength="30" />
+          <Property Name="TATA1" Type="float" />
+          <Property Name="TATXR1" Type="float" />
+          <Property Name="TATA2" Type="float" />
+          <Property Name="TATXR2" Type="float" />
+          <Property Name="TATA3" Type="float" />
+          <Property Name="TATXR3" Type="float" />
+          <Property Name="TATA4" Type="float" />
+          <Property Name="TATXR4" Type="float" />
+          <Property Name="TATA5" Type="float" />
+          <Property Name="TATXR5" Type="float" />
+          <Property Name="TAEFDJ" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TAEFTJ" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TAGL01" Type="nchar" MaxLength="4" />
+          <Property Name="TAGL02" Type="nchar" MaxLength="4" />
+          <Property Name="TAGL03" Type="nchar" MaxLength="4" />
+          <Property Name="TAGL04" Type="nchar" MaxLength="4" />
+          <Property Name="TAGL05" Type="nchar" MaxLength="4" />
+          <Property Name="TAITM" Type="float" Nullable="false" />
+          <Property Name="TALITM" Type="nchar" MaxLength="25" />
+          <Property Name="TAAITM" Type="nchar" MaxLength="25" />
+          <Property Name="TAUOM" Type="nchar" MaxLength="2" />
+          <Property Name="TAFVTY" Type="nchar" MaxLength="1" />
+          <Property Name="TAMTAX" Type="float" />
+          <Property Name="TATC1" Type="nchar" MaxLength="1" />
+          <Property Name="TATC2" Type="nchar" MaxLength="1" />
+          <Property Name="TATC3" Type="nchar" MaxLength="1" />
+          <Property Name="TATC4" Type="nchar" MaxLength="1" />
+          <Property Name="TATC5" Type="nchar" MaxLength="1" />
+          <Property Name="TATT1" Type="nchar" MaxLength="1" />
+          <Property Name="TATT2" Type="nchar" MaxLength="1" />
+          <Property Name="TATT3" Type="nchar" MaxLength="1" />
+          <Property Name="TATT4" Type="nchar" MaxLength="1" />
+          <Property Name="TATT5" Type="nchar" MaxLength="1" />
+        </EntityType>
         <EntityType Name="F4102">
           <Key>
             <PropertyRef Name="IBITM" />
@@ -1422,6 +1464,7 @@
           <EntitySet Name="F0117" EntityType="Self.F0117" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F03012" EntityType="Self.F03012" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F03012Z1" EntityType="Self.F03012Z1" Schema="TESTDTA" store:Type="Tables" />
+          <EntitySet Name="F4008" EntityType="Self.F4008" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F4102" EntityType="Self.F4102" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F47011" EntityType="Self.F47011" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F47012" EntityType="Self.F47012" Schema="TESTDTA" store:Type="Tables" />
@@ -2431,6 +2474,7 @@
           <EntitySet Name="F03012Z1" EntityType="JDEModel.F03012Z1" />
           <EntitySet Name="F0002" EntityType="JDEModel.F0002" />
           <EntitySet Name="F0117" EntityType="JDEModel.F0117" />
+          <EntitySet Name="F4008" EntityType="JDEModel.F4008" />
         </EntityContainer>
         <EntityType Name="F0101Z2">
           <Key>
@@ -2850,6 +2894,48 @@
           <Property Name="A8UPMJ" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="A8UPMT" Type="Double" />
           <Property Name="A8MKEY" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="F4008">
+          <Key>
+            <PropertyRef Name="TATXA1" />
+            <PropertyRef Name="TAEFDJ" />
+            <PropertyRef Name="TAITM" />
+          </Key>
+          <Property Name="TATXA1" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="TATAXA" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="TATA1" Type="Double" />
+          <Property Name="TATXR1" Type="Double" />
+          <Property Name="TATA2" Type="Double" />
+          <Property Name="TATXR2" Type="Double" />
+          <Property Name="TATA3" Type="Double" />
+          <Property Name="TATXR3" Type="Double" />
+          <Property Name="TATA4" Type="Double" />
+          <Property Name="TATXR4" Type="Double" />
+          <Property Name="TATA5" Type="Double" />
+          <Property Name="TATXR5" Type="Double" />
+          <Property Name="TAEFDJ" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TAEFTJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TAGL01" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="TAGL02" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="TAGL03" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="TAGL04" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="TAGL05" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="TAITM" Type="Double" Nullable="false" />
+          <Property Name="TALITM" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="TAAITM" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="TAUOM" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="TAFVTY" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="TAMTAX" Type="Double" />
+          <Property Name="TATC1" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="TATC2" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="TATC3" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="TATC4" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="TATC5" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="TATT1" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="TATT2" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="TATT3" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="TATT4" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="TATT5" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4258,6 +4344,47 @@
                 <ScalarProperty Name="A8CTY1" ColumnName="A8CTY1" />
                 <ScalarProperty Name="A8ADDS" ColumnName="A8ADDS" />
                 <ScalarProperty Name="A8ADDZ" ColumnName="A8ADDZ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="F4008">
+            <EntityTypeMapping TypeName="JDEModel.F4008">
+              <MappingFragment StoreEntitySet="F4008">
+                <ScalarProperty Name="TATT5" ColumnName="TATT5" />
+                <ScalarProperty Name="TATT4" ColumnName="TATT4" />
+                <ScalarProperty Name="TATT3" ColumnName="TATT3" />
+                <ScalarProperty Name="TATT2" ColumnName="TATT2" />
+                <ScalarProperty Name="TATT1" ColumnName="TATT1" />
+                <ScalarProperty Name="TATC5" ColumnName="TATC5" />
+                <ScalarProperty Name="TATC4" ColumnName="TATC4" />
+                <ScalarProperty Name="TATC3" ColumnName="TATC3" />
+                <ScalarProperty Name="TATC2" ColumnName="TATC2" />
+                <ScalarProperty Name="TATC1" ColumnName="TATC1" />
+                <ScalarProperty Name="TAMTAX" ColumnName="TAMTAX" />
+                <ScalarProperty Name="TAFVTY" ColumnName="TAFVTY" />
+                <ScalarProperty Name="TAUOM" ColumnName="TAUOM" />
+                <ScalarProperty Name="TAAITM" ColumnName="TAAITM" />
+                <ScalarProperty Name="TALITM" ColumnName="TALITM" />
+                <ScalarProperty Name="TAITM" ColumnName="TAITM" />
+                <ScalarProperty Name="TAGL05" ColumnName="TAGL05" />
+                <ScalarProperty Name="TAGL04" ColumnName="TAGL04" />
+                <ScalarProperty Name="TAGL03" ColumnName="TAGL03" />
+                <ScalarProperty Name="TAGL02" ColumnName="TAGL02" />
+                <ScalarProperty Name="TAGL01" ColumnName="TAGL01" />
+                <ScalarProperty Name="TAEFTJ" ColumnName="TAEFTJ" />
+                <ScalarProperty Name="TAEFDJ" ColumnName="TAEFDJ" />
+                <ScalarProperty Name="TATXR5" ColumnName="TATXR5" />
+                <ScalarProperty Name="TATA5" ColumnName="TATA5" />
+                <ScalarProperty Name="TATXR4" ColumnName="TATXR4" />
+                <ScalarProperty Name="TATA4" ColumnName="TATA4" />
+                <ScalarProperty Name="TATXR3" ColumnName="TATXR3" />
+                <ScalarProperty Name="TATA3" ColumnName="TATA3" />
+                <ScalarProperty Name="TATXR2" ColumnName="TATXR2" />
+                <ScalarProperty Name="TATA2" ColumnName="TATA2" />
+                <ScalarProperty Name="TATXR1" ColumnName="TATXR1" />
+                <ScalarProperty Name="TATA1" ColumnName="TATA1" />
+                <ScalarProperty Name="TATAXA" ColumnName="TATAXA" />
+                <ScalarProperty Name="TATXA1" ColumnName="TATXA1" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
