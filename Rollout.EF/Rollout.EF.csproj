@@ -56,7 +56,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectionHelper.cs" />
     <Compile Include="F0002.cs">
+      <DependentUpon>JDE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="F0005.cs">
       <DependentUpon>JDE.tt</DependentUpon>
     </Compile>
     <Compile Include="F0101.cs">
@@ -101,6 +105,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>JDE.edmx</DependentUpon>
     </Compile>
+    <Compile Include="JDEEntitiesOverload.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

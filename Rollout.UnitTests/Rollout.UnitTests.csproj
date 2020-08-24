@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="CommonFunctionsTests.cs" />
     <Compile Include="ConceptCSVTest.cs" />
+    <Compile Include="ConnectionStringTest.cs" />
     <Compile Include="JDETest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShipToCSV_Test.cs" />
@@ -76,6 +77,10 @@
     <ProjectReference Include="..\Rollout.Common\Rollout.Common.csproj">
       <Project>{4a8b5b70-f740-4829-bfe8-6783ca163701}</Project>
       <Name>Rollout.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rollout.EF\Rollout.EF.csproj">
+      <Project>{68cb77d4-7b1c-4207-bbe6-f45ccf4f8a4a}</Project>
+      <Name>Rollout.EF</Name>
     </ProjectReference>
     <ProjectReference Include="..\Rollout.UI.Winform\Rollout.UI.Winform.csproj">
       <Project>{faa5c330-f172-4811-9763-7355759eda10}</Project>

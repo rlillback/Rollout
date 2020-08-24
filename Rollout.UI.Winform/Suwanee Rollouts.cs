@@ -50,6 +50,25 @@ namespace Rollout.UI.Winform
         #endregion
 
         #region private functions
+        private bool ValidateTaxExplanations(ShipTo ship)
+        {
+            bool result = ship.ValidateTaxExplanations();
+            if (!result)
+            {
+                // TODO: Fix this to display the missing information
+                log.Error("Failed to validate tax explanations.");
+                using (new CenterDialog(this))
+                {
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    MessageBox.Show($"Error in csv.  There are invalid tax explanation codes.  See Log file and documentation for more information.", "Data Error", buttons);
+                }
+            }
+            else
+            {
+                log.Debug("All tax explanations are valid in UDC 00/EX.");
+            }
+            return result;
+        }
         /// <summary>
         /// Verify a valid concept code exists in JDE for this customer.
         /// </summary>
@@ -609,6 +628,10 @@ namespace Rollout.UI.Winform
                                 log.Debug($"Verifying all tax codes are valid entries in F4008");
                                 frm.AddText($"Validating Tax codes are active in JDE.");
                                 if (!ValidateTaxCodes(ship)) { return; }
+                                // 5a.2.a) Verify all tax code explanations are valid
+                                log.Debug($"Verifying all tax code explanations are valid entries in UDC 00/EX");
+                                frm.AddText($"Validating Tax Explanations are valid in JDE.");
+                                if (!ValidateTaxExplanations(ship)) { return; }
                                 // 5a.3) Populate the Z file
                                 log.Debug($"Populating F03012Z1 with data");
                                 frm.AddText("Loading JDE F03012Z1 with data.");
@@ -638,6 +661,10 @@ namespace Rollout.UI.Winform
                                 log.Debug($"Verifying all tax codes are valid entries in F4008");
                                 frm.AddText($"Validating Tax codes are active in JDE.");
                                 if (!ValidateTaxCodes(ship)) { return; }
+                                // 5c.2.a) Verify all tax code explanations are valid
+                                log.Debug($"Verifying all tax code explanations are valid entries in UDC 00/EX");
+                                frm.AddText($"Validating Tax Explanations are valid in JDE.");
+                                if (!ValidateTaxExplanations(ship)) { return; }
                                 // 5c.3) Populate the datatable with concept information
                                 frm.AddText("Successfully created JDE loadable object.");
                                 this.dgv_DataDisplay.DataSource = ship.NewShipTos;

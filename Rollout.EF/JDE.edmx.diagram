@@ -15,6 +15,7 @@
         <EntityTypeShape EntityType="JDEModel.F0002" Width="1.5" PointX="12.875" PointY="0.75" />
         <EntityTypeShape EntityType="JDEModel.F0117" Width="1.5" PointX="18.125" PointY="0.75" />
         <EntityTypeShape EntityType="JDEModel.F4008" Width="1.5" PointX="3.125" PointY="0.75" />
+        <EntityTypeShape EntityType="JDEModel.F0005" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

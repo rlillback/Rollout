@@ -22,5 +22,10 @@ namespace Rollout.BLL
         {
             return JDE.ValidateTaxCodes(this.NewShipTos.Select(n => n.TaxAreaCode.Trim()).Distinct().ToList());
         }
+
+        public bool ValidateTaxExplanations()
+        {
+            return JDE.ValidateTaxExplanations(this.NewShipTos.Select(n => n.TaxExplanationCode.Trim()).Distinct().ToList());
+        }
     }
 }

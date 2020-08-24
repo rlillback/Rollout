@@ -381,6 +381,52 @@ namespace Rollout.BLL
         #endregion
 
         #region public methods
+        /// <summary>
+        /// Verify that a string of tax explanation codes exist in UDC 00/EX
+        /// </summary>
+        /// <param name="expl"></param>
+        /// <returns></returns>
+        public static bool ValidateTaxExplanations(List<string> expl)
+        {
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));
+            List<string> unique = expl.Distinct().ToList();
+            log.Debug($"Validating Explanation Codes: {String.Join(",", unique)}");
+            bool result = false;
+            try
+            {
+                List<string> missing = new List<string>();
+                List<string> found;
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
+                {
+                    found = jde.F0005.AsNoTracking()
+                            .Where(n => ("00" == n.DRSY.Trim()) && ("EX" == n.DRRT.Trim()) && (unique.Contains(n.DRKY.Trim())))
+                            .Select(n => n.DRKY.Trim())
+                            .ToList();
+                    log.Debug($"Found these explanation codes in UDC 00/EX = {String.Join(",", found)}");
+                    missing = unique.Except(found).ToList();
+                    if (0 < missing.Count)
+                    {
+                        log.Error($"These tax explanation codes are missing from UDC 00/EX = {String.Join(",", missing)}");
+                        result = false;
+                    }
+                    else
+                    {
+                        result = true;
+                    }
+                }
+            }
+            catch (Exception eJDE)
+            {
+                log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
+                throw;
+            }
+            return result;
+        }
+        /// <summary>
+        /// Validate a list of tax codes exist in F4008 and are not expired tax codes
+        /// </summary>
+        /// <param name="codes"></param>
+        /// <returns></returns>
         public static bool ValidateTaxCodes(List<string> codes)
         {
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));
@@ -394,7 +440,7 @@ namespace Rollout.BLL
                 // Make sure all the codes exist in F4008
                 List<string> missing = new List<string>();
                 List<string> found;
-                using (JDEEntities jde = new JDEEntities())
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
                     found = jde.F4008.AsNoTracking()
                             .Where(n => uniqueCodes.Contains(n.TATXA1.Trim()))
@@ -402,9 +448,9 @@ namespace Rollout.BLL
                             .ToList();
                     log.Debug($"Found these tax codes in F4008 = {String.Join(",", found)}");
                     missing = uniqueCodes.Except(found).ToList();
-                    log.Error($"These tax codes are missing from F4008 = {String.Join(",", missing)}");
                     if (0 < missing.Count)
                     {
+                        log.Error($"These tax codes are missing from F4008 = {String.Join(",", missing)}");
                         result = false;
                     }
                     else
@@ -450,7 +496,7 @@ namespace Rollout.BLL
             string county;
             try
             {
-                using (JDEEntities jde = new JDEEntities())
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
                     county = jde.F0117.AsNoTracking().Where(n => n.A8ADDZ.Trim() == zipcode.ToUpper().Trim()).Select(n => n.A8COUN).FirstOrDefault();
                     log.Debug($"A8ADDZ = {zipcode} returned {county} from F0117");
@@ -477,7 +523,7 @@ namespace Rollout.BLL
             double nn;
             try
             {
-                using (JDEEntities jde = new JDEEntities())
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
                     F0002 record = jde.F0002.Where(n => "47" == n.NNSY).First();
                     nn = (double)record.NNN007;
@@ -507,7 +553,7 @@ namespace Rollout.BLL
             double nn;
             try
             {
-                using (JDEEntities jde = new JDEEntities())
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
                     F0002 record = jde.F0002.Where(n => "47" == n.NNSY).First();
                     nn = (double)record.NNN006;
@@ -536,7 +582,7 @@ namespace Rollout.BLL
             string conceptID = String.Empty;
             try
             {
-                using (JDEEntities jde = new JDEEntities())
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
                     if ( jde.F0101.AsNoTracking().Any(n => n.ABAN8 == Address))
                     {
@@ -581,7 +627,7 @@ namespace Rollout.BLL
             string conceptID = String.Empty;
             try
             {
-                using (JDEEntities jde = new JDEEntities())
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
                     if (jde.F0101.AsNoTracking().Any(n => n.ABALKY == Nickname))
                     {
@@ -619,7 +665,7 @@ namespace Rollout.BLL
 
             try
             {
-                using (JDEEntities jde = new JDEEntities())
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
                     if (jde.F0101.AsNoTracking().Any(n => ((n.ABAC08 == ConceptId) && (n.ABAT1 == "C3"))))
                     {
@@ -657,7 +703,7 @@ namespace Rollout.BLL
             List<string> found;
             try
             {
-                using (JDEEntities jde = new JDEEntities())
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
                     found = jde.F0101.AsNoTracking()
                         .Where(n => Names.Contains(n.ABALKY.Trim()))
@@ -666,7 +712,10 @@ namespace Rollout.BLL
                 }
                 log.Debug($"Found these addresses = {String.Join(",",found)}");
                 missing = Names.Except(found).ToList();
-                log.Error($"These names are missing = {String.Join(",", missing)}");
+                if (0 < missing.Count)
+                {
+                    log.Error($"These names are missing = {String.Join(",", missing)}");
+                }
             }
             catch (Exception eJDE)
             {
@@ -689,7 +738,7 @@ namespace Rollout.BLL
             bool exists;
             try
             {
-                using (JDEEntities jde = new JDEEntities())
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
                     if (jde.F0101.AsNoTracking().Any(n => (n.ABAN8 == addressNumber) && (n.ABAT1 == searchType)))
                     {
@@ -726,7 +775,7 @@ namespace Rollout.BLL
             List<string> found;
             try
             {
-                using (JDEEntities jde = new JDEEntities())
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
                     found = jde.F4102.AsNoTracking()
                             .Where(n => branchplant.Trim() == n.IBMCU.Trim() &&
@@ -736,7 +785,10 @@ namespace Rollout.BLL
                 }
                 log.Debug($"Found the following items in the {branchplant} branch: {String.Join(",", found)}");
                 missing = items.Except(found).ToList();
-                log.Error($"The following items were not found: {String.Join(",", missing)}");
+                if (0 < missing.Count)
+                {
+                    log.Error($"The following items were not found: {String.Join(",", missing)}");
+                }
             }
             catch (Exception eJDE)
             {
@@ -760,7 +812,7 @@ namespace Rollout.BLL
             bool exists;
             try
             {
-                using (JDEEntities jde = new JDEEntities())
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
                     if (jde.F4102.AsNoTracking().Any(n => partnumber == n.IBLITM && 
                                                           branchplant.Trim() == n.IBMCU.Trim()))
@@ -794,7 +846,7 @@ namespace Rollout.BLL
             double? address;
             try
             {
-                using (JDEEntities jde = new JDEEntities())
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
                     address = jde.F0101.AsNoTracking().Where(n => n.ABALKY.Trim() == alky.Trim()).Select(n => n.ABAN8).FirstOrDefault();
                     log.Debug($"ABALKY = {alky} returned {address.ToString()} from F0101");
@@ -830,7 +882,7 @@ namespace Rollout.BLL
             }
             try
             {
-                using (JDEEntities jde = new JDEEntities())
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
                     jde.F0101Z2.AddRange(entries);
                     jde.SaveChanges();
@@ -866,7 +918,7 @@ namespace Rollout.BLL
             }
             try
             {
-                using (JDEEntities jde = new JDEEntities())
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
                     jde.F03012Z1.AddRange(entries);
                     jde.SaveChanges();
@@ -899,7 +951,7 @@ namespace Rollout.BLL
             }
             try
             {
-                using (JDEEntities jde = new JDEEntities())
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
                     jde.F47011.AddRange(EdiHeaderList);
                     jde.SaveChanges();
@@ -931,7 +983,7 @@ namespace Rollout.BLL
             }
             try
             {
-                using (JDEEntities jde = new JDEEntities())
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
                     jde.F47012.AddRange(EdiDetailsList);
                     jde.SaveChanges();

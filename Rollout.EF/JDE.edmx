@@ -41,6 +41,26 @@
           <Property Name="NNCK09" Type="nchar" MaxLength="1" />
           <Property Name="NNCK10" Type="nchar" MaxLength="1" />
         </EntityType>
+        <EntityType Name="F0005">
+          <Key>
+            <PropertyRef Name="DRSY" />
+            <PropertyRef Name="DRRT" />
+            <PropertyRef Name="DRKY" />
+          </Key>
+          <Property Name="DRSY" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="DRRT" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="DRKY" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="DRDL01" Type="nchar" MaxLength="30" />
+          <Property Name="DRDL02" Type="nchar" MaxLength="30" />
+          <Property Name="DRSPHD" Type="nchar" MaxLength="10" />
+          <Property Name="DRUDCO" Type="nchar" MaxLength="1" />
+          <Property Name="DRHRDC" Type="nchar" MaxLength="1" />
+          <Property Name="DRUSER" Type="nchar" MaxLength="10" />
+          <Property Name="DRPID" Type="nchar" MaxLength="10" />
+          <Property Name="DRUPMJ" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DRJOBN" Type="nchar" MaxLength="10" />
+          <Property Name="DRUPMT" Type="float" />
+        </EntityType>
         <EntityType Name="F0101">
           <Key>
             <PropertyRef Name="ABAN8" />
@@ -1459,6 +1479,7 @@
         </EntityType>
         <EntityContainer Name="JDEModelStoreContainer">
           <EntitySet Name="F0002" EntityType="Self.F0002" Schema="TESTCTL" store:Type="Tables" />
+          <EntitySet Name="F0005" EntityType="Self.F0005" Schema="TESTCTL" store:Type="Tables" />
           <EntitySet Name="F0101" EntityType="Self.F0101" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F0101Z2" EntityType="Self.F0101Z2" Schema="TESTDTA" store:Type="Tables" />
           <EntitySet Name="F0117" EntityType="Self.F0117" Schema="TESTDTA" store:Type="Tables" />
@@ -2475,6 +2496,7 @@
           <EntitySet Name="F0002" EntityType="JDEModel.F0002" />
           <EntitySet Name="F0117" EntityType="JDEModel.F0117" />
           <EntitySet Name="F4008" EntityType="JDEModel.F4008" />
+          <EntitySet Name="F0005" EntityType="JDEModel.F0005" />
         </EntityContainer>
         <EntityType Name="F0101Z2">
           <Key>
@@ -2936,6 +2958,26 @@
           <Property Name="TATT3" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="TATT4" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="TATT5" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="F0005">
+          <Key>
+            <PropertyRef Name="DRSY" />
+            <PropertyRef Name="DRRT" />
+            <PropertyRef Name="DRKY" />
+          </Key>
+          <Property Name="DRSY" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="DRRT" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="DRKY" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DRDL01" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="DRDL02" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="DRSPHD" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DRUDCO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="DRHRDC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="DRUSER" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DRPID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DRUPMJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DRJOBN" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DRUPMT" Type="Double" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4385,6 +4427,25 @@
                 <ScalarProperty Name="TATA1" ColumnName="TATA1" />
                 <ScalarProperty Name="TATAXA" ColumnName="TATAXA" />
                 <ScalarProperty Name="TATXA1" ColumnName="TATXA1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="F0005">
+            <EntityTypeMapping TypeName="JDEModel.F0005">
+              <MappingFragment StoreEntitySet="F0005">
+                <ScalarProperty Name="DRUPMT" ColumnName="DRUPMT" />
+                <ScalarProperty Name="DRJOBN" ColumnName="DRJOBN" />
+                <ScalarProperty Name="DRUPMJ" ColumnName="DRUPMJ" />
+                <ScalarProperty Name="DRPID" ColumnName="DRPID" />
+                <ScalarProperty Name="DRUSER" ColumnName="DRUSER" />
+                <ScalarProperty Name="DRHRDC" ColumnName="DRHRDC" />
+                <ScalarProperty Name="DRUDCO" ColumnName="DRUDCO" />
+                <ScalarProperty Name="DRSPHD" ColumnName="DRSPHD" />
+                <ScalarProperty Name="DRDL02" ColumnName="DRDL02" />
+                <ScalarProperty Name="DRDL01" ColumnName="DRDL01" />
+                <ScalarProperty Name="DRKY" ColumnName="DRKY" />
+                <ScalarProperty Name="DRRT" ColumnName="DRRT" />
+                <ScalarProperty Name="DRSY" ColumnName="DRSY" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
