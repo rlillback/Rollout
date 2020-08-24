@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Rollout.UI.Winform")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Kinetico Rollout Order Entry")]
+[assembly: AssemblyDescription("Order and customer entry for Kinetico Rollouts")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Rollout.UI.Winform")]
+[assembly: AssemblyCompany("Kinetico Incorporated")]
+[assembly: AssemblyProduct("KineticoRolloutSales")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("3E Controls")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible

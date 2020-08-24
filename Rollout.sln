@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rollout.UnitTests", "Rollou
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rollout.EF", "Rollout.EF\Rollout.EF.csproj", "{68CB77D4-7B1C-4207-BBE6-F45CCF4F8A4A}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Rollout.Installer", "Rollout.Installer\Rollout.Installer.vdproj", "{54018DCF-5246-4946-AE11-902AD04A8AD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,8 @@ Global
 		{68CB77D4-7B1C-4207-BBE6-F45CCF4F8A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68CB77D4-7B1C-4207-BBE6-F45CCF4F8A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68CB77D4-7B1C-4207-BBE6-F45CCF4F8A4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54018DCF-5246-4946-AE11-902AD04A8AD4}.Debug|Any CPU.ActiveCfg = Debug
+		{54018DCF-5246-4946-AE11-902AD04A8AD4}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
