@@ -10,5 +10,6 @@
         public static string MatchIntegerOrBlank = @"^(\s*|[0-9]+)$";
         public static string MatchZipCodeUSA = @"^[0-9]{5}$";
         public static string MatchZipCodes = @"^(([0-9]{5})|((([A-Z]|[a-z])[0-9]([A-Z]|[a-z])) ([0-9]([A-Z]|[a-z])[0-9])))$";
+        public static string MatchDecimalNumber = @"^[0-9]*[\.]?[0-9]*$";
     }
 }

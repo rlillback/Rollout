@@ -35,6 +35,7 @@
             this.of_OpenRollout = new System.Windows.Forms.OpenFileDialog();
             this.dgv_DataDisplay = new System.Windows.Forms.DataGridView();
             this.btn_SaveCSV = new System.Windows.Forms.Button();
+            this.btn_FreightUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DataDisplay)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,9 +52,8 @@
             // 
             // btn_LoadShipToAB
             // 
-            this.btn_LoadShipToAB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_LoadShipToAB.Font = new System.Drawing.Font("Montserrat", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_LoadShipToAB.Location = new System.Drawing.Point(595, 13);
+            this.btn_LoadShipToAB.Location = new System.Drawing.Point(594, 12);
             this.btn_LoadShipToAB.Name = "btn_LoadShipToAB";
             this.btn_LoadShipToAB.Size = new System.Drawing.Size(277, 34);
             this.btn_LoadShipToAB.TabIndex = 1;
@@ -63,9 +63,8 @@
             // 
             // btn_LoadShipToCM
             // 
-            this.btn_LoadShipToCM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_LoadShipToCM.Font = new System.Drawing.Font("Montserrat", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_LoadShipToCM.Location = new System.Drawing.Point(878, 13);
+            this.btn_LoadShipToCM.Location = new System.Drawing.Point(877, 12);
             this.btn_LoadShipToCM.Name = "btn_LoadShipToCM";
             this.btn_LoadShipToCM.Size = new System.Drawing.Size(277, 34);
             this.btn_LoadShipToCM.TabIndex = 2;
@@ -76,7 +75,7 @@
             // btn_Exit
             // 
             this.btn_Exit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Exit.Location = new System.Drawing.Point(1080, 689);
+            this.btn_Exit.Location = new System.Drawing.Point(1433, 689);
             this.btn_Exit.Name = "btn_Exit";
             this.btn_Exit.Size = new System.Drawing.Size(75, 23);
             this.btn_Exit.TabIndex = 3;
@@ -103,14 +102,13 @@
             this.dgv_DataDisplay.Location = new System.Drawing.Point(28, 65);
             this.dgv_DataDisplay.Name = "dgv_DataDisplay";
             this.dgv_DataDisplay.ReadOnly = true;
-            this.dgv_DataDisplay.Size = new System.Drawing.Size(1127, 618);
+            this.dgv_DataDisplay.Size = new System.Drawing.Size(1480, 618);
             this.dgv_DataDisplay.TabIndex = 4;
             // 
             // btn_SaveCSV
             // 
-            this.btn_SaveCSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_SaveCSV.Font = new System.Drawing.Font("Montserrat", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_SaveCSV.Location = new System.Drawing.Point(312, 13);
+            this.btn_SaveCSV.Location = new System.Drawing.Point(311, 12);
             this.btn_SaveCSV.Name = "btn_SaveCSV";
             this.btn_SaveCSV.Size = new System.Drawing.Size(277, 34);
             this.btn_SaveCSV.TabIndex = 5;
@@ -118,11 +116,24 @@
             this.btn_SaveCSV.UseVisualStyleBackColor = true;
             this.btn_SaveCSV.Click += new System.EventHandler(this.btn_SaveCSV_DoIt);
             // 
+            // btn_FreightUpdate
+            // 
+            this.btn_FreightUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_FreightUpdate.Font = new System.Drawing.Font("Montserrat", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_FreightUpdate.Location = new System.Drawing.Point(1231, 12);
+            this.btn_FreightUpdate.Name = "btn_FreightUpdate";
+            this.btn_FreightUpdate.Size = new System.Drawing.Size(277, 34);
+            this.btn_FreightUpdate.TabIndex = 6;
+            this.btn_FreightUpdate.Text = "Load Freight and Tracking Info";
+            this.btn_FreightUpdate.UseVisualStyleBackColor = true;
+            this.btn_FreightUpdate.Click += new System.EventHandler(this.btn_FreightUpdate_DoIt);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1183, 724);
+            this.ClientSize = new System.Drawing.Size(1537, 724);
+            this.Controls.Add(this.btn_FreightUpdate);
             this.Controls.Add(this.btn_SaveCSV);
             this.Controls.Add(this.dgv_DataDisplay);
             this.Controls.Add(this.btn_Exit);
@@ -148,6 +159,7 @@
         private System.Windows.Forms.OpenFileDialog of_OpenRollout;
         private System.Windows.Forms.DataGridView dgv_DataDisplay;
         private System.Windows.Forms.Button btn_SaveCSV;
+        private System.Windows.Forms.Button btn_FreightUpdate;
     }
 }
 

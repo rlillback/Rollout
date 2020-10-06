@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\gitHub\Rollout\Rollout.EF\JDE.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\gitHub\Kinetico\Rollout\Rollout.EF\JDE.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

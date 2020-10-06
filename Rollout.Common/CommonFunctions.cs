@@ -48,5 +48,18 @@ namespace Rollout.Common
             date = date.AddDays((JulianDate % 1000) - 1);
             return $"{date.Month.ToString()}/{date.Day.ToString()}/{year.ToString()}";
         }
+
+        /// <summary>
+        /// Convert a DateTime structure to a JDE time
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public static uint TimeToJDETime(DateTime time)
+        {
+            uint hour = Convert.ToUInt32(time.Hour) * 10000;
+            uint minute = Convert.ToUInt32(time.Minute) * 100;
+            uint second = Convert.ToUInt32(time.Second);
+            return (hour + minute + second);
+        } // TimeToJDETime
     }
 }

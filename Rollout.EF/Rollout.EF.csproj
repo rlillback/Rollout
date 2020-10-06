@@ -33,6 +33,26 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-ASP.NET|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug-ASP.NET\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-ASP.NET|AnyCPU'">
+    <OutputPath>bin\Release-ASP.NET\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
@@ -84,10 +104,19 @@
     <Compile Include="F4102.cs">
       <DependentUpon>JDE.tt</DependentUpon>
     </Compile>
+    <Compile Include="F4211.cs">
+      <DependentUpon>JDE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="F4217.cs">
+      <DependentUpon>JDE.tt</DependentUpon>
+    </Compile>
     <Compile Include="F47011.cs">
       <DependentUpon>JDE.tt</DependentUpon>
     </Compile>
     <Compile Include="F47012.cs">
+      <DependentUpon>JDE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="F4943.cs">
       <DependentUpon>JDE.tt</DependentUpon>
     </Compile>
     <Compile Include="JDE.Context.cs">

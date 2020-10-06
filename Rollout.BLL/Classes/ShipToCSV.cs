@@ -98,8 +98,8 @@ namespace Rollout.BLL
             this.HeaderRow.Add(PopulateHeader("CITY", nonBlankReg));
             this.HeaderRow.Add(PopulateHeader("STATE", nonBlankReg));
             this.HeaderRow.Add(PopulateHeader("ZIP", ZipCodes));
-            this.HeaderRow.Add(PopulateHeader("TAX AREA CODE", anyreg));
-            this.HeaderRow.Add(PopulateHeader("TAX EXPLANATION CODE", anyreg));
+            this.HeaderRow.Add(PopulateHeader("TAX AREA CODE", nonBlankReg));
+            this.HeaderRow.Add(PopulateHeader("TAX EXPLANATION CODE", nonBlankReg));
         }
 
         /// <summary>

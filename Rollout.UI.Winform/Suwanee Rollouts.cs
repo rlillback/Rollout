@@ -20,6 +20,7 @@ namespace Rollout.UI.Winform
         private static string FileFilter = "csv files (*.csv)|*.csv|txt files (*.txt)|*.txt|all files (*.*)|*.*";
         private ConceptCSV conceptCSV;
         private ShipToCSV MissingShipToCSV;
+        private FreightCSV freightCSV;
         #endregion
 
         #region application and forms
@@ -50,6 +51,11 @@ namespace Rollout.UI.Winform
         #endregion
 
         #region private functions
+        /// <summary>
+        /// Validate that the Tax Explanations are valid entries in the UDC
+        /// </summary>
+        /// <param name="ship"></param>
+        /// <returns></returns>
         private bool ValidateTaxExplanations(ShipTo ship)
         {
             bool result = ship.ValidateTaxExplanations();
@@ -68,7 +74,8 @@ namespace Rollout.UI.Winform
                 log.Debug("All tax explanations are valid in UDC 00/EX.");
             }
             return result;
-        }
+        } // ValidateTaxExplanations
+
         /// <summary>
         /// Verify a valid concept code exists in JDE for this customer.
         /// </summary>
@@ -94,7 +101,7 @@ namespace Rollout.UI.Winform
                 result = true;
             }
             return result;
-        }
+        } // ConceptCodeExists
 
         /// <summary>
         /// Make sure all tax codes exist in F4008 and we are in an active date range for that code.
@@ -119,7 +126,7 @@ namespace Rollout.UI.Winform
                 log.Debug("All tax codes exist and are active.");
             }
             return result;
-        }
+        } // ValidateTaxCodes
 
         /// <summary>
         /// See if there are any JDE Addresses that are 0, which is invalid
@@ -148,7 +155,7 @@ namespace Rollout.UI.Winform
                 result = false;
             }
             return result;
-        }
+        } // AnyZeroAddresses
 
         /// <summary>
         /// Validate concept header minimal columns are there
@@ -173,7 +180,7 @@ namespace Rollout.UI.Winform
                 log.Debug("All required columns exist");
             }
             return result;
-        }
+        } // ValidateConceptHeader
 
         /// <summary>
         /// Validate the row data
@@ -198,7 +205,7 @@ namespace Rollout.UI.Winform
                 log.Debug("All row data is valid for all required columns");
             }
             return result;
-        }
+        } // ValidateConceptRows
 
         /// <summary>
         /// Check to see if the shipping vendor in the spreadsheet is a valid vendor in JDE
@@ -221,7 +228,7 @@ namespace Rollout.UI.Winform
                 log.Debug($"The shipping vendor number {csv.DT.Rows[0].Field<string>("SHIPPING VENDOR")} is a valid vendor.");
             }
             return result;
-        }
+        } // CheckShippingVendor
 
         /// <summary>
         /// Validate the required columns exist
@@ -246,8 +253,14 @@ namespace Rollout.UI.Winform
                 log.Debug("All required columns exist");
             }
             return result;
-        }
+        } // ValidateShipToHeader
 
+        /// <summary>
+        /// Validate the data in the shipto CSV
+        /// </summary>
+        /// <param name="csv"></param>
+        /// <param name="AllowBlankTaxAreaCode"></param>
+        /// <returns></returns>
         private bool ValidateShipToRows(ref ShipToCSV csv, bool AllowBlankTaxAreaCode)
         {
             bool result = csv.ValidateRows(AllowBlankTaxAreaCode);
@@ -265,7 +278,56 @@ namespace Rollout.UI.Winform
                 log.Debug("All row data is valid for all required columns");
             }
             return result;
-        }
+        } // ValidateShipToRows
+
+        /// <summary>
+        /// Validate the required columns exist in the freight update spreadsheet
+        /// </summary>
+        /// <param name="freight"></param>
+        /// <returns></returns>
+        private bool ValidateFreightHeaders(ref FreightCSV csv)
+        {
+            bool result = csv.ValidateHeader();
+            if (!result)
+            {
+                // TODO: Fix this to display the missing information
+                log.Error("Failed to validate required headers");
+                using (new CenterDialog(this))
+                {
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    MessageBox.Show($"Error in csv.  There are missing required header rows.  See Log file and documentation for more information.", "Error in Freight CSV Headers", buttons);
+                }
+            }
+            else
+            {
+                log.Debug("All required columns exist");
+            }
+            return result;
+        } // ValidateFreightHeaders
+
+        /// <summary>
+        /// Validate the data in all freight update spreadsheet rows
+        /// </summary>
+        /// <param name="csv"></param>
+        /// <returns></returns>
+        private bool ValidateFreightRows(ref FreightCSV csv)
+        {
+            bool result = csv.ValidateRows();
+            if (!result)
+            {
+                // TODO:  Fix this to display the bad data
+                log.Error("Failed to validate row data for one or more rows");
+                using (new CenterDialog(this))
+                {
+                    MessageBox.Show($"Error in csv. Failed to validate data in one or more rows.  See log file and documentation for more information.", "Error in Freight Update CSV Data", MessageBoxButtons.OK);
+                }
+            }
+            else
+            {
+                log.Debug("All row data is valid for all required columns");
+            }
+            return result;
+        } // ValidateFreightRows
 
         /// <summary>
         /// The process flow to follow when you encounter missing ship to locations in the spreadsheet.
@@ -291,7 +353,7 @@ namespace Rollout.UI.Winform
             frm.AddText("Datatable population complete.");
             btn_SaveCSV.Enabled = true;
             return;
-        }
+        } // FollowMissingShipToPath
 
         /// <summary>
         /// The control flow for loading a rollout spreadsheet.
@@ -373,12 +435,14 @@ namespace Rollout.UI.Winform
                                                                           "Load EDI Data?",
                                                                           MessageBoxButtons.YesNoCancel,
                                                                           MessageBoxIcon.Information);
+                                    if (DialogResult.Cancel == result) { return; }
+
+                                    // 7.) Save the data into a concept & save that to JDE
+                                    log.Debug($"Tranform the conceptCSV into a concept");
+                                    frm.AddText("Transforming the spreadsheet into a concept object.");
+                                    Concept concept = XfrmConcept.CSVtoConcept(conceptCSV);
                                     if (DialogResult.Yes == result)
                                     {
-                                        // 7.) Save the data into a concept & save that to JDE
-                                        log.Debug($"Tranform the conceptCSV into a concept");
-                                        frm.AddText("Transforming the spreadsheet into a concept object.");
-                                        Concept concept = XfrmConcept.CSVtoConcept(conceptCSV);
                                         log.Debug($"Populating header file F47011 with data");
                                         frm.AddText("Populating the EDI header file with concept data.");
                                         JDE.PopulateF47011(concept);
@@ -396,10 +460,6 @@ namespace Rollout.UI.Winform
                                     }
                                     else if (DialogResult.No == result)
                                     {
-                                        // 7.) Populate the datatable with concept information
-                                        log.Debug($"Transform the conceptCSV into a concept for data table.");
-                                        frm.AddText("Transforming the spreadsheet into a concept object.");
-                                        Concept concept = XfrmConcept.CSVtoConcept(conceptCSV);
                                         frm.AddText("Success!");
                                         frm.Close();
                                         this.dgv_DataDisplay.DataSource = concept.OrderDetails;
@@ -421,7 +481,7 @@ namespace Rollout.UI.Winform
                     }
                 }
             }
-        }
+        } // LoadRolloutFlow
 
         /// <summary>
         /// The control flow for saving a Ship To CSV to a file
@@ -486,7 +546,7 @@ namespace Rollout.UI.Winform
                     btn_SaveCSV.Enabled = false;
                 }
             }
-        }
+        } // SaveCSVFlow
 
         /// <summary>
         /// The control flow for uploading and saving a Ship To CSV address book file.
@@ -528,12 +588,15 @@ namespace Rollout.UI.Winform
                                                                   "Load Data?",
                                                                   MessageBoxButtons.YesNoCancel,
                                                                   MessageBoxIcon.Information);
+                            if (DialogResult.Cancel == result) { return; }
+                            
+                            // 5a.) Save the data into a ShipTo & save that to JDE
+                            log.Debug($"Tranform the ShipToCSV into a ShipTo object");
+                            frm.AddText($"Converting CSV file to a JDE loadable object.");
+                            ShipTo ship = XfrmShipTo.CSVToShipTo(MissingShipToCSV, false); // Don't look up the JDE address, because you don't have any yet
+
                             if (DialogResult.Yes == result)
                             {
-                                // 5a.) Save the data into a ShipTo & save that to JDE
-                                log.Debug($"Tranform the ShipToCSV into a ShipTo object");
-                                frm.AddText($"Converting CSV file to a JDE loadable object.");
-                                ShipTo ship = XfrmShipTo.CSVToShipTo(MissingShipToCSV, false); // Don't look up the JDE address, because you don't have any yet
                                 log.Debug($"Populating F0101Z2 with data");
                                 frm.AddText("Loading JDE F0101Z2 with data.");
                                 JDE.PopulateF0101Z2(ship);
@@ -550,10 +613,6 @@ namespace Rollout.UI.Winform
                             }
                             else if (DialogResult.No == result)
                             {
-                                // 5c.) Populate the datatable with concept information
-                                log.Debug($"Tranform the ShipToCSV into a ShipTo object for data table.");
-                                frm.AddText($"Converting CSV file to a JDE loadable object.");
-                                ShipTo ship = XfrmShipTo.CSVToShipTo(MissingShipToCSV, false); // Don't look up the JDE address, because you don't have any yet
                                 frm.AddText("Successfully created JDE loadable object.");
                                 this.dgv_DataDisplay.DataSource = ship.NewShipTos;
                             }
@@ -573,7 +632,7 @@ namespace Rollout.UI.Winform
                 }
             }
             return;
-        }
+        } // AddressBookFlow
 
         /// <summary>
         /// Control flow for the customer master data load
@@ -606,7 +665,7 @@ namespace Rollout.UI.Winform
                         // 4.) Validate the data in the rows match the column requirements
                         frm.AddText("Validate data is in the correct format for each row and column.");
                         log.Debug("Validating all row data in all required columns");
-                        if (!ValidateShipToRows(ref MissingShipToCSV, true)) { return; } // Allow blank TankAreaCode ###
+                        if (!ValidateShipToRows(ref MissingShipToCSV, false)) { return; } // No Blank tax area codes allowed
                         // 5.) Either populate the data table for viewing or load the data into JDE
                         using (new CenterDialog(this))
                         {
@@ -614,24 +673,29 @@ namespace Rollout.UI.Winform
                                                                   "Load Data?",
                                                                   MessageBoxButtons.YesNoCancel,
                                                                   MessageBoxIcon.Information);
+                            
+                            if (DialogResult.Cancel == result) { return; }
+
+                            ShipTo ship = null;
+                            // 5a.) Save the data into a ShipTo & save that to JDE
+                            log.Debug($"Tranform the ShipToCSV into a ShipTo object");
+                            frm.AddText($"Converting CSV file to a JDE loadable object.");
+                            ship = XfrmShipTo.CSVToShipTo(MissingShipToCSV, true); // Get the JDE address, since we need it
+                                                                                   // 5a.1) Verify there aren't any unfound addresses
+                            log.Debug($"Checking that all JDE addresses are > 0");
+                            frm.AddText($"Validating JDE Addresses were found for all rows.");
+                            if (AnyZeroAddresses(ship)) { return; }
+                            // 5a.2) Verify all tax codes are valid
+                            log.Debug($"Verifying all tax codes are valid entries in F4008");
+                            frm.AddText($"Validating Tax codes are active in JDE.");
+                            if (!ValidateTaxCodes(ship)) { return; }
+                            // 5a.2.a) Verify all tax code explanations are valid
+                            log.Debug($"Verifying all tax code explanations are valid entries in UDC 00/EX");
+                            frm.AddText($"Validating Tax Explanations are valid in JDE.");
+                            if (!ValidateTaxExplanations(ship)) { return; }
+
                             if (DialogResult.Yes == result)
                             {
-                                // 5a.) Save the data into a ShipTo & save that to JDE
-                                log.Debug($"Tranform the ShipToCSV into a ShipTo object");
-                                frm.AddText($"Converting CSV file to a JDE loadable object.");
-                                ShipTo ship = XfrmShipTo.CSVToShipTo(MissingShipToCSV, true); // Get the JDE address, since we need it
-                                // 5a.1) Verify there aren't any unfound addresses
-                                log.Debug($"Checking that all JDE addresses are > 0");
-                                frm.AddText($"Validating JDE Addresses were found for all rows.");
-                                if (AnyZeroAddresses(ship)) { return; }
-                                // 5a.2) Verify all tax codes are valid
-                                log.Debug($"Verifying all tax codes are valid entries in F4008");
-                                frm.AddText($"Validating Tax codes are active in JDE.");
-                                if (!ValidateTaxCodes(ship)) { return; }
-                                // 5a.2.a) Verify all tax code explanations are valid
-                                log.Debug($"Verifying all tax code explanations are valid entries in UDC 00/EX");
-                                frm.AddText($"Validating Tax Explanations are valid in JDE.");
-                                if (!ValidateTaxExplanations(ship)) { return; }
                                 // 5a.3) Populate the Z file
                                 log.Debug($"Populating F03012Z1 with data");
                                 frm.AddText("Loading JDE F03012Z1 with data.");
@@ -649,22 +713,6 @@ namespace Rollout.UI.Winform
                             }
                             else if (DialogResult.No == result)
                             {
-                                // 5c.) Save the data into a ShipTo & save that to JDE
-                                log.Debug($"Tranform the ShipToCSV into a ShipTo object");
-                                frm.AddText($"Converting CSV file to a JDE loadable object.");
-                                ShipTo ship = XfrmShipTo.CSVToShipTo(MissingShipToCSV, true); // Get the JDE address, since we need it
-                                // 5c.1) Verify there aren't any unfound addresses
-                                log.Debug($"Checking that all JDE addresses are > 0");
-                                frm.AddText($"Validating JDE Addresses were found for all rows.");
-                                if (AnyZeroAddresses(ship)) { return; }
-                                // 5c.2) Verify all tax codes are valid
-                                log.Debug($"Verifying all tax codes are valid entries in F4008");
-                                frm.AddText($"Validating Tax codes are active in JDE.");
-                                if (!ValidateTaxCodes(ship)) { return; }
-                                // 5c.2.a) Verify all tax code explanations are valid
-                                log.Debug($"Verifying all tax code explanations are valid entries in UDC 00/EX");
-                                frm.AddText($"Validating Tax Explanations are valid in JDE.");
-                                if (!ValidateTaxExplanations(ship)) { return; }
                                 // 5c.3) Populate the datatable with concept information
                                 frm.AddText("Successfully created JDE loadable object.");
                                 this.dgv_DataDisplay.DataSource = ship.NewShipTos;
@@ -685,7 +733,96 @@ namespace Rollout.UI.Winform
                 }
             }
             return;
-        }
+        } // CustomerMasterFlow
+
+        /// <summary>
+        /// Control flow for Freight Data update
+        /// </summary>
+        public void FreightUpdateFlow()
+        {
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(FileIO)).Location) + @"\" + "log4net.config"));
+            this.dgv_DataDisplay.DataSource = null;
+            MissingShipToCSV = null; // make sure to clear this out each time we load a spreadsheet
+            using (LoadingForm frm = new LoadingForm())
+            {
+                // 1.) Get the file to load
+                string FileToLoad = FileIO.GetFileName(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), FileFilter);
+                if (String.Empty != FileToLoad)
+                {
+                    try
+                    {
+                        // 2.) Load the file
+                        log.Debug($"Attempting to load file {FileToLoad} using , as a delimiter");
+                        frm.AddText($"Attempting to load file {FileToLoad} using , as a delimiter.");
+                        freightCSV = new FreightCSV(FileToLoad, ",");
+                        freightCSV.ReadFreight();
+                        frm.AddText($"Successfully read file {FileToLoad}.");
+                        // 3.) Validate the required columns exist in the spreadsheet
+                        log.Debug($"Attempting to validate all required columns exist in the file.");
+                        frm.AddText("Validating required columns exist in the file.");
+                        if (!ValidateFreightHeaders(ref freightCSV)) { return; }
+                        // 4.) Validate the data in the rows match the column requirements
+                        frm.AddText("Validate data is in the correct format for each row and column.");
+                        log.Debug("Validating all row data in all required columns");
+                        if (!ValidateFreightRows(ref freightCSV)) { return; }
+                        // 5.) Either populate the data table for viewing or load the data into JDE
+                        using (new CenterDialog(this))
+                        {
+                            DialogResult result = MessageBox.Show($"All {freightCSV.DT.Rows.Count} rows of data appear to be valid -- Further checks required.\r\nTry to Load the Data into JDE?\r\nSelect No to preview the detail data before load.",
+                                                                  "Load Data?",
+                                                                  MessageBoxButtons.YesNoCancel,
+                                                                  MessageBoxIcon.Information);
+                            if (DialogResult.Cancel == result) { return; }
+
+                            // 6.) Save the data into a Freight structure & save that to JDE
+                            log.Debug($"Tranform the FreightCSV into a Freight object");
+                            frm.AddText($"Converting CSV file to a JDE loadable object.");
+                            Freight freight = XfrmFreight.CSVToFreight(freightCSV);
+                            // 7.) Validate all shipments exist
+                            log.Debug($"Validating that there aren't any 0 shipment numbers");
+                            frm.AddText($"Validating that all shipments exist");
+                            if (freight.freight_lines.Any(n => 0 == n.shipment)) { return; }
+
+                            if (DialogResult.Yes == result)
+                            {
+                                log.Debug($"Update Shipment Reference Numbers in F4217");
+                                frm.AddText($"Updating Shipment Tracking Numbers in JDE");
+                                JDE.PopulateF4217(freight);
+                                log.Debug($"Update Package Information in F4943");
+                                frm.AddText($"Updating package information in JDE");
+                                JDE.PopulateF4943(freight);
+                                log.Debug("$Updating freight prices in F4211");
+                                frm.AddText($"Updating freight prices on sales orders");
+                                JDE.UpdateFreightF4211(freight);
+                                using (new CenterDialog(this))
+                                {
+                                    MessageBox.Show($"The Freight information was successfully loaded into JDE.\r\n",
+                                                    "Success!",
+                                                    MessageBoxButtons.OK,
+                                                    MessageBoxIcon.Information);
+                                }
+                            }
+                            else if (DialogResult.No == result)
+                            {
+                                this.dgv_DataDisplay.DataSource = freight.freight_lines;
+                            }
+                        } // using
+                    } // try
+                    catch (Exception er)
+                    {
+                        log.Error($"{er.Message} + {er.InnerException} + {er.StackTrace}");
+                        using (new CenterDialog(this))
+                        {
+                            MessageBox.Show($"{er.Message} + {er.InnerException} + {er.StackTrace}",
+                                             "Error in Freight Update",
+                                             MessageBoxButtons.OK,
+                                             MessageBoxIcon.Error);
+                        }
+                    } // catch
+                }               
+            } 
+            return;
+        } // FreightUpdateFlow
         #endregion
 
         #region buttons
@@ -734,6 +871,18 @@ namespace Rollout.UI.Winform
             CustomerMasterFlow();
             return;
         }
+
+        /// <summary>
+        /// Perform the Freight Update Flow
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_FreightUpdate_DoIt(object sender, EventArgs e)
+        {
+            this.dgv_DataDisplay.DataSource = null;
+            FreightUpdateFlow();
+            return;
+        } // btn_FreightUpdate_DoIt
 
         /// <summary>
         /// Perform this flow when the close application button is released.

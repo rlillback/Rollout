@@ -16,6 +16,63 @@ namespace Rollout.BLL
 
         #region PrivateMethods
         /// <summary>
+        /// Populate a single F4217 record
+        /// </summary>
+        /// <param name="freightLine"></param>
+        /// <returns></returns>
+        private static F4217 PopulateF4217Detail(FreightLine freightLine)
+        {
+            F4217 val = new F4217();
+            /* Set the audit data */
+            val.XIUPMJ = CommonFunctions.DateStringToJulian(DateTime.Today.ToString());
+            val.XITDAY = CommonFunctions.TimeToJDETime(DateTime.Now);
+            val.XIPID = "Rollout";
+            val.XIJOBN = "Rollout";
+            val.XIUSER = "Rollout";
+            /* Set the actual data */
+            val.XISHPN = freightLine.shipment;
+            val.XIRSSN = 1;
+            val.XISQNR = 1; /* We can only process a single box */
+            val.XIREFQ = "CN";
+            val.XIREFN = freightLine.trackingNumber;
+            return val;
+        } // PopulateF4217Detail
+
+        /// <summary>
+        /// Populate a single F4943 record
+        /// </summary>
+        /// <param name="freightLine"></param>
+        /// <returns></returns>
+        private static F4943 PopulateF4943Detail(FreightLine freightLine)
+        {
+            F4943 val = new F4943();
+            /* Set the audit data */
+            val.SPUPMJ = CommonFunctions.DateStringToJulian(DateTime.Today.ToString());
+            val.SPTDAY = CommonFunctions.TimeToJDETime(DateTime.Now);
+            val.SPPID = "Rollout";
+            val.SPJOBN = "Rollout";
+            val.SPUSER = "Rollout";
+            /* Set the actual data */
+            val.SPSHPN = freightLine.shipment;
+            val.SPRSSN = 0;
+            val.SPPLT = " ";
+            val.SPOSEQ = 1; /* We can only process a single box */
+            val.SPEQTY = "BOX1";
+            val.SPLGTS = 0;
+            val.SPWTHS = 0;
+            val.SPHGTS = 0;
+            val.SPGTHS = 0;
+            val.SPLUOM = "IN";
+            val.SPCVUM = "FC";
+            val.SPGWEI = Math.Round(freightLine.weight * 100);
+            val.SPWTUM = "LB";
+            val.SPVCUD = 0;
+            val.SPREFN = freightLine.trackingNumber;
+            val.SPREFQ = "CN";
+            return val;
+        } // PopulateF4217Detail
+
+        /// <summary>
         /// Populate the non-entry specific fields in the F0101Z2 record
         /// </summary>
         /// <param name="entry"></param>
@@ -358,6 +415,12 @@ namespace Rollout.BLL
             return EdiHeader;
         }
 
+        /// <summary>
+        /// Populate a single F47012 entry with required data
+        /// </summary>
+        /// <param name="line"></param>
+        /// <param name="PONumber"></param>
+        /// <returns></returns>
         private static F47012 PopulateOrderDetailF47012(ConceptLine line, string PONumber)
         {
             F47012 OrderLine = new F47012();
@@ -996,6 +1059,136 @@ namespace Rollout.BLL
             }
             return;
         }
+
+        /// <summary>
+        /// For a freight object, populate all of the shipment lines
+        /// </summary>
+        /// <param name="freight"></param>
+        /// <returns></returns>
+        static public bool GetShipmentNumbers(ref Freight freight)
+        {
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));
+            log.Debug($"Retrieving shipment numbers from orders");
+            bool bResult = false;
+
+            double shipment;
+            try
+            {
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
+                {
+                    foreach (FreightLine line in freight.freight_lines)
+                    {
+                        if (false == Double.TryParse((jde.F4211.AsNoTracking().Where(n => line.order == n.SDDOCO).Select(n => n.SDSHPN).ToString()), out shipment))
+                        {
+                            line.shipment = 0;
+                            log.Error($"Order {line.order} does not have a valid shipment number associated with it");
+                        }
+                        else
+                        {
+                            line.shipment = shipment;
+                        }
+                    }
+                    bResult = true;
+                }
+            }
+            catch (Exception eJDE)
+            {
+                log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
+                throw;
+            }
+            return bResult;
+        } // GetShipmentNumbers
+
+        /// <summary>
+        /// Take a list of freight_lines and add them to F4217
+        /// </summary>
+        /// <param name="freight"></param>
+        static public void PopulateF4217(Freight freight)
+        {
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));
+            log.Debug($"Populating F4217");
+
+            List<F4217> ShipmentDetailsList = new List<F4217>();
+            F4217 freightDetail;
+            foreach (FreightLine line in freight.freight_lines)
+            {
+                freightDetail = PopulateF4217Detail(line);
+                ShipmentDetailsList.Add(freightDetail);
+            }
+            try
+            {
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
+                {
+                    jde.F4217.AddRange(ShipmentDetailsList);
+                    jde.SaveChanges();
+                }
+            }
+            catch (Exception eJDE)
+            {
+                log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
+                throw;
+            }
+            return;
+        } // PopulateF4217
+
+        /// <summary>
+        /// Take a list of freight_lines and add them to F4943
+        /// </summary>
+        /// <param name="freight"></param>
+        static public void PopulateF4943(Freight freight)
+        {
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));
+            log.Debug($"Populating F4943");
+
+            List<F4943> ShipmentDetailsList = new List<F4943>();
+            F4943 freightDetail;
+            foreach (FreightLine line in freight.freight_lines)
+            {
+                freightDetail = PopulateF4943Detail(line);
+                ShipmentDetailsList.Add(freightDetail);
+            }
+            try
+            {
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
+                {
+                    jde.F4943.AddRange(ShipmentDetailsList);
+                    jde.SaveChanges();
+                }
+            }
+            catch (Exception eJDE)
+            {
+                log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
+                throw;
+            }
+            return;
+        } // PopulateF4943
+
+        /// <summary>
+        /// Add the freight charges to the appropriate sales order line
+        /// </summary>
+        /// <param name="freight"></param>
+        static public void UpdateFreightF4211(Freight freight)
+        {
+            try
+            {
+                using (JDEEntities jde = ConnectionHelper.CreateConnection())
+                {
+                    foreach(FreightLine line in freight.freight_lines)
+                    {
+                        F4211 f4211_record = jde.F4211.Where(n => line.order == n.SDDOCO && "9227" == n.SDLITM).First();
+                        f4211_record.SDUPRC = Math.Round(10000 * line.cost);
+                        f4211_record.SDAEXP = Math.Round(100 * line.cost);
+                    }
+                    jde.SaveChanges();
+                }
+            }
+            catch (Exception eJDE)
+            {
+                log.Error($"{eJDE.Message.ToString()} -- INNER: {eJDE.InnerException.ToString()}");
+                throw;
+            }
+            return;
+        } // UpdateFreightF4211
 #endregion
     } // Class
 } // namespace
