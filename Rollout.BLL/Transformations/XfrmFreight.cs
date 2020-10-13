@@ -14,6 +14,11 @@ namespace Rollout.BLL
         #endregion
 
         #region private_methods
+        /// <summary>
+        /// Populate a single Freight class data row
+        /// </summary>
+        /// <param name="r"></param>
+        /// <returns></returns>
         private static FreightLine PopulateFreightLine(DataRow r)
         {
             FreightLine line = new FreightLine();
@@ -21,7 +26,7 @@ namespace Rollout.BLL
             line.order = Double.Parse(r.Field<String>("ORDER #"));
             line.shipment = 0;  // This gets populated later
             line.trackingNumber = r.Field<String>("TRACKING #");
-            line.weight = Double.Parse(r.Field<String>("WEIGHT"));
+            line.weight = 0; // Removed requirement from S/H Double.Parse(r.Field<String>("WEIGHT"));
             return line;
         } // PopulateFreightLine
         #endregion

@@ -17,11 +17,11 @@ namespace Rollout.BLL
             {
                 if (12 < value.Length)
                 {
-                    _BranchPlant = value.Substring((value.Length - 12), 12); // Rightmost 12
+                    _BranchPlant = value.Substring((value.Length - 12), 12).ToUpper(); // Rightmost 12
                 }
                 else
                 {
-                    _BranchPlant = value;
+                    _BranchPlant = value.ToUpper();
                 }
             }
         }
@@ -39,11 +39,11 @@ namespace Rollout.BLL
             {
                 if (25 < value.Length)
                 {
-                    _jdePartNumber = value.Substring(0, 25);
+                    _jdePartNumber = value.Substring(0, 25).ToUpper();
                 }
                 else
                 {
-                    _jdePartNumber = value;
+                    _jdePartNumber = value.ToUpper();
                 }
             }
         }

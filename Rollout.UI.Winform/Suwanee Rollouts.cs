@@ -17,7 +17,7 @@ namespace Rollout.UI.Winform
     {
         #region private_members
         private static readonly ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private static string FileFilter = "csv files (*.csv)|*.csv|txt files (*.txt)|*.txt|all files (*.*)|*.*";
+        private static string FileFilter = "txt files (*.txt)|*.txt|all files (*.*)|*.*";
         private ConceptCSV conceptCSV;
         private ShipToCSV MissingShipToCSV;
         private FreightCSV freightCSV;
@@ -370,8 +370,8 @@ namespace Rollout.UI.Winform
                 try
                 {
                     // 2.) Load the file
-                    log.Debug($"Attempting to load file {FileToLoad} using , as a delimiter");
-                    conceptCSV = new ConceptCSV(FileToLoad, ",");
+                    log.Debug($"Attempting to load file {FileToLoad} using \t as a delimiter");
+                    conceptCSV = new ConceptCSV(FileToLoad, "\t");
                     using (LoadingForm frm = new LoadingForm())
                     {
                         frm.AddText("Loading Concept Spreadsheet.");
@@ -495,7 +495,7 @@ namespace Rollout.UI.Winform
                 // 1.) Verify we have a ship to CSV
                 if (null != MissingShipToCSV)
                 {
-                    frm.AddText("Get the Ship To CSV filename to save as.");
+                    frm.AddText("Get the Ship To filename to save as.");
                     frm.Visible = true;
                     // 2.) Get the filename to save
                     string fileName = FileIO.SaveFileName(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), FileFilter);
@@ -503,10 +503,10 @@ namespace Rollout.UI.Winform
                     {
                         // 3.) Save the file
                         MissingShipToCSV.FileName = fileName;
-                        MissingShipToCSV.DeLimiter = ",";
+                        MissingShipToCSV.DeLimiter = "\t";
                         try
                         {
-                            frm.AddText($"Saving {fileName} as CSV with a , delimiter.");
+                            frm.AddText($"Saving {fileName} as TXT with a <tab> delimiter.");
                             MissingShipToCSV.WriteCSV();
                             frm.AddText($"Successfully saved {fileName}.");
                             this.dgv_DataDisplay.DataSource = null;
@@ -568,9 +568,9 @@ namespace Rollout.UI.Winform
                     try
                     {
                         // 2.) Load the file
-                        log.Debug($"Attempting to load file {FileToLoad} using , as a delimiter");
-                        frm.AddText($"Attempting to load file {FileToLoad} using , as a delimiter.");
-                        MissingShipToCSV = new ShipToCSV(FileToLoad, ",");
+                        log.Debug($"Attempting to load file {FileToLoad} using <tab> as a delimiter");
+                        frm.AddText($"Attempting to load file {FileToLoad} using <tab> as a delimiter.");
+                        MissingShipToCSV = new ShipToCSV(FileToLoad, "\t");
                         MissingShipToCSV.ReadShipTo();
                         frm.AddText($"Successfully read file {FileToLoad}.");
                         // 3.) Validate the required columns exist in the spreadsheet
@@ -653,9 +653,9 @@ namespace Rollout.UI.Winform
                     try
                     {
                         // 2.) Load the file
-                        log.Debug($"Attempting to load file {FileToLoad} using , as a delimiter");
-                        frm.AddText($"Attempting to load file {FileToLoad} using , as a delimiter.");
-                        MissingShipToCSV = new ShipToCSV(FileToLoad, ",");
+                        log.Debug($"Attempting to load file {FileToLoad} using <tab> as a delimiter");
+                        frm.AddText($"Attempting to load file {FileToLoad} using <tab> as a delimiter.");
+                        MissingShipToCSV = new ShipToCSV(FileToLoad, "\t");
                         MissingShipToCSV.ReadShipTo();
                         frm.AddText($"Successfully read file {FileToLoad}.");
                         // 3.) Validate the required columns exist in the spreadsheet
@@ -752,9 +752,9 @@ namespace Rollout.UI.Winform
                     try
                     {
                         // 2.) Load the file
-                        log.Debug($"Attempting to load file {FileToLoad} using , as a delimiter");
-                        frm.AddText($"Attempting to load file {FileToLoad} using , as a delimiter.");
-                        freightCSV = new FreightCSV(FileToLoad, ",");
+                        log.Debug($"Attempting to load file {FileToLoad} using <tab> as a delimiter");
+                        frm.AddText($"Attempting to load file {FileToLoad} using <tab> as a delimiter.");
+                        freightCSV = new FreightCSV(FileToLoad, "\t");
                         freightCSV.ReadFreight();
                         frm.AddText($"Successfully read file {FileToLoad}.");
                         // 3.) Validate the required columns exist in the spreadsheet

@@ -8,13 +8,24 @@ namespace Rollout.BLL
 {
     public class ShipTo
     {
+        private string _conceptID;
+        private string _storeName;
+
         public string batch { get; set; }
 
-        public string ConceptID { get; set; }
+        public string ConceptID
+        {
+            get { return _conceptID; }
+            set { _conceptID = value.ToUpper(); }
+        }
 
         public double ParentAddress { get; set; }
 
-        public string StoreName { get; set; }
+        public string StoreName 
+        { 
+            get { return _storeName; }
+            set { _storeName = value.ToUpper(); }
+        }
 
         public List<ShipToLine>  NewShipTos { get; set; }
 

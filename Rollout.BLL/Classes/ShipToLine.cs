@@ -26,7 +26,7 @@ namespace Rollout.BLL
         public string StoreNumber
         {
             get { return _StoreNumber; }
-            set { _StoreNumber = value; }
+            set { _StoreNumber = value.ToUpper(); }
         }
 
         private string _Concept;
@@ -38,13 +38,13 @@ namespace Rollout.BLL
             }
             set
             {
-                if ( 2 < value.Length )
+                if ( 3 < value.Length )
                 {
-                    _Concept = value.Substring(0, 2);
+                    _Concept = value.Substring(0, 3).ToUpper();
                 }
                 else
                 {
-                    _Concept = value;
+                    _Concept = value.ToUpper();
                 }
             }
         }
@@ -60,11 +60,11 @@ namespace Rollout.BLL
             {
                 if (40 < value.Length)
                 {
-                    _Address1 = value.Substring(0, 40);
+                    _Address1 = value.Substring(0, 40).ToUpper();
                 }
                 else
                 {
-                    _Address1 = value;
+                    _Address1 = value.ToUpper();
                 }
             }
         }
@@ -80,11 +80,11 @@ namespace Rollout.BLL
             {
                 if (40 < value.Length)
                 {
-                    _Address2 = value.Substring(0, 40);
+                    _Address2 = value.Substring(0, 40).ToUpper();
                 }
                 else
                 {
-                    _Address2 = value;
+                    _Address2 = value.ToUpper();
                 }
             }
         }
@@ -100,11 +100,11 @@ namespace Rollout.BLL
             {
                 if (25 < value.Length)
                 {
-                    _City = value.Substring(0, 40);
+                    _City = value.Substring(0, 40).ToUpper();
                 }
                 else
                 {
-                    _City = value;
+                    _City = value.ToUpper();
                 }
             }
         }
@@ -120,11 +120,11 @@ namespace Rollout.BLL
             {
                 if (3 < value.Length)
                 {
-                    _State = value.Substring(0, 3);
+                    _State = value.Substring(0, 3).ToUpper();
                 }
                 else
                 {
-                    _State = value;
+                    _State = value.ToUpper();
                 }
             }
         }
@@ -140,11 +140,11 @@ namespace Rollout.BLL
             {
                 if (12 < value.Length)
                 {
-                    _Zip = value.Substring(0, 12);
+                    _Zip = value.Substring(0, 12).ToUpper();
                 }
                 else
                 {
-                    _Zip = value;
+                    _Zip = value.ToUpper();
                 }
             }
         }
@@ -160,11 +160,11 @@ namespace Rollout.BLL
             {
                 if (25 < value.Length)
                 {
-                    _County = value.Substring(0, 25);
+                    _County = value.Substring(0, 25).ToUpper();
                 }
                 else
                 {
-                    _County = value;
+                    _County = value.ToUpper();
                 }
             }
         }
@@ -180,11 +180,11 @@ namespace Rollout.BLL
             {
                 if (10 < value.Length)
                 {
-                    _TaxAreaCode = value.Substring(0, 10);
+                    _TaxAreaCode = value.Substring(0, 10).ToUpper();
                 }
                 else
                 {
-                    _TaxAreaCode = value;
+                    _TaxAreaCode = value.ToUpper();
                 }
             }
         }
@@ -197,11 +197,11 @@ namespace Rollout.BLL
             {
                 if ( 2 < value.Length )
                 {
-                    _TaxExplanationCode = value.Substring(0, 2);
+                    _TaxExplanationCode = value.Substring(0, 2).ToUpper();
                 }
                 else
                 {
-                    _TaxExplanationCode = value;
+                    _TaxExplanationCode = value.ToUpper();
                 }
             }
         }

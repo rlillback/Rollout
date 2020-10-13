@@ -64,7 +64,7 @@ namespace Rollout.BLL
             val.SPGTHS = 0;
             val.SPLUOM = "IN";
             val.SPCVUM = "FC";
-            val.SPGWEI = Math.Round(freightLine.weight * 100);
+            val.SPGWEI = 0; // Removed calculation from spreadsheet Math.Round(freightLine.weight * 100)
             val.SPWTUM = "LB";
             val.SPVCUD = 0;
             val.SPREFN = freightLine.trackingNumber;

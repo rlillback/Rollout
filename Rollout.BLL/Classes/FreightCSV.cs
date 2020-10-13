@@ -69,7 +69,7 @@ namespace Rollout.BLL
             Regex nonBlankReg = new Regex(RegexHelper.MatchNonBlank);
             Regex decimalNum = new Regex(RegexHelper.MatchDecimalNumber);
             this.HeaderRow.Add(PopulateHeader("ORDER #", intreg, intreg));
-            this.HeaderRow.Add(PopulateHeader("WEIGHT", decimalNum, decimalNum));
+            // Removed "WEIGHT" from the spreadsheet 
             this.HeaderRow.Add(PopulateHeader("TRACKING #", nonBlankReg, nonBlankReg));
             this.HeaderRow.Add(PopulateHeader("FREIGHT", decimalNum, decimalNum));
         }
