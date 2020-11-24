@@ -91,7 +91,7 @@ namespace Rollout.BLL
             Regex ZipCodeUSA = new Regex(RegexHelper.MatchZipCodeUSA);
             Regex ZipCodes = new Regex(RegexHelper.MatchZipCodes);
             this.HeaderRow.Add(PopulateHeader("SHIP TO NAME", nonBlankReg));
-            this.HeaderRow.Add(PopulateHeader("STORE NUMBER", intreg));
+            this.HeaderRow.Add(PopulateHeader("STORE NUMBER", nonBlankReg));
             this.HeaderRow.Add(PopulateHeader("CONCEPT CODE", nonBlankReg));
             this.HeaderRow.Add(PopulateHeader("ADDRESS 1", nonBlankReg));
             this.HeaderRow.Add(PopulateHeader("ADDRESS 2", anyreg));
