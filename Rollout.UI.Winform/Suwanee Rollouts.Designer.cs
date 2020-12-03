@@ -112,7 +112,7 @@
             this.btn_SaveCSV.Name = "btn_SaveCSV";
             this.btn_SaveCSV.Size = new System.Drawing.Size(277, 34);
             this.btn_SaveCSV.TabIndex = 5;
-            this.btn_SaveCSV.Text = "Save Ship To CSV";
+            this.btn_SaveCSV.Text = "Save Ship To (Tab Delimited)";
             this.btn_SaveCSV.UseVisualStyleBackColor = true;
             this.btn_SaveCSV.Click += new System.EventHandler(this.btn_SaveCSV_DoIt);
             // 

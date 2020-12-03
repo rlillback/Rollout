@@ -7,10 +7,14 @@ namespace Rollout.EF
     public class ConnectionHelper
     {
         protected const string thisMetaData = "res://*/JDE.csdl|res://*/JDE.ssdl|res://*/JDE.msl";
-        protected const string thisDataSource = "n0e9sql01";
-        protected const string thisInitialCatalogue = "JDE_DEVELOPMENT";
-        protected const string thisUserId = "JDE";
-        protected const string thisP = "jde";
+#if DEBUG
+        protected const string thisDataSource = "SR02";
+#else
+        protected const string thisDataSource = "N0E9SQL01";
+#endif
+        protected const string thisInitialCatalogue = "JDE_PRODUCTION";
+        protected const string thisUserId = "SuwaneeRollouts";
+        protected const string thisP = "SuwaneeRollouts";
         protected const string appName = "EntityFramework";
         protected const string providerName = "System.Data.SqlClient";
 

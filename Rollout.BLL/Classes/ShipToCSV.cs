@@ -218,6 +218,27 @@ namespace Rollout.BLL
                     Regex reg = new Regex(RegexHelper.MatchNonBlank);
                     h.ColumnRegex = reg;
                 }
+                h = this.HeaderRow.Find(n => "TAX EXPLANATION CODE" == n.ColumnName);
+                if (null != h)
+                {
+                    Regex reg = new Regex(RegexHelper.MatchNonBlank);
+                    h.ColumnRegex = reg;
+                }
+            }
+            else
+            {
+                Header h = this.HeaderRow.Find(n => "TAX AREA CODE" == n.ColumnName);
+                if (null != h)
+                {
+                    Regex reg = new Regex(RegexHelper.MatchAnything);
+                    h.ColumnRegex = reg;
+                }
+                h = this.HeaderRow.Find(n => "TAX EXPLANATION CODE" == n.ColumnName);
+                if (null != h)
+                {
+                    Regex reg = new Regex(RegexHelper.MatchAnything);
+                    h.ColumnRegex = reg;
+                }
             }
             foreach (DataRow r in DT.Rows)
             {

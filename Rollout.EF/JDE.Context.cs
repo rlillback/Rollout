@@ -25,19 +25,19 @@ namespace Rollout.EF
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<F0002> F0002 { get; set; }
+        public virtual DbSet<F0005> F0005 { get; set; }
         public virtual DbSet<F0101> F0101 { get; set; }
+        public virtual DbSet<F0101Z2> F0101Z2 { get; set; }
+        public virtual DbSet<F0117> F0117 { get; set; }
         public virtual DbSet<F03012> F03012 { get; set; }
+        public virtual DbSet<F03012Z1> F03012Z1 { get; set; }
+        public virtual DbSet<F4008> F4008 { get; set; }
         public virtual DbSet<F4102> F4102 { get; set; }
+        public virtual DbSet<F4211> F4211 { get; set; }
+        public virtual DbSet<F4217> F4217 { get; set; }
         public virtual DbSet<F47011> F47011 { get; set; }
         public virtual DbSet<F47012> F47012 { get; set; }
-        public virtual DbSet<F0101Z2> F0101Z2 { get; set; }
-        public virtual DbSet<F03012Z1> F03012Z1 { get; set; }
-        public virtual DbSet<F0002> F0002 { get; set; }
-        public virtual DbSet<F0117> F0117 { get; set; }
-        public virtual DbSet<F4008> F4008 { get; set; }
-        public virtual DbSet<F0005> F0005 { get; set; }
-        public virtual DbSet<F4217> F4217 { get; set; }
         public virtual DbSet<F4943> F4943 { get; set; }
-        public virtual DbSet<F4211> F4211 { get; set; }
     }
 }
