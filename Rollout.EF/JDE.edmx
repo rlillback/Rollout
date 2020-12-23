@@ -984,6 +984,83 @@
           <Property Name="IBVCPFC" Type="nchar" MaxLength="20" />
           <Property Name="IBPNYN" Type="nchar" MaxLength="1" />
         </EntityType>
+        <EntityType Name="F4111">
+          <Key>
+            <PropertyRef Name="ILUKID" />
+          </Key>
+          <Property Name="ILNLIN" Type="float" />
+          <Property Name="ILITM" Type="float" />
+          <Property Name="ILLITM" Type="nchar" MaxLength="25" />
+          <Property Name="ILAITM" Type="nchar" MaxLength="25" />
+          <Property Name="ILMCU" Type="nchar" MaxLength="12" />
+          <Property Name="ILLOCN" Type="nchar" MaxLength="20" />
+          <Property Name="ILLOTN" Type="nchar" MaxLength="30" />
+          <Property Name="ILPLOT" Type="nchar" MaxLength="30" />
+          <Property Name="ILSTUN" Type="float" />
+          <Property Name="ILLDSQ" Type="float" />
+          <Property Name="ILTRNO" Type="float" />
+          <Property Name="ILFRTO" Type="nchar" MaxLength="1" />
+          <Property Name="ILLMCX" Type="nchar" MaxLength="1" />
+          <Property Name="ILLOTS" Type="nchar" MaxLength="1" />
+          <Property Name="ILLOTP" Type="float" />
+          <Property Name="ILLOTG" Type="nchar" MaxLength="3" />
+          <Property Name="ILKIT" Type="float" />
+          <Property Name="ILMMCU" Type="nchar" MaxLength="12" />
+          <Property Name="ILDMCT" Type="nchar" MaxLength="12" />
+          <Property Name="ILDMCS" Type="float" />
+          <Property Name="ILKCO" Type="nchar" MaxLength="5" />
+          <Property Name="ILDOC" Type="float" />
+          <Property Name="ILDCT" Type="nchar" MaxLength="2" />
+          <Property Name="ILSFX" Type="nchar" MaxLength="3" />
+          <Property Name="ILJELN" Type="float" />
+          <Property Name="ILICU" Type="float" />
+          <Property Name="ILDGL" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ILGLPT" Type="nchar" MaxLength="4" />
+          <Property Name="ILDCTO" Type="nchar" MaxLength="2" />
+          <Property Name="ILDOCO" Type="float" />
+          <Property Name="ILKCOO" Type="nchar" MaxLength="5" />
+          <Property Name="ILLNID" Type="float" />
+          <Property Name="ILIPCD" Type="nchar" MaxLength="1" />
+          <Property Name="ILTRDJ" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ILTRUM" Type="nchar" MaxLength="2" />
+          <Property Name="ILAN8" Type="float" />
+          <Property Name="ILTREX" Type="nchar" MaxLength="30" />
+          <Property Name="ILTREF" Type="nchar" MaxLength="8" />
+          <Property Name="ILRCD" Type="nchar" MaxLength="3" />
+          <Property Name="ILTRQT" Type="float" />
+          <Property Name="ILUNCS" Type="float" />
+          <Property Name="ILPAID" Type="float" />
+          <Property Name="ILTERM" Type="nchar" MaxLength="10" />
+          <Property Name="ILUKID" Type="float" Nullable="false" />
+          <Property Name="ILTDAY" Type="float" />
+          <Property Name="ILUSER" Type="nchar" MaxLength="10" />
+          <Property Name="ILPID" Type="nchar" MaxLength="10" />
+          <Property Name="ILCRDJ" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ILAID" Type="nchar" MaxLength="8" />
+          <Property Name="ILASID" Type="nchar" MaxLength="25" />
+          <Property Name="ILMCUZ" Type="nchar" MaxLength="12" />
+          <Property Name="ILOBJ" Type="nchar" MaxLength="6" />
+          <Property Name="ILSBL" Type="nchar" MaxLength="8" />
+          <Property Name="ILSUB" Type="nchar" MaxLength="8" />
+          <Property Name="ILUOM2" Type="nchar" MaxLength="2" />
+          <Property Name="ILCMOO" Type="nchar" MaxLength="1" />
+          <Property Name="ILRE" Type="nchar" MaxLength="1" />
+          <Property Name="ILSBLT" Type="nchar" MaxLength="1" />
+          <Property Name="ILSQOR" Type="float" />
+          <Property Name="ILVPEJ" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ILHDGJ" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ILSHAN" Type="float" />
+          <Property Name="ILOPSQ" Type="float" />
+          <Property Name="ILRFLN" Type="float" />
+          <Property Name="ILTGN" Type="float" />
+          <Property Name="ILLOTC" Type="nchar" MaxLength="3" />
+          <Property Name="ILSVDT" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ILLRCD" Type="nchar" MaxLength="3" />
+          <Property Name="ILRLOT" Type="nchar" MaxLength="30" />
+          <Property Name="ILLPNU" Type="nchar" MaxLength="40" />
+          <Property Name="ILPMPN" Type="nchar" MaxLength="30" />
+          <Property Name="ILPNS" Type="float" />
+        </EntityType>
         <EntityType Name="F4211">
           <Key>
             <PropertyRef Name="SDKCOO" />
@@ -1819,6 +1896,7 @@
           <EntitySet Name="F03012Z1" EntityType="Self.F03012Z1" Schema="PRODDTA" store:Type="Tables" />
           <EntitySet Name="F4008" EntityType="Self.F4008" Schema="PRODDTA" store:Type="Tables" />
           <EntitySet Name="F4102" EntityType="Self.F4102" Schema="PRODDTA" store:Type="Tables" />
+          <EntitySet Name="F4111" EntityType="Self.F4111" Schema="PRODDTA" store:Type="Tables" />
           <EntitySet Name="F4211" EntityType="Self.F4211" Schema="PRODDTA" store:Type="Tables" />
           <EntitySet Name="F4217" EntityType="Self.F4217" Schema="PRODDTA" store:Type="Tables" />
           <EntitySet Name="F47011" EntityType="Self.F47011" Schema="PRODDTA" store:Type="Tables" />
@@ -1839,11 +1917,12 @@
           <EntitySet Name="F03012Z1" EntityType="JDEModel.F03012Z1" />
           <EntitySet Name="F4008" EntityType="JDEModel.F4008" />
           <EntitySet Name="F4102" EntityType="JDEModel.F4102" />
-          <EntitySet Name="F4211" EntityType="JDEModel.F4211" />
           <EntitySet Name="F4217" EntityType="JDEModel.F4217" />
           <EntitySet Name="F47011" EntityType="JDEModel.F47011" />
           <EntitySet Name="F47012" EntityType="JDEModel.F47012" />
           <EntitySet Name="F4943" EntityType="JDEModel.F4943" />
+          <EntitySet Name="F4111" EntityType="JDEModel.F4111" />
+          <EntitySet Name="F4211" EntityType="JDEModel.F4211" />
         </EntityContainer>
         <EntityType Name="F0002">
           <Key>
@@ -2824,282 +2903,6 @@
           <Property Name="IBVCPFC" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="IBPNYN" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
         </EntityType>
-        <EntityType Name="F4211">
-          <Key>
-            <PropertyRef Name="SDKCOO" />
-            <PropertyRef Name="SDDOCO" />
-            <PropertyRef Name="SDDCTO" />
-            <PropertyRef Name="SDLNID" />
-          </Key>
-          <Property Name="SDKCOO" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="SDDOCO" Type="Double" Nullable="false" />
-          <Property Name="SDDCTO" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDLNID" Type="Double" Nullable="false" />
-          <Property Name="SDSFXO" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDMCU" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
-          <Property Name="SDCO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="SDOKCO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="SDOORN" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
-          <Property Name="SDOCTO" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDOGNO" Type="Double" />
-          <Property Name="SDRKCO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="SDRORN" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
-          <Property Name="SDRCTO" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDRLLN" Type="Double" />
-          <Property Name="SDDMCT" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
-          <Property Name="SDDMCS" Type="Double" />
-          <Property Name="SDAN8" Type="Double" />
-          <Property Name="SDSHAN" Type="Double" />
-          <Property Name="SDPA8" Type="Double" />
-          <Property Name="SDDRQJ" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SDTRDJ" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SDPDDJ" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SDADDJ" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SDIVD" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SDCNDJ" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SDDGL" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SDRSDJ" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SDPEFJ" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SDPPDJ" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SDVR01" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
-          <Property Name="SDVR02" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
-          <Property Name="SDITM" Type="Double" />
-          <Property Name="SDLITM" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
-          <Property Name="SDAITM" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
-          <Property Name="SDLOCN" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="SDLOTN" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="SDFRGD" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDTHGD" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDFRMP" Type="Double" />
-          <Property Name="SDTHRP" Type="Double" />
-          <Property Name="SDEXDP" Type="Double" />
-          <Property Name="SDDSC1" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="SDDSC2" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="SDLNTY" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDNXTR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDLTTR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDEMCU" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
-          <Property Name="SDRLIT" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
-          <Property Name="SDKTLN" Type="Double" />
-          <Property Name="SDCPNT" Type="Double" />
-          <Property Name="SDRKIT" Type="Double" />
-          <Property Name="SDKTP" Type="Double" />
-          <Property Name="SDSRP1" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDSRP2" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDSRP3" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDSRP4" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDSRP5" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDPRP1" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDPRP2" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDPRP3" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDPRP4" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDPRP5" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDUOM" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDUORG" Type="Double" />
-          <Property Name="SDSOQS" Type="Double" />
-          <Property Name="SDSOBK" Type="Double" />
-          <Property Name="SDSOCN" Type="Double" />
-          <Property Name="SDSONE" Type="Double" />
-          <Property Name="SDUOPN" Type="Double" />
-          <Property Name="SDQTYT" Type="Double" />
-          <Property Name="SDQRLV" Type="Double" />
-          <Property Name="SDCOMM" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDOTQY" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDUPRC" Type="Double" />
-          <Property Name="SDAEXP" Type="Double" />
-          <Property Name="SDAOPN" Type="Double" />
-          <Property Name="SDPROV" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDTPC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDAPUM" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDLPRC" Type="Double" />
-          <Property Name="SDUNCS" Type="Double" />
-          <Property Name="SDECST" Type="Double" />
-          <Property Name="SDCSTO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDTCST" Type="Double" />
-          <Property Name="SDINMG" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="SDPTC" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDRYIN" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDDTBS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDTRDC" Type="Double" />
-          <Property Name="SDFUN2" Type="Double" />
-          <Property Name="SDASN" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
-          <Property Name="SDPRGR" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
-          <Property Name="SDCLVL" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDCADC" Type="Double" />
-          <Property Name="SDKCO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="SDDOC" Type="Double" />
-          <Property Name="SDDCT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDODOC" Type="Double" />
-          <Property Name="SDODCT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDOKC" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="SDPSN" Type="Double" />
-          <Property Name="SDDELN" Type="Double" />
-          <Property Name="SDTAX1" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDTXA1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="SDEXR1" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDATXT" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDPRIO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDRESL" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDBACK" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSBAL" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDAPTS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDLOB" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDEUSE" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDDTYS" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDNTR" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDVEND" Type="Double" />
-          <Property Name="SDCARS" Type="Double" />
-          <Property Name="SDMOT" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDROUT" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDSTOP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDZON" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDCNID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="SDFRTH" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDSHCM" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDSHCN" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDSERN" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="SDUOM1" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDPQOR" Type="Double" />
-          <Property Name="SDUOM2" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDSQOR" Type="Double" />
-          <Property Name="SDUOM4" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDITWT" Type="Double" />
-          <Property Name="SDWTUM" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDITVL" Type="Double" />
-          <Property Name="SDVLUM" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDRPRC" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
-          <Property Name="SDORPR" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
-          <Property Name="SDORP" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDCMGP" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDGLC" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
-          <Property Name="SDCTRY" Type="Double" />
-          <Property Name="SDFY" Type="Double" />
-          <Property Name="SDSO01" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO02" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO03" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO04" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO05" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO06" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO07" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO08" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO09" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO10" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO11" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO12" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO13" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO14" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO15" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDACOM" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDCMCG" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
-          <Property Name="SDRCD" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDGRWT" Type="Double" />
-          <Property Name="SDGWUM" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDSBL" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
-          <Property Name="SDSBLT" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDLCOD" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDUPC1" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDUPC2" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDUPC3" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDSWMS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDUNCD" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDCRMD" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDCRCD" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDCRR" Type="Double" />
-          <Property Name="SDFPRC" Type="Double" />
-          <Property Name="SDFUP" Type="Double" />
-          <Property Name="SDFEA" Type="Double" />
-          <Property Name="SDFUC" Type="Double" />
-          <Property Name="SDFEC" Type="Double" />
-          <Property Name="SDURCD" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDURDT" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SDURAT" Type="Double" />
-          <Property Name="SDURAB" Type="Double" />
-          <Property Name="SDURRF" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
-          <Property Name="SDTORG" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="SDUSER" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="SDPID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="SDJOBN" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="SDUPMJ" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SDTDAY" Type="Double" />
-          <Property Name="SDSO16" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO17" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO18" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO19" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDSO20" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDIR01" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="SDIR02" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="SDIR03" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="SDIR04" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="SDIR05" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="SDSOOR" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SDVR03" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
-          <Property Name="SDDEID" Type="Double" />
-          <Property Name="SDPSIG" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="SDRLNU" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="SDPMDT" Type="Double" />
-          <Property Name="SDRLTM" Type="Double" />
-          <Property Name="SDRLDJ" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SDDRQT" Type="Double" />
-          <Property Name="SDADTM" Type="Double" />
-          <Property Name="SDOPTT" Type="Double" />
-          <Property Name="SDPDTT" Type="Double" />
-          <Property Name="SDPSTM" Type="Double" />
-          <Property Name="SDXDCK" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDXPTY" Type="Double" />
-          <Property Name="SDDUAL" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDBSC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="SDCBSC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="SDCORD" Type="Double" />
-          <Property Name="SDDVAN" Type="Double" />
-          <Property Name="SDPEND" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDRFRV" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDMCLN" Type="Double" />
-          <Property Name="SDSHPN" Type="Double" />
-          <Property Name="SDRSDT" Type="Double" />
-          <Property Name="SDPRJM" Type="Double" />
-          <Property Name="SDOSEQ" Type="Double" />
-          <Property Name="SDMERL" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDHOLD" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDHDBU" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
-          <Property Name="SDDMBU" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
-          <Property Name="SDBCRC" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDODLN" Type="Double" />
-          <Property Name="SDOPDJ" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SDXKCO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="SDXORN" Type="Double" />
-          <Property Name="SDXCTO" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="SDXLLN" Type="Double" />
-          <Property Name="SDXSFX" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDPOE" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
-          <Property Name="SDPMTO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDANBY" Type="Double" />
-          <Property Name="SDPMTN" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
-          <Property Name="SDNUMB" Type="Double" />
-          <Property Name="SDAAID" Type="Double" />
-          <Property Name="SDSPATTN" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="SDPRAN8" Type="Double" />
-          <Property Name="SDPRCIDLN" Type="Double" />
-          <Property Name="SDCCIDLN" Type="Double" />
-          <Property Name="SDSHCCIDLN" Type="Double" />
-          <Property Name="SDOPPID" Type="Double" />
-          <Property Name="SDOSTP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
-          <Property Name="SDUKID" Type="Double" />
-          <Property Name="SDCATNM" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="SDALLOC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDFULPID" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="SDALLSTS" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="SDOSCORE" Type="Double" />
-          <Property Name="SDOSCOREO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDCMCO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="SDKITID" Type="Double" />
-          <Property Name="SDKITAMTDOM" Type="Double" />
-          <Property Name="SDKITAMTFOR" Type="Double" />
-          <Property Name="SDKITDIRTY" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDOCITT" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Name="SDOCCARDNO" Type="Double" />
-          <Property Name="SDPMPN" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="SDPNS" Type="Double" />
-        </EntityType>
         <EntityType Name="F4217">
           <Key>
             <PropertyRef Name="XISHPN" />
@@ -3648,6 +3451,359 @@
           <Property Name="SPJOBN" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="SPUPMJ" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="SPTDAY" Type="Double" />
+        </EntityType>
+        <EntityType Name="F4111">
+          <Key>
+            <PropertyRef Name="ILUKID" />
+          </Key>
+          <Property Name="ILNLIN" Type="Double" />
+          <Property Name="ILITM" Type="Double" />
+          <Property Name="ILLITM" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="ILAITM" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="ILMCU" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="ILLOCN" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="ILLOTN" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="ILPLOT" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="ILSTUN" Type="Double" />
+          <Property Name="ILLDSQ" Type="Double" />
+          <Property Name="ILTRNO" Type="Double" />
+          <Property Name="ILFRTO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="ILLMCX" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="ILLOTS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="ILLOTP" Type="Double" />
+          <Property Name="ILLOTG" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="ILKIT" Type="Double" />
+          <Property Name="ILMMCU" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="ILDMCT" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="ILDMCS" Type="Double" />
+          <Property Name="ILKCO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="ILDOC" Type="Double" />
+          <Property Name="ILDCT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="ILSFX" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="ILJELN" Type="Double" />
+          <Property Name="ILICU" Type="Double" />
+          <Property Name="ILDGL" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ILGLPT" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="ILDCTO" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="ILDOCO" Type="Double" />
+          <Property Name="ILKCOO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="ILLNID" Type="Double" />
+          <Property Name="ILIPCD" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="ILTRDJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ILTRUM" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="ILAN8" Type="Double" />
+          <Property Name="ILTREX" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="ILTREF" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="ILRCD" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="ILTRQT" Type="Double" />
+          <Property Name="ILUNCS" Type="Double" />
+          <Property Name="ILPAID" Type="Double" />
+          <Property Name="ILTERM" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ILUKID" Type="Double" Nullable="false" />
+          <Property Name="ILTDAY" Type="Double" />
+          <Property Name="ILUSER" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ILPID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ILCRDJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ILAID" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="ILASID" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="ILMCUZ" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="ILOBJ" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="ILSBL" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="ILSUB" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="ILUOM2" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="ILCMOO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="ILRE" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="ILSBLT" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="ILSQOR" Type="Double" />
+          <Property Name="ILVPEJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ILHDGJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ILSHAN" Type="Double" />
+          <Property Name="ILOPSQ" Type="Double" />
+          <Property Name="ILRFLN" Type="Double" />
+          <Property Name="ILTGN" Type="Double" />
+          <Property Name="ILLOTC" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="ILSVDT" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ILLRCD" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="ILRLOT" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="ILLPNU" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="ILPMPN" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="ILPNS" Type="Double" />
+        </EntityType>
+        <EntityType Name="F4211">
+          <Key>
+            <PropertyRef Name="SDKCOO" />
+            <PropertyRef Name="SDDOCO" />
+            <PropertyRef Name="SDDCTO" />
+            <PropertyRef Name="SDLNID" />
+          </Key>
+          <Property Name="SDKCOO" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="SDDOCO" Type="Double" Nullable="false" />
+          <Property Name="SDDCTO" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDLNID" Type="Double" Nullable="false" />
+          <Property Name="SDSFXO" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDMCU" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="SDCO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="SDOKCO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="SDOORN" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="SDOCTO" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDOGNO" Type="Double" />
+          <Property Name="SDRKCO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="SDRORN" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="SDRCTO" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDRLLN" Type="Double" />
+          <Property Name="SDDMCT" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="SDDMCS" Type="Double" />
+          <Property Name="SDAN8" Type="Double" />
+          <Property Name="SDSHAN" Type="Double" />
+          <Property Name="SDPA8" Type="Double" />
+          <Property Name="SDDRQJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SDTRDJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SDPDDJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SDADDJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SDIVD" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SDCNDJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SDDGL" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SDRSDJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SDPEFJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SDPPDJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SDVR01" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="SDVR02" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="SDITM" Type="Double" />
+          <Property Name="SDLITM" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="SDAITM" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="SDLOCN" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="SDLOTN" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="SDFRGD" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDTHGD" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDFRMP" Type="Double" />
+          <Property Name="SDTHRP" Type="Double" />
+          <Property Name="SDEXDP" Type="Double" />
+          <Property Name="SDDSC1" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="SDDSC2" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="SDLNTY" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDNXTR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDLTTR" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDEMCU" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="SDRLIT" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="SDKTLN" Type="Double" />
+          <Property Name="SDCPNT" Type="Double" />
+          <Property Name="SDRKIT" Type="Double" />
+          <Property Name="SDKTP" Type="Double" />
+          <Property Name="SDSRP1" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDSRP2" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDSRP3" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDSRP4" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDSRP5" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDPRP1" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDPRP2" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDPRP3" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDPRP4" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDPRP5" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDUOM" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDUORG" Type="Double" />
+          <Property Name="SDSOQS" Type="Double" />
+          <Property Name="SDSOBK" Type="Double" />
+          <Property Name="SDSOCN" Type="Double" />
+          <Property Name="SDSONE" Type="Double" />
+          <Property Name="SDUOPN" Type="Double" />
+          <Property Name="SDQTYT" Type="Double" />
+          <Property Name="SDQRLV" Type="Double" />
+          <Property Name="SDCOMM" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDOTQY" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDUPRC" Type="Double" />
+          <Property Name="SDAEXP" Type="Double" />
+          <Property Name="SDAOPN" Type="Double" />
+          <Property Name="SDPROV" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDTPC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDAPUM" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDLPRC" Type="Double" />
+          <Property Name="SDUNCS" Type="Double" />
+          <Property Name="SDECST" Type="Double" />
+          <Property Name="SDCSTO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDTCST" Type="Double" />
+          <Property Name="SDINMG" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SDPTC" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDRYIN" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDDTBS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDTRDC" Type="Double" />
+          <Property Name="SDFUN2" Type="Double" />
+          <Property Name="SDASN" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="SDPRGR" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="SDCLVL" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDCADC" Type="Double" />
+          <Property Name="SDKCO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="SDDOC" Type="Double" />
+          <Property Name="SDDCT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDODOC" Type="Double" />
+          <Property Name="SDODCT" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDOKC" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="SDPSN" Type="Double" />
+          <Property Name="SDDELN" Type="Double" />
+          <Property Name="SDTAX1" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDTXA1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SDEXR1" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDATXT" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDPRIO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDRESL" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDBACK" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSBAL" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDAPTS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDLOB" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDEUSE" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDDTYS" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDNTR" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDVEND" Type="Double" />
+          <Property Name="SDCARS" Type="Double" />
+          <Property Name="SDMOT" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDROUT" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDSTOP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDZON" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDCNID" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="SDFRTH" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDSHCM" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDSHCN" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDSERN" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="SDUOM1" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDPQOR" Type="Double" />
+          <Property Name="SDUOM2" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDSQOR" Type="Double" />
+          <Property Name="SDUOM4" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDITWT" Type="Double" />
+          <Property Name="SDWTUM" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDITVL" Type="Double" />
+          <Property Name="SDVLUM" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDRPRC" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="SDORPR" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="SDORP" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDCMGP" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDGLC" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="SDCTRY" Type="Double" />
+          <Property Name="SDFY" Type="Double" />
+          <Property Name="SDSO01" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO02" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO03" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO04" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO05" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO06" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO07" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO08" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO09" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO10" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO11" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO12" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO13" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO14" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO15" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDACOM" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDCMCG" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="SDRCD" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDGRWT" Type="Double" />
+          <Property Name="SDGWUM" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDSBL" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="SDSBLT" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDLCOD" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDUPC1" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDUPC2" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDUPC3" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDSWMS" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDUNCD" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDCRMD" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDCRCD" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDCRR" Type="Double" />
+          <Property Name="SDFPRC" Type="Double" />
+          <Property Name="SDFUP" Type="Double" />
+          <Property Name="SDFEA" Type="Double" />
+          <Property Name="SDFUC" Type="Double" />
+          <Property Name="SDFEC" Type="Double" />
+          <Property Name="SDURCD" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDURDT" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SDURAT" Type="Double" />
+          <Property Name="SDURAB" Type="Double" />
+          <Property Name="SDURRF" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="SDTORG" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SDUSER" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SDPID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SDJOBN" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SDUPMJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SDTDAY" Type="Double" />
+          <Property Name="SDSO16" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO17" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO18" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO19" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDSO20" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDIR01" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="SDIR02" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="SDIR03" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="SDIR04" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="SDIR05" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="SDSOOR" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SDVR03" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="SDDEID" Type="Double" />
+          <Property Name="SDPSIG" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="SDRLNU" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SDPMDT" Type="Double" />
+          <Property Name="SDRLTM" Type="Double" />
+          <Property Name="SDRLDJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SDDRQT" Type="Double" />
+          <Property Name="SDADTM" Type="Double" />
+          <Property Name="SDOPTT" Type="Double" />
+          <Property Name="SDPDTT" Type="Double" />
+          <Property Name="SDPSTM" Type="Double" />
+          <Property Name="SDXDCK" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDXPTY" Type="Double" />
+          <Property Name="SDDUAL" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDBSC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SDCBSC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SDCORD" Type="Double" />
+          <Property Name="SDDVAN" Type="Double" />
+          <Property Name="SDPEND" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDRFRV" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDMCLN" Type="Double" />
+          <Property Name="SDSHPN" Type="Double" />
+          <Property Name="SDRSDT" Type="Double" />
+          <Property Name="SDPRJM" Type="Double" />
+          <Property Name="SDOSEQ" Type="Double" />
+          <Property Name="SDMERL" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDHOLD" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDHDBU" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="SDDMBU" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="SDBCRC" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDODLN" Type="Double" />
+          <Property Name="SDOPDJ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SDXKCO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="SDXORN" Type="Double" />
+          <Property Name="SDXCTO" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="SDXLLN" Type="Double" />
+          <Property Name="SDXSFX" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDPOE" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="SDPMTO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDANBY" Type="Double" />
+          <Property Name="SDPMTN" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="SDNUMB" Type="Double" />
+          <Property Name="SDAAID" Type="Double" />
+          <Property Name="SDSPATTN" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="SDPRAN8" Type="Double" />
+          <Property Name="SDPRCIDLN" Type="Double" />
+          <Property Name="SDCCIDLN" Type="Double" />
+          <Property Name="SDSHCCIDLN" Type="Double" />
+          <Property Name="SDOPPID" Type="Double" />
+          <Property Name="SDOSTP" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+          <Property Name="SDUKID" Type="Double" />
+          <Property Name="SDCATNM" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="SDALLOC" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDFULPID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SDALLSTS" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="SDOSCORE" Type="Double" />
+          <Property Name="SDOSCOREO" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDCMCO" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="SDKITID" Type="Double" />
+          <Property Name="SDKITAMTDOM" Type="Double" />
+          <Property Name="SDKITAMTFOR" Type="Double" />
+          <Property Name="SDKITDIRTY" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDOCITT" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="SDOCCARDNO" Type="Double" />
+          <Property Name="SDPMPN" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="SDPNS" Type="Double" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4629,280 +4785,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="F4211">
-            <EntityTypeMapping TypeName="JDEModel.F4211">
-              <MappingFragment StoreEntitySet="F4211">
-                <ScalarProperty Name="SDPNS" ColumnName="SDPNS" />
-                <ScalarProperty Name="SDPMPN" ColumnName="SDPMPN" />
-                <ScalarProperty Name="SDOCCARDNO" ColumnName="SDOCCARDNO" />
-                <ScalarProperty Name="SDOCITT" ColumnName="SDOCITT" />
-                <ScalarProperty Name="SDKITDIRTY" ColumnName="SDKITDIRTY" />
-                <ScalarProperty Name="SDKITAMTFOR" ColumnName="SDKITAMTFOR" />
-                <ScalarProperty Name="SDKITAMTDOM" ColumnName="SDKITAMTDOM" />
-                <ScalarProperty Name="SDKITID" ColumnName="SDKITID" />
-                <ScalarProperty Name="SDCMCO" ColumnName="SDCMCO" />
-                <ScalarProperty Name="SDOSCOREO" ColumnName="SDOSCOREO" />
-                <ScalarProperty Name="SDOSCORE" ColumnName="SDOSCORE" />
-                <ScalarProperty Name="SDALLSTS" ColumnName="SDALLSTS" />
-                <ScalarProperty Name="SDFULPID" ColumnName="SDFULPID" />
-                <ScalarProperty Name="SDALLOC" ColumnName="SDALLOC" />
-                <ScalarProperty Name="SDCATNM" ColumnName="SDCATNM" />
-                <ScalarProperty Name="SDUKID" ColumnName="SDUKID" />
-                <ScalarProperty Name="SDOSTP" ColumnName="SDOSTP" />
-                <ScalarProperty Name="SDOPPID" ColumnName="SDOPPID" />
-                <ScalarProperty Name="SDSHCCIDLN" ColumnName="SDSHCCIDLN" />
-                <ScalarProperty Name="SDCCIDLN" ColumnName="SDCCIDLN" />
-                <ScalarProperty Name="SDPRCIDLN" ColumnName="SDPRCIDLN" />
-                <ScalarProperty Name="SDPRAN8" ColumnName="SDPRAN8" />
-                <ScalarProperty Name="SDSPATTN" ColumnName="SDSPATTN" />
-                <ScalarProperty Name="SDAAID" ColumnName="SDAAID" />
-                <ScalarProperty Name="SDNUMB" ColumnName="SDNUMB" />
-                <ScalarProperty Name="SDPMTN" ColumnName="SDPMTN" />
-                <ScalarProperty Name="SDANBY" ColumnName="SDANBY" />
-                <ScalarProperty Name="SDPMTO" ColumnName="SDPMTO" />
-                <ScalarProperty Name="SDPOE" ColumnName="SDPOE" />
-                <ScalarProperty Name="SDXSFX" ColumnName="SDXSFX" />
-                <ScalarProperty Name="SDXLLN" ColumnName="SDXLLN" />
-                <ScalarProperty Name="SDXCTO" ColumnName="SDXCTO" />
-                <ScalarProperty Name="SDXORN" ColumnName="SDXORN" />
-                <ScalarProperty Name="SDXKCO" ColumnName="SDXKCO" />
-                <ScalarProperty Name="SDOPDJ" ColumnName="SDOPDJ" />
-                <ScalarProperty Name="SDODLN" ColumnName="SDODLN" />
-                <ScalarProperty Name="SDBCRC" ColumnName="SDBCRC" />
-                <ScalarProperty Name="SDDMBU" ColumnName="SDDMBU" />
-                <ScalarProperty Name="SDHDBU" ColumnName="SDHDBU" />
-                <ScalarProperty Name="SDHOLD" ColumnName="SDHOLD" />
-                <ScalarProperty Name="SDMERL" ColumnName="SDMERL" />
-                <ScalarProperty Name="SDOSEQ" ColumnName="SDOSEQ" />
-                <ScalarProperty Name="SDPRJM" ColumnName="SDPRJM" />
-                <ScalarProperty Name="SDRSDT" ColumnName="SDRSDT" />
-                <ScalarProperty Name="SDSHPN" ColumnName="SDSHPN" />
-                <ScalarProperty Name="SDMCLN" ColumnName="SDMCLN" />
-                <ScalarProperty Name="SDRFRV" ColumnName="SDRFRV" />
-                <ScalarProperty Name="SDPEND" ColumnName="SDPEND" />
-                <ScalarProperty Name="SDDVAN" ColumnName="SDDVAN" />
-                <ScalarProperty Name="SDCORD" ColumnName="SDCORD" />
-                <ScalarProperty Name="SDCBSC" ColumnName="SDCBSC" />
-                <ScalarProperty Name="SDBSC" ColumnName="SDBSC" />
-                <ScalarProperty Name="SDDUAL" ColumnName="SDDUAL" />
-                <ScalarProperty Name="SDXPTY" ColumnName="SDXPTY" />
-                <ScalarProperty Name="SDXDCK" ColumnName="SDXDCK" />
-                <ScalarProperty Name="SDPSTM" ColumnName="SDPSTM" />
-                <ScalarProperty Name="SDPDTT" ColumnName="SDPDTT" />
-                <ScalarProperty Name="SDOPTT" ColumnName="SDOPTT" />
-                <ScalarProperty Name="SDADTM" ColumnName="SDADTM" />
-                <ScalarProperty Name="SDDRQT" ColumnName="SDDRQT" />
-                <ScalarProperty Name="SDRLDJ" ColumnName="SDRLDJ" />
-                <ScalarProperty Name="SDRLTM" ColumnName="SDRLTM" />
-                <ScalarProperty Name="SDPMDT" ColumnName="SDPMDT" />
-                <ScalarProperty Name="SDRLNU" ColumnName="SDRLNU" />
-                <ScalarProperty Name="SDPSIG" ColumnName="SDPSIG" />
-                <ScalarProperty Name="SDDEID" ColumnName="SDDEID" />
-                <ScalarProperty Name="SDVR03" ColumnName="SDVR03" />
-                <ScalarProperty Name="SDSOOR" ColumnName="SDSOOR" />
-                <ScalarProperty Name="SDIR05" ColumnName="SDIR05" />
-                <ScalarProperty Name="SDIR04" ColumnName="SDIR04" />
-                <ScalarProperty Name="SDIR03" ColumnName="SDIR03" />
-                <ScalarProperty Name="SDIR02" ColumnName="SDIR02" />
-                <ScalarProperty Name="SDIR01" ColumnName="SDIR01" />
-                <ScalarProperty Name="SDSO20" ColumnName="SDSO20" />
-                <ScalarProperty Name="SDSO19" ColumnName="SDSO19" />
-                <ScalarProperty Name="SDSO18" ColumnName="SDSO18" />
-                <ScalarProperty Name="SDSO17" ColumnName="SDSO17" />
-                <ScalarProperty Name="SDSO16" ColumnName="SDSO16" />
-                <ScalarProperty Name="SDTDAY" ColumnName="SDTDAY" />
-                <ScalarProperty Name="SDUPMJ" ColumnName="SDUPMJ" />
-                <ScalarProperty Name="SDJOBN" ColumnName="SDJOBN" />
-                <ScalarProperty Name="SDPID" ColumnName="SDPID" />
-                <ScalarProperty Name="SDUSER" ColumnName="SDUSER" />
-                <ScalarProperty Name="SDTORG" ColumnName="SDTORG" />
-                <ScalarProperty Name="SDURRF" ColumnName="SDURRF" />
-                <ScalarProperty Name="SDURAB" ColumnName="SDURAB" />
-                <ScalarProperty Name="SDURAT" ColumnName="SDURAT" />
-                <ScalarProperty Name="SDURDT" ColumnName="SDURDT" />
-                <ScalarProperty Name="SDURCD" ColumnName="SDURCD" />
-                <ScalarProperty Name="SDFEC" ColumnName="SDFEC" />
-                <ScalarProperty Name="SDFUC" ColumnName="SDFUC" />
-                <ScalarProperty Name="SDFEA" ColumnName="SDFEA" />
-                <ScalarProperty Name="SDFUP" ColumnName="SDFUP" />
-                <ScalarProperty Name="SDFPRC" ColumnName="SDFPRC" />
-                <ScalarProperty Name="SDCRR" ColumnName="SDCRR" />
-                <ScalarProperty Name="SDCRCD" ColumnName="SDCRCD" />
-                <ScalarProperty Name="SDCRMD" ColumnName="SDCRMD" />
-                <ScalarProperty Name="SDUNCD" ColumnName="SDUNCD" />
-                <ScalarProperty Name="SDSWMS" ColumnName="SDSWMS" />
-                <ScalarProperty Name="SDUPC3" ColumnName="SDUPC3" />
-                <ScalarProperty Name="SDUPC2" ColumnName="SDUPC2" />
-                <ScalarProperty Name="SDUPC1" ColumnName="SDUPC1" />
-                <ScalarProperty Name="SDLCOD" ColumnName="SDLCOD" />
-                <ScalarProperty Name="SDSBLT" ColumnName="SDSBLT" />
-                <ScalarProperty Name="SDSBL" ColumnName="SDSBL" />
-                <ScalarProperty Name="SDGWUM" ColumnName="SDGWUM" />
-                <ScalarProperty Name="SDGRWT" ColumnName="SDGRWT" />
-                <ScalarProperty Name="SDRCD" ColumnName="SDRCD" />
-                <ScalarProperty Name="SDCMCG" ColumnName="SDCMCG" />
-                <ScalarProperty Name="SDACOM" ColumnName="SDACOM" />
-                <ScalarProperty Name="SDSO15" ColumnName="SDSO15" />
-                <ScalarProperty Name="SDSO14" ColumnName="SDSO14" />
-                <ScalarProperty Name="SDSO13" ColumnName="SDSO13" />
-                <ScalarProperty Name="SDSO12" ColumnName="SDSO12" />
-                <ScalarProperty Name="SDSO11" ColumnName="SDSO11" />
-                <ScalarProperty Name="SDSO10" ColumnName="SDSO10" />
-                <ScalarProperty Name="SDSO09" ColumnName="SDSO09" />
-                <ScalarProperty Name="SDSO08" ColumnName="SDSO08" />
-                <ScalarProperty Name="SDSO07" ColumnName="SDSO07" />
-                <ScalarProperty Name="SDSO06" ColumnName="SDSO06" />
-                <ScalarProperty Name="SDSO05" ColumnName="SDSO05" />
-                <ScalarProperty Name="SDSO04" ColumnName="SDSO04" />
-                <ScalarProperty Name="SDSO03" ColumnName="SDSO03" />
-                <ScalarProperty Name="SDSO02" ColumnName="SDSO02" />
-                <ScalarProperty Name="SDSO01" ColumnName="SDSO01" />
-                <ScalarProperty Name="SDFY" ColumnName="SDFY" />
-                <ScalarProperty Name="SDCTRY" ColumnName="SDCTRY" />
-                <ScalarProperty Name="SDGLC" ColumnName="SDGLC" />
-                <ScalarProperty Name="SDCMGP" ColumnName="SDCMGP" />
-                <ScalarProperty Name="SDORP" ColumnName="SDORP" />
-                <ScalarProperty Name="SDORPR" ColumnName="SDORPR" />
-                <ScalarProperty Name="SDRPRC" ColumnName="SDRPRC" />
-                <ScalarProperty Name="SDVLUM" ColumnName="SDVLUM" />
-                <ScalarProperty Name="SDITVL" ColumnName="SDITVL" />
-                <ScalarProperty Name="SDWTUM" ColumnName="SDWTUM" />
-                <ScalarProperty Name="SDITWT" ColumnName="SDITWT" />
-                <ScalarProperty Name="SDUOM4" ColumnName="SDUOM4" />
-                <ScalarProperty Name="SDSQOR" ColumnName="SDSQOR" />
-                <ScalarProperty Name="SDUOM2" ColumnName="SDUOM2" />
-                <ScalarProperty Name="SDPQOR" ColumnName="SDPQOR" />
-                <ScalarProperty Name="SDUOM1" ColumnName="SDUOM1" />
-                <ScalarProperty Name="SDSERN" ColumnName="SDSERN" />
-                <ScalarProperty Name="SDSHCN" ColumnName="SDSHCN" />
-                <ScalarProperty Name="SDSHCM" ColumnName="SDSHCM" />
-                <ScalarProperty Name="SDFRTH" ColumnName="SDFRTH" />
-                <ScalarProperty Name="SDCNID" ColumnName="SDCNID" />
-                <ScalarProperty Name="SDZON" ColumnName="SDZON" />
-                <ScalarProperty Name="SDSTOP" ColumnName="SDSTOP" />
-                <ScalarProperty Name="SDROUT" ColumnName="SDROUT" />
-                <ScalarProperty Name="SDMOT" ColumnName="SDMOT" />
-                <ScalarProperty Name="SDCARS" ColumnName="SDCARS" />
-                <ScalarProperty Name="SDVEND" ColumnName="SDVEND" />
-                <ScalarProperty Name="SDNTR" ColumnName="SDNTR" />
-                <ScalarProperty Name="SDDTYS" ColumnName="SDDTYS" />
-                <ScalarProperty Name="SDEUSE" ColumnName="SDEUSE" />
-                <ScalarProperty Name="SDLOB" ColumnName="SDLOB" />
-                <ScalarProperty Name="SDAPTS" ColumnName="SDAPTS" />
-                <ScalarProperty Name="SDSBAL" ColumnName="SDSBAL" />
-                <ScalarProperty Name="SDBACK" ColumnName="SDBACK" />
-                <ScalarProperty Name="SDRESL" ColumnName="SDRESL" />
-                <ScalarProperty Name="SDPRIO" ColumnName="SDPRIO" />
-                <ScalarProperty Name="SDATXT" ColumnName="SDATXT" />
-                <ScalarProperty Name="SDEXR1" ColumnName="SDEXR1" />
-                <ScalarProperty Name="SDTXA1" ColumnName="SDTXA1" />
-                <ScalarProperty Name="SDTAX1" ColumnName="SDTAX1" />
-                <ScalarProperty Name="SDDELN" ColumnName="SDDELN" />
-                <ScalarProperty Name="SDPSN" ColumnName="SDPSN" />
-                <ScalarProperty Name="SDOKC" ColumnName="SDOKC" />
-                <ScalarProperty Name="SDODCT" ColumnName="SDODCT" />
-                <ScalarProperty Name="SDODOC" ColumnName="SDODOC" />
-                <ScalarProperty Name="SDDCT" ColumnName="SDDCT" />
-                <ScalarProperty Name="SDDOC" ColumnName="SDDOC" />
-                <ScalarProperty Name="SDKCO" ColumnName="SDKCO" />
-                <ScalarProperty Name="SDCADC" ColumnName="SDCADC" />
-                <ScalarProperty Name="SDCLVL" ColumnName="SDCLVL" />
-                <ScalarProperty Name="SDPRGR" ColumnName="SDPRGR" />
-                <ScalarProperty Name="SDASN" ColumnName="SDASN" />
-                <ScalarProperty Name="SDFUN2" ColumnName="SDFUN2" />
-                <ScalarProperty Name="SDTRDC" ColumnName="SDTRDC" />
-                <ScalarProperty Name="SDDTBS" ColumnName="SDDTBS" />
-                <ScalarProperty Name="SDRYIN" ColumnName="SDRYIN" />
-                <ScalarProperty Name="SDPTC" ColumnName="SDPTC" />
-                <ScalarProperty Name="SDINMG" ColumnName="SDINMG" />
-                <ScalarProperty Name="SDTCST" ColumnName="SDTCST" />
-                <ScalarProperty Name="SDCSTO" ColumnName="SDCSTO" />
-                <ScalarProperty Name="SDECST" ColumnName="SDECST" />
-                <ScalarProperty Name="SDUNCS" ColumnName="SDUNCS" />
-                <ScalarProperty Name="SDLPRC" ColumnName="SDLPRC" />
-                <ScalarProperty Name="SDAPUM" ColumnName="SDAPUM" />
-                <ScalarProperty Name="SDTPC" ColumnName="SDTPC" />
-                <ScalarProperty Name="SDPROV" ColumnName="SDPROV" />
-                <ScalarProperty Name="SDAOPN" ColumnName="SDAOPN" />
-                <ScalarProperty Name="SDAEXP" ColumnName="SDAEXP" />
-                <ScalarProperty Name="SDUPRC" ColumnName="SDUPRC" />
-                <ScalarProperty Name="SDOTQY" ColumnName="SDOTQY" />
-                <ScalarProperty Name="SDCOMM" ColumnName="SDCOMM" />
-                <ScalarProperty Name="SDQRLV" ColumnName="SDQRLV" />
-                <ScalarProperty Name="SDQTYT" ColumnName="SDQTYT" />
-                <ScalarProperty Name="SDUOPN" ColumnName="SDUOPN" />
-                <ScalarProperty Name="SDSONE" ColumnName="SDSONE" />
-                <ScalarProperty Name="SDSOCN" ColumnName="SDSOCN" />
-                <ScalarProperty Name="SDSOBK" ColumnName="SDSOBK" />
-                <ScalarProperty Name="SDSOQS" ColumnName="SDSOQS" />
-                <ScalarProperty Name="SDUORG" ColumnName="SDUORG" />
-                <ScalarProperty Name="SDUOM" ColumnName="SDUOM" />
-                <ScalarProperty Name="SDPRP5" ColumnName="SDPRP5" />
-                <ScalarProperty Name="SDPRP4" ColumnName="SDPRP4" />
-                <ScalarProperty Name="SDPRP3" ColumnName="SDPRP3" />
-                <ScalarProperty Name="SDPRP2" ColumnName="SDPRP2" />
-                <ScalarProperty Name="SDPRP1" ColumnName="SDPRP1" />
-                <ScalarProperty Name="SDSRP5" ColumnName="SDSRP5" />
-                <ScalarProperty Name="SDSRP4" ColumnName="SDSRP4" />
-                <ScalarProperty Name="SDSRP3" ColumnName="SDSRP3" />
-                <ScalarProperty Name="SDSRP2" ColumnName="SDSRP2" />
-                <ScalarProperty Name="SDSRP1" ColumnName="SDSRP1" />
-                <ScalarProperty Name="SDKTP" ColumnName="SDKTP" />
-                <ScalarProperty Name="SDRKIT" ColumnName="SDRKIT" />
-                <ScalarProperty Name="SDCPNT" ColumnName="SDCPNT" />
-                <ScalarProperty Name="SDKTLN" ColumnName="SDKTLN" />
-                <ScalarProperty Name="SDRLIT" ColumnName="SDRLIT" />
-                <ScalarProperty Name="SDEMCU" ColumnName="SDEMCU" />
-                <ScalarProperty Name="SDLTTR" ColumnName="SDLTTR" />
-                <ScalarProperty Name="SDNXTR" ColumnName="SDNXTR" />
-                <ScalarProperty Name="SDLNTY" ColumnName="SDLNTY" />
-                <ScalarProperty Name="SDDSC2" ColumnName="SDDSC2" />
-                <ScalarProperty Name="SDDSC1" ColumnName="SDDSC1" />
-                <ScalarProperty Name="SDEXDP" ColumnName="SDEXDP" />
-                <ScalarProperty Name="SDTHRP" ColumnName="SDTHRP" />
-                <ScalarProperty Name="SDFRMP" ColumnName="SDFRMP" />
-                <ScalarProperty Name="SDTHGD" ColumnName="SDTHGD" />
-                <ScalarProperty Name="SDFRGD" ColumnName="SDFRGD" />
-                <ScalarProperty Name="SDLOTN" ColumnName="SDLOTN" />
-                <ScalarProperty Name="SDLOCN" ColumnName="SDLOCN" />
-                <ScalarProperty Name="SDAITM" ColumnName="SDAITM" />
-                <ScalarProperty Name="SDLITM" ColumnName="SDLITM" />
-                <ScalarProperty Name="SDITM" ColumnName="SDITM" />
-                <ScalarProperty Name="SDVR02" ColumnName="SDVR02" />
-                <ScalarProperty Name="SDVR01" ColumnName="SDVR01" />
-                <ScalarProperty Name="SDPPDJ" ColumnName="SDPPDJ" />
-                <ScalarProperty Name="SDPEFJ" ColumnName="SDPEFJ" />
-                <ScalarProperty Name="SDRSDJ" ColumnName="SDRSDJ" />
-                <ScalarProperty Name="SDDGL" ColumnName="SDDGL" />
-                <ScalarProperty Name="SDCNDJ" ColumnName="SDCNDJ" />
-                <ScalarProperty Name="SDIVD" ColumnName="SDIVD" />
-                <ScalarProperty Name="SDADDJ" ColumnName="SDADDJ" />
-                <ScalarProperty Name="SDPDDJ" ColumnName="SDPDDJ" />
-                <ScalarProperty Name="SDTRDJ" ColumnName="SDTRDJ" />
-                <ScalarProperty Name="SDDRQJ" ColumnName="SDDRQJ" />
-                <ScalarProperty Name="SDPA8" ColumnName="SDPA8" />
-                <ScalarProperty Name="SDSHAN" ColumnName="SDSHAN" />
-                <ScalarProperty Name="SDAN8" ColumnName="SDAN8" />
-                <ScalarProperty Name="SDDMCS" ColumnName="SDDMCS" />
-                <ScalarProperty Name="SDDMCT" ColumnName="SDDMCT" />
-                <ScalarProperty Name="SDRLLN" ColumnName="SDRLLN" />
-                <ScalarProperty Name="SDRCTO" ColumnName="SDRCTO" />
-                <ScalarProperty Name="SDRORN" ColumnName="SDRORN" />
-                <ScalarProperty Name="SDRKCO" ColumnName="SDRKCO" />
-                <ScalarProperty Name="SDOGNO" ColumnName="SDOGNO" />
-                <ScalarProperty Name="SDOCTO" ColumnName="SDOCTO" />
-                <ScalarProperty Name="SDOORN" ColumnName="SDOORN" />
-                <ScalarProperty Name="SDOKCO" ColumnName="SDOKCO" />
-                <ScalarProperty Name="SDCO" ColumnName="SDCO" />
-                <ScalarProperty Name="SDMCU" ColumnName="SDMCU" />
-                <ScalarProperty Name="SDSFXO" ColumnName="SDSFXO" />
-                <ScalarProperty Name="SDLNID" ColumnName="SDLNID" />
-                <ScalarProperty Name="SDDCTO" ColumnName="SDDCTO" />
-                <ScalarProperty Name="SDDOCO" ColumnName="SDDOCO" />
-                <ScalarProperty Name="SDKCOO" ColumnName="SDKCOO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="F4217">
             <EntityTypeMapping TypeName="JDEModel.F4217">
               <MappingFragment StoreEntitySet="F4217">
@@ -5443,6 +5325,358 @@
                 <ScalarProperty Name="SPOSEQ" ColumnName="SPOSEQ" />
                 <ScalarProperty Name="SPRSSN" ColumnName="SPRSSN" />
                 <ScalarProperty Name="SPSHPN" ColumnName="SPSHPN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="F4111">
+            <EntityTypeMapping TypeName="JDEModel.F4111">
+              <MappingFragment StoreEntitySet="F4111">
+                <ScalarProperty Name="ILPNS" ColumnName="ILPNS" />
+                <ScalarProperty Name="ILPMPN" ColumnName="ILPMPN" />
+                <ScalarProperty Name="ILLPNU" ColumnName="ILLPNU" />
+                <ScalarProperty Name="ILRLOT" ColumnName="ILRLOT" />
+                <ScalarProperty Name="ILLRCD" ColumnName="ILLRCD" />
+                <ScalarProperty Name="ILSVDT" ColumnName="ILSVDT" />
+                <ScalarProperty Name="ILLOTC" ColumnName="ILLOTC" />
+                <ScalarProperty Name="ILTGN" ColumnName="ILTGN" />
+                <ScalarProperty Name="ILRFLN" ColumnName="ILRFLN" />
+                <ScalarProperty Name="ILOPSQ" ColumnName="ILOPSQ" />
+                <ScalarProperty Name="ILSHAN" ColumnName="ILSHAN" />
+                <ScalarProperty Name="ILHDGJ" ColumnName="ILHDGJ" />
+                <ScalarProperty Name="ILVPEJ" ColumnName="ILVPEJ" />
+                <ScalarProperty Name="ILSQOR" ColumnName="ILSQOR" />
+                <ScalarProperty Name="ILSBLT" ColumnName="ILSBLT" />
+                <ScalarProperty Name="ILRE" ColumnName="ILRE" />
+                <ScalarProperty Name="ILCMOO" ColumnName="ILCMOO" />
+                <ScalarProperty Name="ILUOM2" ColumnName="ILUOM2" />
+                <ScalarProperty Name="ILSUB" ColumnName="ILSUB" />
+                <ScalarProperty Name="ILSBL" ColumnName="ILSBL" />
+                <ScalarProperty Name="ILOBJ" ColumnName="ILOBJ" />
+                <ScalarProperty Name="ILMCUZ" ColumnName="ILMCUZ" />
+                <ScalarProperty Name="ILASID" ColumnName="ILASID" />
+                <ScalarProperty Name="ILAID" ColumnName="ILAID" />
+                <ScalarProperty Name="ILCRDJ" ColumnName="ILCRDJ" />
+                <ScalarProperty Name="ILPID" ColumnName="ILPID" />
+                <ScalarProperty Name="ILUSER" ColumnName="ILUSER" />
+                <ScalarProperty Name="ILTDAY" ColumnName="ILTDAY" />
+                <ScalarProperty Name="ILUKID" ColumnName="ILUKID" />
+                <ScalarProperty Name="ILTERM" ColumnName="ILTERM" />
+                <ScalarProperty Name="ILPAID" ColumnName="ILPAID" />
+                <ScalarProperty Name="ILUNCS" ColumnName="ILUNCS" />
+                <ScalarProperty Name="ILTRQT" ColumnName="ILTRQT" />
+                <ScalarProperty Name="ILRCD" ColumnName="ILRCD" />
+                <ScalarProperty Name="ILTREF" ColumnName="ILTREF" />
+                <ScalarProperty Name="ILTREX" ColumnName="ILTREX" />
+                <ScalarProperty Name="ILAN8" ColumnName="ILAN8" />
+                <ScalarProperty Name="ILTRUM" ColumnName="ILTRUM" />
+                <ScalarProperty Name="ILTRDJ" ColumnName="ILTRDJ" />
+                <ScalarProperty Name="ILIPCD" ColumnName="ILIPCD" />
+                <ScalarProperty Name="ILLNID" ColumnName="ILLNID" />
+                <ScalarProperty Name="ILKCOO" ColumnName="ILKCOO" />
+                <ScalarProperty Name="ILDOCO" ColumnName="ILDOCO" />
+                <ScalarProperty Name="ILDCTO" ColumnName="ILDCTO" />
+                <ScalarProperty Name="ILGLPT" ColumnName="ILGLPT" />
+                <ScalarProperty Name="ILDGL" ColumnName="ILDGL" />
+                <ScalarProperty Name="ILICU" ColumnName="ILICU" />
+                <ScalarProperty Name="ILJELN" ColumnName="ILJELN" />
+                <ScalarProperty Name="ILSFX" ColumnName="ILSFX" />
+                <ScalarProperty Name="ILDCT" ColumnName="ILDCT" />
+                <ScalarProperty Name="ILDOC" ColumnName="ILDOC" />
+                <ScalarProperty Name="ILKCO" ColumnName="ILKCO" />
+                <ScalarProperty Name="ILDMCS" ColumnName="ILDMCS" />
+                <ScalarProperty Name="ILDMCT" ColumnName="ILDMCT" />
+                <ScalarProperty Name="ILMMCU" ColumnName="ILMMCU" />
+                <ScalarProperty Name="ILKIT" ColumnName="ILKIT" />
+                <ScalarProperty Name="ILLOTG" ColumnName="ILLOTG" />
+                <ScalarProperty Name="ILLOTP" ColumnName="ILLOTP" />
+                <ScalarProperty Name="ILLOTS" ColumnName="ILLOTS" />
+                <ScalarProperty Name="ILLMCX" ColumnName="ILLMCX" />
+                <ScalarProperty Name="ILFRTO" ColumnName="ILFRTO" />
+                <ScalarProperty Name="ILTRNO" ColumnName="ILTRNO" />
+                <ScalarProperty Name="ILLDSQ" ColumnName="ILLDSQ" />
+                <ScalarProperty Name="ILSTUN" ColumnName="ILSTUN" />
+                <ScalarProperty Name="ILPLOT" ColumnName="ILPLOT" />
+                <ScalarProperty Name="ILLOTN" ColumnName="ILLOTN" />
+                <ScalarProperty Name="ILLOCN" ColumnName="ILLOCN" />
+                <ScalarProperty Name="ILMCU" ColumnName="ILMCU" />
+                <ScalarProperty Name="ILAITM" ColumnName="ILAITM" />
+                <ScalarProperty Name="ILLITM" ColumnName="ILLITM" />
+                <ScalarProperty Name="ILITM" ColumnName="ILITM" />
+                <ScalarProperty Name="ILNLIN" ColumnName="ILNLIN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="F4211">
+            <EntityTypeMapping TypeName="JDEModel.F4211">
+              <MappingFragment StoreEntitySet="F4211">
+                <ScalarProperty Name="SDPNS" ColumnName="SDPNS" />
+                <ScalarProperty Name="SDPMPN" ColumnName="SDPMPN" />
+                <ScalarProperty Name="SDOCCARDNO" ColumnName="SDOCCARDNO" />
+                <ScalarProperty Name="SDOCITT" ColumnName="SDOCITT" />
+                <ScalarProperty Name="SDKITDIRTY" ColumnName="SDKITDIRTY" />
+                <ScalarProperty Name="SDKITAMTFOR" ColumnName="SDKITAMTFOR" />
+                <ScalarProperty Name="SDKITAMTDOM" ColumnName="SDKITAMTDOM" />
+                <ScalarProperty Name="SDKITID" ColumnName="SDKITID" />
+                <ScalarProperty Name="SDCMCO" ColumnName="SDCMCO" />
+                <ScalarProperty Name="SDOSCOREO" ColumnName="SDOSCOREO" />
+                <ScalarProperty Name="SDOSCORE" ColumnName="SDOSCORE" />
+                <ScalarProperty Name="SDALLSTS" ColumnName="SDALLSTS" />
+                <ScalarProperty Name="SDFULPID" ColumnName="SDFULPID" />
+                <ScalarProperty Name="SDALLOC" ColumnName="SDALLOC" />
+                <ScalarProperty Name="SDCATNM" ColumnName="SDCATNM" />
+                <ScalarProperty Name="SDUKID" ColumnName="SDUKID" />
+                <ScalarProperty Name="SDOSTP" ColumnName="SDOSTP" />
+                <ScalarProperty Name="SDOPPID" ColumnName="SDOPPID" />
+                <ScalarProperty Name="SDSHCCIDLN" ColumnName="SDSHCCIDLN" />
+                <ScalarProperty Name="SDCCIDLN" ColumnName="SDCCIDLN" />
+                <ScalarProperty Name="SDPRCIDLN" ColumnName="SDPRCIDLN" />
+                <ScalarProperty Name="SDPRAN8" ColumnName="SDPRAN8" />
+                <ScalarProperty Name="SDSPATTN" ColumnName="SDSPATTN" />
+                <ScalarProperty Name="SDAAID" ColumnName="SDAAID" />
+                <ScalarProperty Name="SDNUMB" ColumnName="SDNUMB" />
+                <ScalarProperty Name="SDPMTN" ColumnName="SDPMTN" />
+                <ScalarProperty Name="SDANBY" ColumnName="SDANBY" />
+                <ScalarProperty Name="SDPMTO" ColumnName="SDPMTO" />
+                <ScalarProperty Name="SDPOE" ColumnName="SDPOE" />
+                <ScalarProperty Name="SDXSFX" ColumnName="SDXSFX" />
+                <ScalarProperty Name="SDXLLN" ColumnName="SDXLLN" />
+                <ScalarProperty Name="SDXCTO" ColumnName="SDXCTO" />
+                <ScalarProperty Name="SDXORN" ColumnName="SDXORN" />
+                <ScalarProperty Name="SDXKCO" ColumnName="SDXKCO" />
+                <ScalarProperty Name="SDOPDJ" ColumnName="SDOPDJ" />
+                <ScalarProperty Name="SDODLN" ColumnName="SDODLN" />
+                <ScalarProperty Name="SDBCRC" ColumnName="SDBCRC" />
+                <ScalarProperty Name="SDDMBU" ColumnName="SDDMBU" />
+                <ScalarProperty Name="SDHDBU" ColumnName="SDHDBU" />
+                <ScalarProperty Name="SDHOLD" ColumnName="SDHOLD" />
+                <ScalarProperty Name="SDMERL" ColumnName="SDMERL" />
+                <ScalarProperty Name="SDOSEQ" ColumnName="SDOSEQ" />
+                <ScalarProperty Name="SDPRJM" ColumnName="SDPRJM" />
+                <ScalarProperty Name="SDRSDT" ColumnName="SDRSDT" />
+                <ScalarProperty Name="SDSHPN" ColumnName="SDSHPN" />
+                <ScalarProperty Name="SDMCLN" ColumnName="SDMCLN" />
+                <ScalarProperty Name="SDRFRV" ColumnName="SDRFRV" />
+                <ScalarProperty Name="SDPEND" ColumnName="SDPEND" />
+                <ScalarProperty Name="SDDVAN" ColumnName="SDDVAN" />
+                <ScalarProperty Name="SDCORD" ColumnName="SDCORD" />
+                <ScalarProperty Name="SDCBSC" ColumnName="SDCBSC" />
+                <ScalarProperty Name="SDBSC" ColumnName="SDBSC" />
+                <ScalarProperty Name="SDDUAL" ColumnName="SDDUAL" />
+                <ScalarProperty Name="SDXPTY" ColumnName="SDXPTY" />
+                <ScalarProperty Name="SDXDCK" ColumnName="SDXDCK" />
+                <ScalarProperty Name="SDPSTM" ColumnName="SDPSTM" />
+                <ScalarProperty Name="SDPDTT" ColumnName="SDPDTT" />
+                <ScalarProperty Name="SDOPTT" ColumnName="SDOPTT" />
+                <ScalarProperty Name="SDADTM" ColumnName="SDADTM" />
+                <ScalarProperty Name="SDDRQT" ColumnName="SDDRQT" />
+                <ScalarProperty Name="SDRLDJ" ColumnName="SDRLDJ" />
+                <ScalarProperty Name="SDRLTM" ColumnName="SDRLTM" />
+                <ScalarProperty Name="SDPMDT" ColumnName="SDPMDT" />
+                <ScalarProperty Name="SDRLNU" ColumnName="SDRLNU" />
+                <ScalarProperty Name="SDPSIG" ColumnName="SDPSIG" />
+                <ScalarProperty Name="SDDEID" ColumnName="SDDEID" />
+                <ScalarProperty Name="SDVR03" ColumnName="SDVR03" />
+                <ScalarProperty Name="SDSOOR" ColumnName="SDSOOR" />
+                <ScalarProperty Name="SDIR05" ColumnName="SDIR05" />
+                <ScalarProperty Name="SDIR04" ColumnName="SDIR04" />
+                <ScalarProperty Name="SDIR03" ColumnName="SDIR03" />
+                <ScalarProperty Name="SDIR02" ColumnName="SDIR02" />
+                <ScalarProperty Name="SDIR01" ColumnName="SDIR01" />
+                <ScalarProperty Name="SDSO20" ColumnName="SDSO20" />
+                <ScalarProperty Name="SDSO19" ColumnName="SDSO19" />
+                <ScalarProperty Name="SDSO18" ColumnName="SDSO18" />
+                <ScalarProperty Name="SDSO17" ColumnName="SDSO17" />
+                <ScalarProperty Name="SDSO16" ColumnName="SDSO16" />
+                <ScalarProperty Name="SDTDAY" ColumnName="SDTDAY" />
+                <ScalarProperty Name="SDUPMJ" ColumnName="SDUPMJ" />
+                <ScalarProperty Name="SDJOBN" ColumnName="SDJOBN" />
+                <ScalarProperty Name="SDPID" ColumnName="SDPID" />
+                <ScalarProperty Name="SDUSER" ColumnName="SDUSER" />
+                <ScalarProperty Name="SDTORG" ColumnName="SDTORG" />
+                <ScalarProperty Name="SDURRF" ColumnName="SDURRF" />
+                <ScalarProperty Name="SDURAB" ColumnName="SDURAB" />
+                <ScalarProperty Name="SDURAT" ColumnName="SDURAT" />
+                <ScalarProperty Name="SDURDT" ColumnName="SDURDT" />
+                <ScalarProperty Name="SDURCD" ColumnName="SDURCD" />
+                <ScalarProperty Name="SDFEC" ColumnName="SDFEC" />
+                <ScalarProperty Name="SDFUC" ColumnName="SDFUC" />
+                <ScalarProperty Name="SDFEA" ColumnName="SDFEA" />
+                <ScalarProperty Name="SDFUP" ColumnName="SDFUP" />
+                <ScalarProperty Name="SDFPRC" ColumnName="SDFPRC" />
+                <ScalarProperty Name="SDCRR" ColumnName="SDCRR" />
+                <ScalarProperty Name="SDCRCD" ColumnName="SDCRCD" />
+                <ScalarProperty Name="SDCRMD" ColumnName="SDCRMD" />
+                <ScalarProperty Name="SDUNCD" ColumnName="SDUNCD" />
+                <ScalarProperty Name="SDSWMS" ColumnName="SDSWMS" />
+                <ScalarProperty Name="SDUPC3" ColumnName="SDUPC3" />
+                <ScalarProperty Name="SDUPC2" ColumnName="SDUPC2" />
+                <ScalarProperty Name="SDUPC1" ColumnName="SDUPC1" />
+                <ScalarProperty Name="SDLCOD" ColumnName="SDLCOD" />
+                <ScalarProperty Name="SDSBLT" ColumnName="SDSBLT" />
+                <ScalarProperty Name="SDSBL" ColumnName="SDSBL" />
+                <ScalarProperty Name="SDGWUM" ColumnName="SDGWUM" />
+                <ScalarProperty Name="SDGRWT" ColumnName="SDGRWT" />
+                <ScalarProperty Name="SDRCD" ColumnName="SDRCD" />
+                <ScalarProperty Name="SDCMCG" ColumnName="SDCMCG" />
+                <ScalarProperty Name="SDACOM" ColumnName="SDACOM" />
+                <ScalarProperty Name="SDSO15" ColumnName="SDSO15" />
+                <ScalarProperty Name="SDSO14" ColumnName="SDSO14" />
+                <ScalarProperty Name="SDSO13" ColumnName="SDSO13" />
+                <ScalarProperty Name="SDSO12" ColumnName="SDSO12" />
+                <ScalarProperty Name="SDSO11" ColumnName="SDSO11" />
+                <ScalarProperty Name="SDSO10" ColumnName="SDSO10" />
+                <ScalarProperty Name="SDSO09" ColumnName="SDSO09" />
+                <ScalarProperty Name="SDSO08" ColumnName="SDSO08" />
+                <ScalarProperty Name="SDSO07" ColumnName="SDSO07" />
+                <ScalarProperty Name="SDSO06" ColumnName="SDSO06" />
+                <ScalarProperty Name="SDSO05" ColumnName="SDSO05" />
+                <ScalarProperty Name="SDSO04" ColumnName="SDSO04" />
+                <ScalarProperty Name="SDSO03" ColumnName="SDSO03" />
+                <ScalarProperty Name="SDSO02" ColumnName="SDSO02" />
+                <ScalarProperty Name="SDSO01" ColumnName="SDSO01" />
+                <ScalarProperty Name="SDFY" ColumnName="SDFY" />
+                <ScalarProperty Name="SDCTRY" ColumnName="SDCTRY" />
+                <ScalarProperty Name="SDGLC" ColumnName="SDGLC" />
+                <ScalarProperty Name="SDCMGP" ColumnName="SDCMGP" />
+                <ScalarProperty Name="SDORP" ColumnName="SDORP" />
+                <ScalarProperty Name="SDORPR" ColumnName="SDORPR" />
+                <ScalarProperty Name="SDRPRC" ColumnName="SDRPRC" />
+                <ScalarProperty Name="SDVLUM" ColumnName="SDVLUM" />
+                <ScalarProperty Name="SDITVL" ColumnName="SDITVL" />
+                <ScalarProperty Name="SDWTUM" ColumnName="SDWTUM" />
+                <ScalarProperty Name="SDITWT" ColumnName="SDITWT" />
+                <ScalarProperty Name="SDUOM4" ColumnName="SDUOM4" />
+                <ScalarProperty Name="SDSQOR" ColumnName="SDSQOR" />
+                <ScalarProperty Name="SDUOM2" ColumnName="SDUOM2" />
+                <ScalarProperty Name="SDPQOR" ColumnName="SDPQOR" />
+                <ScalarProperty Name="SDUOM1" ColumnName="SDUOM1" />
+                <ScalarProperty Name="SDSERN" ColumnName="SDSERN" />
+                <ScalarProperty Name="SDSHCN" ColumnName="SDSHCN" />
+                <ScalarProperty Name="SDSHCM" ColumnName="SDSHCM" />
+                <ScalarProperty Name="SDFRTH" ColumnName="SDFRTH" />
+                <ScalarProperty Name="SDCNID" ColumnName="SDCNID" />
+                <ScalarProperty Name="SDZON" ColumnName="SDZON" />
+                <ScalarProperty Name="SDSTOP" ColumnName="SDSTOP" />
+                <ScalarProperty Name="SDROUT" ColumnName="SDROUT" />
+                <ScalarProperty Name="SDMOT" ColumnName="SDMOT" />
+                <ScalarProperty Name="SDCARS" ColumnName="SDCARS" />
+                <ScalarProperty Name="SDVEND" ColumnName="SDVEND" />
+                <ScalarProperty Name="SDNTR" ColumnName="SDNTR" />
+                <ScalarProperty Name="SDDTYS" ColumnName="SDDTYS" />
+                <ScalarProperty Name="SDEUSE" ColumnName="SDEUSE" />
+                <ScalarProperty Name="SDLOB" ColumnName="SDLOB" />
+                <ScalarProperty Name="SDAPTS" ColumnName="SDAPTS" />
+                <ScalarProperty Name="SDSBAL" ColumnName="SDSBAL" />
+                <ScalarProperty Name="SDBACK" ColumnName="SDBACK" />
+                <ScalarProperty Name="SDRESL" ColumnName="SDRESL" />
+                <ScalarProperty Name="SDPRIO" ColumnName="SDPRIO" />
+                <ScalarProperty Name="SDATXT" ColumnName="SDATXT" />
+                <ScalarProperty Name="SDEXR1" ColumnName="SDEXR1" />
+                <ScalarProperty Name="SDTXA1" ColumnName="SDTXA1" />
+                <ScalarProperty Name="SDTAX1" ColumnName="SDTAX1" />
+                <ScalarProperty Name="SDDELN" ColumnName="SDDELN" />
+                <ScalarProperty Name="SDPSN" ColumnName="SDPSN" />
+                <ScalarProperty Name="SDOKC" ColumnName="SDOKC" />
+                <ScalarProperty Name="SDODCT" ColumnName="SDODCT" />
+                <ScalarProperty Name="SDODOC" ColumnName="SDODOC" />
+                <ScalarProperty Name="SDDCT" ColumnName="SDDCT" />
+                <ScalarProperty Name="SDDOC" ColumnName="SDDOC" />
+                <ScalarProperty Name="SDKCO" ColumnName="SDKCO" />
+                <ScalarProperty Name="SDCADC" ColumnName="SDCADC" />
+                <ScalarProperty Name="SDCLVL" ColumnName="SDCLVL" />
+                <ScalarProperty Name="SDPRGR" ColumnName="SDPRGR" />
+                <ScalarProperty Name="SDASN" ColumnName="SDASN" />
+                <ScalarProperty Name="SDFUN2" ColumnName="SDFUN2" />
+                <ScalarProperty Name="SDTRDC" ColumnName="SDTRDC" />
+                <ScalarProperty Name="SDDTBS" ColumnName="SDDTBS" />
+                <ScalarProperty Name="SDRYIN" ColumnName="SDRYIN" />
+                <ScalarProperty Name="SDPTC" ColumnName="SDPTC" />
+                <ScalarProperty Name="SDINMG" ColumnName="SDINMG" />
+                <ScalarProperty Name="SDTCST" ColumnName="SDTCST" />
+                <ScalarProperty Name="SDCSTO" ColumnName="SDCSTO" />
+                <ScalarProperty Name="SDECST" ColumnName="SDECST" />
+                <ScalarProperty Name="SDUNCS" ColumnName="SDUNCS" />
+                <ScalarProperty Name="SDLPRC" ColumnName="SDLPRC" />
+                <ScalarProperty Name="SDAPUM" ColumnName="SDAPUM" />
+                <ScalarProperty Name="SDTPC" ColumnName="SDTPC" />
+                <ScalarProperty Name="SDPROV" ColumnName="SDPROV" />
+                <ScalarProperty Name="SDAOPN" ColumnName="SDAOPN" />
+                <ScalarProperty Name="SDAEXP" ColumnName="SDAEXP" />
+                <ScalarProperty Name="SDUPRC" ColumnName="SDUPRC" />
+                <ScalarProperty Name="SDOTQY" ColumnName="SDOTQY" />
+                <ScalarProperty Name="SDCOMM" ColumnName="SDCOMM" />
+                <ScalarProperty Name="SDQRLV" ColumnName="SDQRLV" />
+                <ScalarProperty Name="SDQTYT" ColumnName="SDQTYT" />
+                <ScalarProperty Name="SDUOPN" ColumnName="SDUOPN" />
+                <ScalarProperty Name="SDSONE" ColumnName="SDSONE" />
+                <ScalarProperty Name="SDSOCN" ColumnName="SDSOCN" />
+                <ScalarProperty Name="SDSOBK" ColumnName="SDSOBK" />
+                <ScalarProperty Name="SDSOQS" ColumnName="SDSOQS" />
+                <ScalarProperty Name="SDUORG" ColumnName="SDUORG" />
+                <ScalarProperty Name="SDUOM" ColumnName="SDUOM" />
+                <ScalarProperty Name="SDPRP5" ColumnName="SDPRP5" />
+                <ScalarProperty Name="SDPRP4" ColumnName="SDPRP4" />
+                <ScalarProperty Name="SDPRP3" ColumnName="SDPRP3" />
+                <ScalarProperty Name="SDPRP2" ColumnName="SDPRP2" />
+                <ScalarProperty Name="SDPRP1" ColumnName="SDPRP1" />
+                <ScalarProperty Name="SDSRP5" ColumnName="SDSRP5" />
+                <ScalarProperty Name="SDSRP4" ColumnName="SDSRP4" />
+                <ScalarProperty Name="SDSRP3" ColumnName="SDSRP3" />
+                <ScalarProperty Name="SDSRP2" ColumnName="SDSRP2" />
+                <ScalarProperty Name="SDSRP1" ColumnName="SDSRP1" />
+                <ScalarProperty Name="SDKTP" ColumnName="SDKTP" />
+                <ScalarProperty Name="SDRKIT" ColumnName="SDRKIT" />
+                <ScalarProperty Name="SDCPNT" ColumnName="SDCPNT" />
+                <ScalarProperty Name="SDKTLN" ColumnName="SDKTLN" />
+                <ScalarProperty Name="SDRLIT" ColumnName="SDRLIT" />
+                <ScalarProperty Name="SDEMCU" ColumnName="SDEMCU" />
+                <ScalarProperty Name="SDLTTR" ColumnName="SDLTTR" />
+                <ScalarProperty Name="SDNXTR" ColumnName="SDNXTR" />
+                <ScalarProperty Name="SDLNTY" ColumnName="SDLNTY" />
+                <ScalarProperty Name="SDDSC2" ColumnName="SDDSC2" />
+                <ScalarProperty Name="SDDSC1" ColumnName="SDDSC1" />
+                <ScalarProperty Name="SDEXDP" ColumnName="SDEXDP" />
+                <ScalarProperty Name="SDTHRP" ColumnName="SDTHRP" />
+                <ScalarProperty Name="SDFRMP" ColumnName="SDFRMP" />
+                <ScalarProperty Name="SDTHGD" ColumnName="SDTHGD" />
+                <ScalarProperty Name="SDFRGD" ColumnName="SDFRGD" />
+                <ScalarProperty Name="SDLOTN" ColumnName="SDLOTN" />
+                <ScalarProperty Name="SDLOCN" ColumnName="SDLOCN" />
+                <ScalarProperty Name="SDAITM" ColumnName="SDAITM" />
+                <ScalarProperty Name="SDLITM" ColumnName="SDLITM" />
+                <ScalarProperty Name="SDITM" ColumnName="SDITM" />
+                <ScalarProperty Name="SDVR02" ColumnName="SDVR02" />
+                <ScalarProperty Name="SDVR01" ColumnName="SDVR01" />
+                <ScalarProperty Name="SDPPDJ" ColumnName="SDPPDJ" />
+                <ScalarProperty Name="SDPEFJ" ColumnName="SDPEFJ" />
+                <ScalarProperty Name="SDRSDJ" ColumnName="SDRSDJ" />
+                <ScalarProperty Name="SDDGL" ColumnName="SDDGL" />
+                <ScalarProperty Name="SDCNDJ" ColumnName="SDCNDJ" />
+                <ScalarProperty Name="SDIVD" ColumnName="SDIVD" />
+                <ScalarProperty Name="SDADDJ" ColumnName="SDADDJ" />
+                <ScalarProperty Name="SDPDDJ" ColumnName="SDPDDJ" />
+                <ScalarProperty Name="SDTRDJ" ColumnName="SDTRDJ" />
+                <ScalarProperty Name="SDDRQJ" ColumnName="SDDRQJ" />
+                <ScalarProperty Name="SDPA8" ColumnName="SDPA8" />
+                <ScalarProperty Name="SDSHAN" ColumnName="SDSHAN" />
+                <ScalarProperty Name="SDAN8" ColumnName="SDAN8" />
+                <ScalarProperty Name="SDDMCS" ColumnName="SDDMCS" />
+                <ScalarProperty Name="SDDMCT" ColumnName="SDDMCT" />
+                <ScalarProperty Name="SDRLLN" ColumnName="SDRLLN" />
+                <ScalarProperty Name="SDRCTO" ColumnName="SDRCTO" />
+                <ScalarProperty Name="SDRORN" ColumnName="SDRORN" />
+                <ScalarProperty Name="SDRKCO" ColumnName="SDRKCO" />
+                <ScalarProperty Name="SDOGNO" ColumnName="SDOGNO" />
+                <ScalarProperty Name="SDOCTO" ColumnName="SDOCTO" />
+                <ScalarProperty Name="SDOORN" ColumnName="SDOORN" />
+                <ScalarProperty Name="SDOKCO" ColumnName="SDOKCO" />
+                <ScalarProperty Name="SDCO" ColumnName="SDCO" />
+                <ScalarProperty Name="SDMCU" ColumnName="SDMCU" />
+                <ScalarProperty Name="SDSFXO" ColumnName="SDSFXO" />
+                <ScalarProperty Name="SDLNID" ColumnName="SDLNID" />
+                <ScalarProperty Name="SDDCTO" ColumnName="SDDCTO" />
+                <ScalarProperty Name="SDDOCO" ColumnName="SDDOCO" />
+                <ScalarProperty Name="SDKCOO" ColumnName="SDKCOO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

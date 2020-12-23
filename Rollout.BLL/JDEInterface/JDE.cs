@@ -205,7 +205,7 @@ namespace Rollout.BLL
         /// <param name="StoreName"></param>
         /// <param name="ConceptID"></param>
         /// <param name="transaction"></param>
-        private static void PopulateLineF0101Z2(ref F0101Z2 entry, ShipToLine line, double ParentAddress, string StoreName, string ConceptID, decimal transaction)
+        private static void PopulateLineF0101Z2(ref F0101Z2 entry, ShipToLine line, double ParentAddress, string ConceptID, decimal transaction)
         {
             entry.SZEDTN = transaction.ToString();
             entry.SZEDLN = 1;
@@ -222,7 +222,7 @@ namespace Rollout.BLL
                 entry.SZALKY = tempString;
             }
 
-            tempString = StoreName.ToUpper() +" STORE #" + line.StoreNumber.ToString();
+            tempString = line.StoreName.ToUpper() +" STORE #" + line.StoreNumber.ToString();
             log.Debug($"Assinging {tempString} to SZALPH");
             if ( 40 < tempString.Length )
             {
@@ -411,7 +411,8 @@ namespace Rollout.BLL
             EdiHeader.SYORBY = concept.OrderedBy;           // Who placed the order with Selecto
             EdiHeader.SYCARS = concept.ShippingVendor;      // JDE Address of the shipping vendor
             EdiHeader.SYMOT = concept.ShippingMode;         // JDE Method Of Transport (Mode of Transport)
-            EdiHeader.SYEDSP = "N";                         // Say this line isn't processed - used in data selection
+            EdiHeader.SYEDSP = "N";                         // Make this line un-processed - used in data selection
+            EdiHeader.SYFRTH = "PP";                        // PP = Prepay & use PN 9227
             return EdiHeader;
         }
 
@@ -439,6 +440,7 @@ namespace Rollout.BLL
             OrderLine.SZVR01 = PONumber;                    // Purchase Order Reference
             OrderLine.SZVR02 = PONumber;                    // Place the PO here too for batch ship confirm
             OrderLine.SZEDSP = "N";                         // Say this line isn't processed - used in data selection
+            OrderLine.SZFRTH = "PP";                        // Set freight handling code to PP Prepay & use 9227
             return OrderLine;
         }
         #endregion
@@ -939,7 +941,7 @@ namespace Rollout.BLL
             {
                 entry = new F0101Z2();
                 PopulateUnchangingF0101Z2(ref entry, DT.batch);
-                PopulateLineF0101Z2(ref entry, line, DT.ParentAddress, DT.StoreName, DT.ConceptID, transaction);
+                PopulateLineF0101Z2(ref entry, line, DT.ParentAddress, DT.ConceptID, transaction);
                 entries.Add(entry);
                 transaction++;
             }
@@ -1078,7 +1080,10 @@ namespace Rollout.BLL
                 {
                     foreach (FreightLine line in freight.freight_lines)
                     {
-                        if (false == Double.TryParse((jde.F4211.AsNoTracking().Where(n => line.order == n.SDDOCO).Select(n => n.SDSHPN).ToString()), out shipment))
+                        var tempVar = jde.F4211.AsNoTracking().Where(n => line.order == n.SDDOCO).Select(n => n.SDSHPN);
+                        shipment = (double)tempVar.FirstOrDefault();
+                        log.Debug($"Order {line.order} returned shipment converted to number {shipment}");
+                        if (0 == shipment)
                         {
                             line.shipment = 0;
                             log.Error($"Order {line.order} does not have a valid shipment number associated with it");

@@ -29,6 +29,13 @@ namespace Rollout.BLL
             set { _StoreNumber = value.ToUpper(); }
         }
 
+        private string _storeName;
+        public string StoreName
+        {
+            get { return _storeName; }
+            set { _storeName = value.ToUpper(); }
+        }
+
         private string _Concept;
         public string Concept
         {

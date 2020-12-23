@@ -34,10 +34,11 @@ namespace Rollout.EF
         public virtual DbSet<F03012Z1> F03012Z1 { get; set; }
         public virtual DbSet<F4008> F4008 { get; set; }
         public virtual DbSet<F4102> F4102 { get; set; }
-        public virtual DbSet<F4211> F4211 { get; set; }
         public virtual DbSet<F4217> F4217 { get; set; }
         public virtual DbSet<F47011> F47011 { get; set; }
         public virtual DbSet<F47012> F47012 { get; set; }
         public virtual DbSet<F4943> F4943 { get; set; }
+        public virtual DbSet<F4111> F4111 { get; set; }
+        public virtual DbSet<F4211> F4211 { get; set; }
     }
 }

@@ -36,6 +36,7 @@
             this.dgv_DataDisplay = new System.Windows.Forms.DataGridView();
             this.btn_SaveCSV = new System.Windows.Forms.Button();
             this.btn_FreightUpdate = new System.Windows.Forms.Button();
+            this.lb_VersionInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DataDisplay)).BeginInit();
             this.SuspendLayout();
             // 
@@ -128,11 +129,22 @@
             this.btn_FreightUpdate.UseVisualStyleBackColor = true;
             this.btn_FreightUpdate.Click += new System.EventHandler(this.btn_FreightUpdate_DoIt);
             // 
+            // lb_VersionInfo
+            // 
+            this.lb_VersionInfo.AutoSize = true;
+            this.lb_VersionInfo.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_VersionInfo.Location = new System.Drawing.Point(28, 698);
+            this.lb_VersionInfo.Name = "lb_VersionInfo";
+            this.lb_VersionInfo.Size = new System.Drawing.Size(88, 16);
+            this.lb_VersionInfo.TabIndex = 7;
+            this.lb_VersionInfo.Text = "lb_VersionInfo";
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1537, 724);
+            this.Controls.Add(this.lb_VersionInfo);
             this.Controls.Add(this.btn_FreightUpdate);
             this.Controls.Add(this.btn_SaveCSV);
             this.Controls.Add(this.dgv_DataDisplay);
@@ -147,6 +159,7 @@
             this.Load += new System.EventHandler(this.main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DataDisplay)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -160,6 +173,7 @@
         private System.Windows.Forms.DataGridView dgv_DataDisplay;
         private System.Windows.Forms.Button btn_SaveCSV;
         private System.Windows.Forms.Button btn_FreightUpdate;
+        private System.Windows.Forms.Label lb_VersionInfo;
     }
 }
 

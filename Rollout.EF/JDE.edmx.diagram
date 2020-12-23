@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4cd54becc67c474e8c0ef4044e9e64fe" Name="Diagram1" ZoomLevel="59">
+      <Diagram DiagramId="4cd54becc67c474e8c0ef4044e9e64fe" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="JDEModel.F0002" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="JDEModel.F0005" Width="1.5" PointX="2.375" PointY="0.75" />
         <EntityTypeShape EntityType="JDEModel.F0101" Width="1.5" PointX="4.75" PointY="0.75" />
@@ -14,11 +14,12 @@
         <EntityTypeShape EntityType="JDEModel.F03012Z1" Width="1.5" PointX="14.625" PointY="1" />
         <EntityTypeShape EntityType="JDEModel.F4008" Width="1.5" PointX="13" PointY="1" />
         <EntityTypeShape EntityType="JDEModel.F4102" Width="1.5" PointX="17.25" PointY="0.75" />
-        <EntityTypeShape EntityType="JDEModel.F4211" Width="1.5" PointX="26.75" PointY="0.875" />
         <EntityTypeShape EntityType="JDEModel.F4217" Width="1.5" PointX="23.375" PointY="0.875" />
         <EntityTypeShape EntityType="JDEModel.F47011" Width="1.5" PointX="19" PointY="0.75" />
         <EntityTypeShape EntityType="JDEModel.F47012" Width="1.5" PointX="20.75" PointY="0.75" />
         <EntityTypeShape EntityType="JDEModel.F4943" Width="1.5" PointX="25" PointY="0.875" />
+        <EntityTypeShape EntityType="JDEModel.F4111" Width="1.5" PointX="2.375" PointY="4.625" />
+        <EntityTypeShape EntityType="JDEModel.F4211" Width="1.5" PointX="26.875" PointY="0.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

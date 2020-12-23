@@ -27,7 +27,6 @@ namespace Rollout.BLL
             Random random = new Random();
             shipTo.batch = random.Next().ToString(); // 32-bit integer
             DataRow r = csv.DT.Rows[0];
-            shipTo.StoreName = r["SHIP TO NAME"].ToString();
             shipTo.ConceptID = r["CONCEPT CODE"].ToString();
             double? parent = JDE.GetParentFromConcept(shipTo.ConceptID);
             if (null != parent)
@@ -51,6 +50,7 @@ namespace Rollout.BLL
         private static ShipToLine PopulateShipToLine(DataRow r, bool LookupJDEaddress)
         {
             ShipToLine line = new ShipToLine();
+            line.StoreName = (null == r["SHIP TO NAME"].ToString()) ? "" : r.Field<String>("SHIP TO NAME").ToUpper();
             line.Address1 = (null == r.Field<String>("ADDRESS 1")) ? "" : r.Field<String>("ADDRESS 1").ToUpper();
             line.Address2 = (null == r.Field<String>("ADDRESS 2")) ? "" : r.Field<String>("ADDRESS 2").ToUpper();
             line.City = (null == r.Field<String>("CITY")) ? "" : r.Field<String>("CITY").ToUpper();

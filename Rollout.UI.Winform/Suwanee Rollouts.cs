@@ -46,6 +46,9 @@ namespace Rollout.UI.Winform
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(FileIO)).Location) + @"\" + "log4net.config"));
             log.Debug("Loading main screen.");
             btn_SaveCSV.Enabled = false;
+
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            lb_VersionInfo.Text = "Version : " + version.Major + "." + version.Minor + " (build " + version.Build + ")";
             return;
         }
         #endregion

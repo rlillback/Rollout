@@ -12,7 +12,7 @@
     <AssemblyName>Rollout.EF</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+    <Deterministic>false</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -102,6 +102,9 @@
       <DependentUpon>JDE.tt</DependentUpon>
     </Compile>
     <Compile Include="F4102.cs">
+      <DependentUpon>JDE.tt</DependentUpon>
+    </Compile>
+    <Compile Include="F4111.cs">
       <DependentUpon>JDE.tt</DependentUpon>
     </Compile>
     <Compile Include="F4211.cs">
