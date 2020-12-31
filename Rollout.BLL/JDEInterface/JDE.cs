@@ -31,8 +31,8 @@ namespace Rollout.BLL
             val.XIUSER = "Rollout";
             /* Set the actual data */
             val.XISHPN = freightLine.shipment;
-            val.XIRSSN = 1;
-            val.XISQNR = 1; /* We can only process a single box */
+            val.XIRSSN = 10;
+            val.XISQNR = freightLine.pkgnumber;
             val.XIREFQ = "CN";
             val.XIREFN = freightLine.trackingNumber;
             return val;
@@ -54,9 +54,9 @@ namespace Rollout.BLL
             val.SPUSER = "Rollout";
             /* Set the actual data */
             val.SPSHPN = freightLine.shipment;
-            val.SPRSSN = 0;
+            val.SPRSSN = 10;
             val.SPPLT = " ";
-            val.SPOSEQ = 1; /* We can only process a single box */
+            val.SPOSEQ = freightLine.pkgnumber;
             val.SPEQTY = "BOX1";
             val.SPLGTS = 0;
             val.SPWTHS = 0;
@@ -1067,7 +1067,7 @@ namespace Rollout.BLL
         /// </summary>
         /// <param name="freight"></param>
         /// <returns></returns>
-        static public bool GetShipmentNumbers(ref Freight freight)
+        static public bool GetShipmentNumbers(ref Freight freight, List<string> distinctOrders)
         {
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConceptCSV)).Location) + @"\" + "log4net.config"));
             log.Debug($"Retrieving shipment numbers from orders");
@@ -1078,19 +1078,24 @@ namespace Rollout.BLL
             {
                 using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
-                    foreach (FreightLine line in freight.freight_lines)
+
+                    foreach (string order in distinctOrders)
                     {
-                        var tempVar = jde.F4211.AsNoTracking().Where(n => line.order == n.SDDOCO).Select(n => n.SDSHPN);
+                        double order_number = Double.Parse(order);
+                        IQueryable<double?> tempVar = jde.F4211.AsNoTracking().Where(n => order_number == n.SDDOCO).Select(n => n.SDSHPN);
                         shipment = (double)tempVar.FirstOrDefault();
-                        log.Debug($"Order {line.order} returned shipment converted to number {shipment}");
+                        log.Debug($"Order {order_number} returned shipment number {shipment}");
                         if (0 == shipment)
                         {
-                            line.shipment = 0;
-                            log.Error($"Order {line.order} does not have a valid shipment number associated with it");
+                            log.Error($"Order {order_number} does not have a valid shipment number associated with it");
                         }
                         else
                         {
-                            line.shipment = shipment;
+                            List<FreightLine> lines = freight.freight_lines.AsEnumerable().Where(n => order_number == n.shipment).ToList();
+                            foreach (FreightLine line in lines)
+                            {
+                                line.shipment = shipment;
+                            }
                         }
                     }
                     bResult = true;
@@ -1119,11 +1124,13 @@ namespace Rollout.BLL
             {
                 freightDetail = PopulateF4217Detail(line);
                 ShipmentDetailsList.Add(freightDetail);
+                log.Debug($"Added freight detail for shipment {line.shipment} package {line.pkgnumber} tracking number {line.trackingNumber} to F4217 list");
             }
             try
             {
                 using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
+                    log.Debug($"Bulk updating JDE F4217");
                     jde.F4217.AddRange(ShipmentDetailsList);
                     jde.SaveChanges();
                 }
@@ -1151,11 +1158,13 @@ namespace Rollout.BLL
             {
                 freightDetail = PopulateF4943Detail(line);
                 ShipmentDetailsList.Add(freightDetail);
+                log.Debug($"Added freight detail for shipment {line.shipment} package {line.pkgnumber} tracking number {line.trackingNumber} to F4943 list");
             }
             try
             {
                 using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
+                    log.Debug($"Bulk updating JDE F4943");
                     jde.F4943.AddRange(ShipmentDetailsList);
                     jde.SaveChanges();
                 }
@@ -1178,11 +1187,17 @@ namespace Rollout.BLL
             {
                 using (JDEEntities jde = ConnectionHelper.CreateConnection())
                 {
-                    foreach(FreightLine line in freight.freight_lines)
+                    List<double> distinct_orders = freight.freight_lines.Select(n => n.order).Distinct().ToList();
+                    // foreach(FreightLine line in freight.freight_lines)
+                    foreach (double order in distinct_orders)
                     {
-                        F4211 f4211_record = jde.F4211.Where(n => line.order == n.SDDOCO && "9227" == n.SDLITM).First();
-                        f4211_record.SDUPRC = Math.Round(10000 * line.cost);
-                        f4211_record.SDAEXP = Math.Round(100 * line.cost);
+                        List<FreightLine> lines = freight.freight_lines.Where(n => order == n.order).ToList();
+                        /* consolidate all package costs */
+                        double cost = (double)lines.Sum(n => Convert.ToInt32(Math.Round(n.cost * 10000)));
+                        F4211 f4211_record = jde.F4211.Where(n => order == n.SDDOCO && "9227" == n.SDLITM).First();
+                        f4211_record.SDUPRC = cost; /* SDUPRC is 4 implied decimals */
+                        f4211_record.SDAEXP = Math.Round(cost / 100); /* SDAEXP is 2 impled decimals */
+                        log.Debug($"Added freight cost ${cost / 10000.0} to order {order}");
                     }
                     jde.SaveChanges();
                 }

@@ -745,9 +745,10 @@ namespace Rollout.UI.Winform
         {
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(Path.GetDirectoryName(Assembly.GetAssembly(typeof(FileIO)).Location) + @"\" + "log4net.config"));
             this.dgv_DataDisplay.DataSource = null;
-            MissingShipToCSV = null; // make sure to clear this out each time we load a spreadsheet
             using (LoadingForm frm = new LoadingForm())
             {
+                frm.Visible = true;
+                freightCSV = null;
                 // 1.) Get the file to load
                 string FileToLoad = FileIO.GetFileName(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), FileFilter);
                 if (String.Empty != FileToLoad)
@@ -794,7 +795,7 @@ namespace Rollout.UI.Winform
                                 log.Debug($"Update Package Information in F4943");
                                 frm.AddText($"Updating package information in JDE");
                                 JDE.PopulateF4943(freight);
-                                log.Debug("$Updating freight prices in F4211");
+                                log.Debug($"Updating freight prices in F4211");
                                 frm.AddText($"Updating freight prices on sales orders");
                                 JDE.UpdateFreightF4211(freight);
                                 using (new CenterDialog(this))

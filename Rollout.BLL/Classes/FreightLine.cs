@@ -13,6 +13,7 @@ namespace Rollout.BLL
         public double shipment { get; set; }
         public double weight { get; set; }
         public double cost { get; set; }
+        public double pkgnumber { get; set; }
         public string trackingNumber
         {
             get { return _trackingNumber; }

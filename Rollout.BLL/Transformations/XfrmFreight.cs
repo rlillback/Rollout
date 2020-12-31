@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Rollout.Common;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,14 +20,15 @@ namespace Rollout.BLL
         /// </summary>
         /// <param name="r"></param>
         /// <returns></returns>
-        private static FreightLine PopulateFreightLine(DataRow r)
+        private static FreightLine PopulateFreightLine(DataRow r, double pkgnumber)
         {
             FreightLine line = new FreightLine();
             line.cost = Double.Parse(r.Field<String>("FREIGHT"));
             line.order = Double.Parse(r.Field<String>("ORDER #"));
             line.shipment = 0;  // This gets populated later
             line.trackingNumber = r.Field<String>("TRACKING #");
-            line.weight = 0; // Removed requirement from S/H Double.Parse(r.Field<String>("WEIGHT"));
+            line.weight = 0;
+            line.pkgnumber = pkgnumber;
             return line;
         } // PopulateFreightLine
         #endregion
@@ -39,15 +41,26 @@ namespace Rollout.BLL
         /// <returns>Populated Freight data structure</returns>
         public static Freight CSVToFreight(FreightCSV csv)
         {
+            double pkgnumber = 0;
             Freight freightUpdate = new Freight();
-            freightUpdate.freight_lines = new List<FreightLine>();
-            foreach (DataRow r in csv.DT.Rows)
+            /* Get a list of the order numbers */
+            List<string> orders = csv.DT.AsEnumerable().Select(n => n.Field<String>("ORDER #")).Distinct().ToList();
+            /* Loop through each order number */
+            foreach (string order in orders)
             {
-                FreightLine line = PopulateFreightLine(r);
-                freightUpdate.freight_lines.Add(line);
+                pkgnumber = 0;
+                /* Now grab all the orders with the same order number */
+                List<DataRow> orderList = csv.DT.AsEnumerable().Where(n => order == n.Field<String>("ORDER #")).ToList() ;
+                foreach (DataRow r in orderList)
+                {
+                    pkgnumber++;
+                    freightUpdate.freight_lines = new List<FreightLine>();
+                    FreightLine line = PopulateFreightLine(r, pkgnumber);
+                    freightUpdate.freight_lines.Add(line);
+                }
             }
             // Now populate all the shipment numbers based on the order numbers
-            JDE.GetShipmentNumbers(ref freightUpdate);
+            JDE.GetShipmentNumbers(ref freightUpdate, orders);
             return freightUpdate;
         } // CSVToFreight
         #endregion
