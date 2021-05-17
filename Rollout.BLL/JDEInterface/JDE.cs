@@ -1091,7 +1091,7 @@ namespace Rollout.BLL
                         }
                         else
                         {
-                            List<FreightLine> lines = freight.freight_lines.AsEnumerable().Where(n => order_number == n.shipment).ToList();
+                            List<FreightLine> lines = freight.freight_lines.AsEnumerable().Where(n => order_number == n.order).ToList();
                             foreach (FreightLine line in lines)
                             {
                                 line.shipment = shipment;

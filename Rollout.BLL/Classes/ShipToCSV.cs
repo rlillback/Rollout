@@ -284,6 +284,10 @@ namespace Rollout.BLL
         /// </summary>
         public void WriteShipTo()
         {
+            foreach (DataRow r in DT.Rows)
+            {
+                r["TAX EXPLANATION CODE"] = "S";
+            }
             try
             {
                 DT.Columns.Remove("RowValid");

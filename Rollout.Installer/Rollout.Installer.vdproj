@@ -15,32 +15,32 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_2622B8812732ECF00D1C1DA448BED884"
+        "MsmKey" = "8:_2D073B36CFE80A7CDB59F449969E8F1D"
+        "OwnerKey" = "8:_B1FF7B8FAD56987B476391CE216F464C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2D073B36CFE80A7CDB59F449969E8F1D"
         "OwnerKey" = "8:_E606207439B1423B91D30A61C5EA4FBF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_2622B8812732ECF00D1C1DA448BED884"
+        "MsmKey" = "8:_58FFD36E005F255DAD445876A492726D"
+        "OwnerKey" = "8:_E606207439B1423B91D30A61C5EA4FBF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_58FFD36E005F255DAD445876A492726D"
         "OwnerKey" = "8:_2D073B36CFE80A7CDB59F449969E8F1D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_2622B8812732ECF00D1C1DA448BED884"
+        "MsmKey" = "8:_58FFD36E005F255DAD445876A492726D"
         "OwnerKey" = "8:_B1FF7B8FAD56987B476391CE216F464C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2D073B36CFE80A7CDB59F449969E8F1D"
-        "OwnerKey" = "8:_B1FF7B8FAD56987B476391CE216F464C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2D073B36CFE80A7CDB59F449969E8F1D"
-        "OwnerKey" = "8:_E606207439B1423B91D30A61C5EA4FBF"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -142,7 +142,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2622B8812732ECF00D1C1DA448BED884"
+        "OwnerKey" = "8:_58FFD36E005F255DAD445876A492726D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -322,20 +322,20 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2622B8812732ECF00D1C1DA448BED884"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2D073B36CFE80A7CDB59F449969E8F1D"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Rollout.Common, Version=1.5.7807.23581, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_2622B8812732ECF00D1C1DA448BED884"
+                    "_2D073B36CFE80A7CDB59F449969E8F1D"
                     {
-                    "Name" = "8:log4net.dll"
+                    "Name" = "8:Rollout.Common.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:log4net.dll"
+            "SourcePath" = "8:Rollout.Common.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_17F2A7AC90F546469A831FCDA1F8E387"
@@ -353,20 +353,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2D073B36CFE80A7CDB59F449969E8F1D"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_58FFD36E005F255DAD445876A492726D"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Rollout.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_2D073B36CFE80A7CDB59F449969E8F1D"
+                    "_58FFD36E005F255DAD445876A492726D"
                     {
-                    "Name" = "8:Rollout.Common.dll"
+                    "Name" = "8:log4net.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Rollout.Common.dll"
+            "SourcePath" = "8:log4net.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_17F2A7AC90F546469A831FCDA1F8E387"
@@ -490,7 +490,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Rollout.BLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Rollout.BLL, Version=1.6.7807.23582, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_B1FF7B8FAD56987B476391CE216F464C"
@@ -521,7 +521,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Rollout.EF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Rollout.EF, Version=1.5.7807.23582, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_B25558ECB6B491573A6346873043A9B7"
@@ -635,15 +635,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Rollouts"
-        "ProductCode" = "8:{5A702179-73E1-4199-84C0-02B668FF12F3}"
-        "PackageCode" = "8:{262507B5-EC5F-4E13-987D-9AA3585224A0}"
+        "ProductCode" = "8:{92073FBB-420C-41ED-91DF-53FCF787B5B2}"
+        "PackageCode" = "8:{384AD81C-F159-4714-B39D-C669963597E6}"
         "UpgradeCode" = "8:{C79413CB-B0D5-4130-930A-A322727F6E08}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.5.0001"
+        "ProductVersion" = "8:1.7.3"
         "Manufacturer" = "8:3E Controls"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

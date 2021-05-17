@@ -176,7 +176,7 @@ namespace Rollout.BLL
             }
             catch (Exception eBLL)
             {
-                log.Error("Error writing concept CSV" + eBLL.Message);
+                log.Error("Error writing Freight CSV" + eBLL.Message);
                 throw;
             }
         } // WriteConcept

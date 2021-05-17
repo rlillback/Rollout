@@ -21,6 +21,7 @@ namespace Rollout.UI.Winform
         private ConceptCSV conceptCSV;
         private ShipToCSV MissingShipToCSV;
         private FreightCSV freightCSV;
+        private static string version = "1.7.x"; //Not used, but to update the build number when we want to
         #endregion
 
         #region application and forms
@@ -785,7 +786,13 @@ namespace Rollout.UI.Winform
                             // 7.) Validate all shipments exist
                             log.Debug($"Validating that there aren't any 0 shipment numbers");
                             frm.AddText($"Validating that all shipments exist");
-                            if (freight.freight_lines.Any(n => 0 == n.shipment)) { return; }
+                            if ( freight.freight_lines.Any(n => 0 == n.shipment) ) 
+                            { 
+                                log.Error($"There are {freight.freight_lines.Count(n => 0 == n.shipment)} freight lines with a 0 shipment" );
+                                return; 
+                            }
+                            log.Info($"All {freight.freight_lines.Count} lines have shipments");
+
 
                             if (DialogResult.Yes == result)
                             {
@@ -808,6 +815,7 @@ namespace Rollout.UI.Winform
                             }
                             else if (DialogResult.No == result)
                             {
+                                log.Info($"Loading data grid view for the freight lines");
                                 this.dgv_DataDisplay.DataSource = freight.freight_lines;
                             }
                         } // using

@@ -202,9 +202,9 @@ namespace Rollout.BLL
             get { return _TaxExplanationCode; }
             set
             {
-                if ( 4 < value.Length )
+                if ( 2 < value.Length )
                 {
-                    _TaxExplanationCode = value.Substring(0, 4).ToUpper();
+                    _TaxExplanationCode = value.Substring(0, 2).ToUpper();
                 }
                 else
                 {

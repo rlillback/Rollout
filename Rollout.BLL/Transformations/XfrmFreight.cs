@@ -43,6 +43,7 @@ namespace Rollout.BLL
         {
             double pkgnumber = 0;
             Freight freightUpdate = new Freight();
+            freightUpdate.freight_lines = new List<FreightLine>();
             /* Get a list of the order numbers */
             List<string> orders = csv.DT.AsEnumerable().Select(n => n.Field<String>("ORDER #")).Distinct().ToList();
             /* Loop through each order number */
@@ -54,7 +55,6 @@ namespace Rollout.BLL
                 foreach (DataRow r in orderList)
                 {
                     pkgnumber++;
-                    freightUpdate.freight_lines = new List<FreightLine>();
                     FreightLine line = PopulateFreightLine(r, pkgnumber);
                     freightUpdate.freight_lines.Add(line);
                 }
